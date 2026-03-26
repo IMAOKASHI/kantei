@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>魂の設計図鑑定書 ｜ 見本夏子</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --parchment: #f5f0e8;
+    --gold: #b8934a;
+    --gold-light: #d4aa6a;
+    --gold-pale: #e8d5a8;
+    --rust: #8b3a2a;
+    --indigo: #2a2d5e;
+    --indigo-mid: #3d4080;
+    --mist: #e8eaf2;
+    --soul-bg: #0d0f1e;
+    --soul-accent: #6b7fd4;
+    --deep-bg: #1a1e30;
+    --surface-bg: #f8f4ec;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    line-height: 1.9;
+  }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh;
+    background: var(--soul-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 40px;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 50% at 50% 30%, rgba(107,127,212,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(184,147,74,0.08) 0%, transparent 60%);
+  }
+
+  .star-field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--d, 3s) ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    from { opacity: 0.1; }
+    to { opacity: var(--max-op, 0.8); }
+  }
+
+  .cover-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .cover-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .cover-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(28px, 5vw, 44px);
+    color: #f0ebe0;
+    letter-spacing: 0.15em;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .cover-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+
+  .cover-divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto 50px;
+    opacity: 0;
+    animation: fadeUp 1s 1.1s forwards;
+  }
+
+  .cover-name {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 400;
+    font-size: clamp(22px, 4vw, 36px);
+    color: #f0ebe0;
+    letter-spacing: 0.3em;
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 1s 1.3s forwards;
+  }
+
+  .cover-name-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(240,235,224,0.5);
+    letter-spacing: 0.2em;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s 1.7s forwards;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-value {
+    font-size: 13px;
+    color: rgba(240,235,224,0.7);
+    letter-spacing: 0.1em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* LAYER NAV */
+  .layer-nav {
+    background: var(--ink);
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .layer-nav-item {
+    flex: 1;
+    padding: 16px 8px;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(240,235,224,0.4);
+    transition: all 0.3s;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+  }
+
+  .layer-nav-item:hover, .layer-nav-item.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  .layer-nav-item span {
+    display: block;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 10px;
+    font-weight: 300;
+    margin-top: 2px;
+    color: rgba(240,235,224,0.3);
+  }
+
+  /* SECTION BASE */
+  .section {
+    padding: 80px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .layer-badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    padding: 6px 20px;
+    border: 1px solid currentColor;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(24px, 4vw, 36px);
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+  }
+
+  .section-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+  }
+
+  .section-lead {
+    max-width: 600px;
+    margin: 30px auto 0;
+    font-size: 14px;
+    line-height: 2;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  /* SOUL LAYER */
+  .soul-section {
+    background: var(--soul-bg);
+    color: #e8e4f0;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .soul-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(107,127,212,0.1) 0%, transparent 70%);
+  }
+
+  .soul-section .section { color: #e8e4f0; }
+  .soul-section .layer-badge { color: var(--soul-accent); border-color: var(--soul-accent); }
+  .soul-section .section-title { color: #f0ebe0; }
+
+  .soul-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 50px;
+  }
+
+  .soul-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(107,127,212,0.3);
+    border-radius: 2px;
+    padding: 32px 28px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .soul-card:hover {
+    border-color: rgba(107,127,212,0.6);
+  }
+
+  .soul-card-source {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--soul-accent);
+    margin-bottom: 12px;
+  }
+
+  .soul-card-key {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #f0ebe0;
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+
+  .soul-card-body {
+    font-size: 13px;
+    line-height: 2;
+    color: rgba(232,228,240,0.75);
+  }
+
+  .soul-highlight {
+    background: var(--deep-bg);
+    border: 1px solid rgba(107,127,212,0.4);
+    border-radius: 2px;
+    padding: 40px;
+    margin-top: 40px;
+    position: relative;
+  }
+
+  .soul-highlight-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--soul-accent);
+    margin-bottom: 20px;
+  }
+
+  .soul-highlight-text {
+    font-size: 14px;
+    line-height: 2.2;
+    color: rgba(232,228,240,0.85);
+  }
+
+  /* DEEP LAYER */
+  .deep-section {
+    background: var(--deep-bg);
+    color: #dde0ec;
+    padding: 80px 40px;
+    position: relative;
+  }
+
+  .deep-section .layer-badge { color: #8a9fd4; border-color: #8a9fd4; }
+  .deep-section .section-title { color: #e8e4f0; }
+  .deep-section .section-title-en { color: rgba(200,205,230,0.5); }
+  .deep-section .section-lead { color: rgba(221,224,236,0.8); }
+
+  .aspect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .aspect-card {
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid #4a5a9a;
+    padding: 24px 24px 24px 28px;
+    transition: border-color 0.3s;
+  }
+
+  .aspect-card.highlight { border-left-color: var(--gold); }
+
+  .aspect-planets {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #b0bde8;
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .aspect-type {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .aspect-body {
+    font-size: 13px;
+    line-height: 2;
+    color: rgba(200,205,230,0.8);
+  }
+
+  .halfsum-block {
+    margin-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 50px;
+  }
+
+  .halfsum-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: #8a9fd4;
+    margin-bottom: 30px;
+  }
+
+  .halfsum-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .halfsum-formula {
+    flex-shrink: 0;
+    width: 180px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--gold-light);
+    line-height: 1.6;
+  }
+
+  .halfsum-formula .orb {
+    font-size: 10px;
+    color: rgba(200,180,100,0.6);
+    display: block;
+  }
+
+  .halfsum-text {
+    font-size: 13px;
+    line-height: 2;
+    color: rgba(200,205,230,0.8);
+  }
+
+  .antiscia-block {
+    margin-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 50px;
+  }
+
+  .antiscia-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(138,159,212,0.2);
+    padding: 24px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .antiscia-planets {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #b0bde8;
+  }
+
+  .antiscia-orb {
+    font-size: 10px;
+    color: var(--gold);
+    display: block;
+    margin-top: 4px;
+  }
+
+  .antiscia-text {
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(200,205,230,0.8);
+  }
+
+  /* SURFACE LAYER */
+  .surface-section {
+    background: var(--surface-bg);
+    padding: 80px 40px;
+  }
+
+  .surface-section .layer-badge { color: var(--rust); border-color: var(--rust); }
+
+  .surface-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .surface-card {
+    background: white;
+    border: 1px solid #ddd5c5;
+    padding: 32px;
+    position: relative;
+  }
+
+  .surface-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 40px; height: 3px;
+    background: var(--gold);
+  }
+
+  .surface-card-source {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 12px;
+    margin-top: 8px;
+  }
+
+  .surface-card-key {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    color: var(--indigo);
+  }
+
+  .surface-card-body {
+    font-size: 13px;
+    line-height: 2;
+    color: #444;
+  }
+
+  /* SYNTHESIS */
+  .synthesis-section {
+    background: var(--ink);
+    color: #e8e4f0;
+    padding: 80px 40px;
+  }
+
+  .synthesis-section .layer-badge { color: var(--gold); border-color: var(--gold); }
+  .synthesis-section .section-title { color: #f0ebe0; }
+  .synthesis-section .section-title-en { color: rgba(240,235,224,0.4); }
+
+  .synthesis-block {
+    max-width: 700px;
+    margin: 50px auto 0;
+  }
+
+  .synthesis-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin: 40px 0 16px;
+  }
+
+  .synthesis-para {
+    font-size: 14px;
+    line-height: 2.4;
+    color: rgba(232,228,240,0.85);
+    margin-bottom: 32px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(184,147,74,0.4);
+  }
+
+  .synthesis-keyword {
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+
+  /* TIMELINE */
+  .timeline-section {
+    background: #f0ebe0;
+    padding: 80px 40px;
+  }
+
+  .timeline-section .layer-badge { color: var(--indigo); border-color: var(--indigo); }
+
+  .timeline-list {
+    max-width: 700px;
+    margin: 40px auto 0;
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 12px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(184,147,74,0.2));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -34px;
+    top: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid #f0ebe0;
+  }
+
+  .timeline-period {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .timeline-title {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--indigo);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-body {
+    font-size: 13px;
+    line-height: 2;
+    color: #555;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--soul-bg);
+    color: rgba(240,235,224,0.4);
+    text-align: center;
+    padding: 50px 40px;
+  }
+
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    margin-bottom: 30px;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* UTILS */
+  .gold { color: var(--gold); }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: currentColor;
+    margin: 20px auto;
+    opacity: 0.3;
+  }
+
+  @media (max-width: 600px) {
+    .section { padding: 60px 24px; }
+    .soul-section, .deep-section, .surface-section, .synthesis-section, .timeline-section { padding: 60px 24px; }
+    .halfsum-item { flex-direction: column; }
+    .halfsum-formula { width: auto; }
+    .antiscia-item { grid-template-columns: 1fr; }
+    .layer-nav-item span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover" id="cover">
+  <div class="star-field" id="starField"></div>
+  <div class="cover-inner">
+    <div class="cover-label">Soul Blueprint Reading</div>
+    <div class="cover-title">魂の設計図<br>鑑定書</div>
+    <div class="cover-subtitle">Three Layers of the Self</div>
+    <div class="cover-divider"></div>
+    <div class="cover-name">見本　夏子</div>
+    <div class="cover-name-en">Mimoto Natsuko</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Date of Birth</span>
+        <span class="cover-meta-value">1981年3月26日</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Place of Birth</span>
+        <span class="cover-meta-value">広島県竹原市</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Kin</span>
+        <span class="cover-meta-value">kin62 白い風</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="layer-nav">
+  <a href="#soul" class="layer-nav-item">SOUL<span>魂の層</span></a>
+  <a href="#deep" class="layer-nav-item">DEEP<span>深層</span></a>
+  <a href="#surface" class="layer-nav-item">SURFACE<span>表層</span></a>
+  <a href="#synthesis" class="layer-nav-item">SYNTHESIS<span>統合</span></a>
+  <a href="#timeline" class="layer-nav-item">TIMELINE<span>時の流れ</span></a>
+</nav>
+
+<!-- SOUL LAYER -->
+<div class="soul-section" id="soul">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Layer 01 · Soul</div>
+      <div class="section-title">魂の層</div>
+      <div class="section-title-en">Who You Are at the Core</div>
+      <div class="divider" style="background:rgba(107,127,212,0.4);"></div>
+      <div class="section-lead">
+        時代や環境を超えた、あなたの本質。<br>
+        魂レベルで設定されてきた「そもそも」の構造を読む層。
+      </div>
+    </div>
+
+    <div class="soul-cards">
+      <div class="soul-card">
+        <div class="soul-card-source">Maya Calendar · kin62</div>
+        <div class="soul-card-key">白い風<br><small style="font-size:13px;opacity:0.6;">音10 / 赤い空歩く人</small></div>
+        <div class="soul-card-body">
+          「風」とは言葉、息吹、霊感の伝達者。コミュニケーションそのものが魂の媒体であり、あなたを通してスピリットが語りかける。音10は「完璧な現れ」——内なるものを物質次元に具現化する力。潜在意識（ウェブスペル）の「赤い空歩く人」は、現実を歩きながら夢を見る探求者の資質を示す。
+        </div>
+      </div>
+
+      <div class="soul-card">
+        <div class="soul-card-source">Vedic · Nakshatra</div>
+        <div class="soul-card-key">アヌラーダー<br><small style="font-size:13px;opacity:0.6;">蠍座 11°57'</small></div>
+        <div class="soul-card-body">
+          「友情の星」と呼ばれるナクシャトラ。守護神ミトラは誓約と誠実さの神。深い絆を築く能力と、規律と忍耐によって成功を手繰り寄せる魂の設計。水星支配は知性と伝達力を加える。蠍座の深部に位置し、表面には見えない強度を持つ。
+        </div>
+      </div>
+
+      <div class="soul-card">
+        <div class="soul-card-source">Numerology · Soul Number</div>
+        <div class="soul-card-key">ソウルナンバー 4<br><small style="font-size:13px;opacity:0.6;">魂の欲求</small></div>
+        <div class="soul-card-body">
+          魂の奥底が求めるのは「秩序と安定」。混沌を形にすることへの深い衝動。土台を築くことへの執着は、前世から持ち越された魂の課題でもある。名前の母音から算出される本音——「確かなものを遺したい」という核心。
+        </div>
+      </div>
+    </div>
+
+    <div class="soul-highlight">
+      <div class="soul-highlight-title">★ Antiscia · 隠れた魂の回路</div>
+      <div class="soul-highlight-text">
+        ヘリオセントリックのアンティシア（鏡像点）が示す、見えない糸。<br><br>
+        <strong style="color:#b0bde8;">地球・木星・土星が魚座24〜25°に集結</strong>——三者の鏡像点がほぼ同一位置。これは「現実の土台（地球）、拡張と信仰（木星）、試練と構造（土星）」が隠れた次元で一つのテーマを形成することを示す。魚座のエネルギーは「境界の溶解」と「より大きなものへの帰還」。魂レベルでは、個を超えた何かに仕えることで本領を発揮する設計が見て取れる。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEEP LAYER -->
+<div class="deep-section" id="deep">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge" style="color:#8a9fd4;border-color:#8a9fd4;">Layer 02 · Deep</div>
+      <div class="section-title" style="color:#e8e4f0;">深層</div>
+      <div class="section-title-en">Patterns, Karma & the Invisible Drives</div>
+      <div class="divider" style="background:rgba(138,159,212,0.4);"></div>
+      <div class="section-lead" style="color:rgba(221,224,236,0.8);">
+        無意識のパターン、カルマの構造、内側の動力源。<br>
+        表には出てこないが、すべての選択の背後で動いている層。
+      </div>
+    </div>
+
+    <!-- Helio Aspects -->
+    <div class="halfsum-title" style="margin-top:0;">HELIOCENTRIC ASPECTS · 宇宙的役割の構造</div>
+    <div class="aspect-grid">
+      <div class="aspect-card highlight">
+        <div class="aspect-planets">地球 ☌ 木星</div>
+        <div class="aspect-type">CONJUNCTION · 0.11°</div>
+        <div class="aspect-body">
+          太陽から見た地球（あなたの存在）と木星が0.1°で重なる——これは極めて稀な精密合。拡張・哲学・信仰のエネルギーが存在そのものに溶け込んでいる。「在るだけで場が広がる」資質。
+        </div>
+      </div>
+      <div class="aspect-card highlight">
+        <div class="aspect-planets">地球 ☌ 土星</div>
+        <div class="aspect-type">CONJUNCTION · 1.03°</div>
+        <div class="aspect-body">
+          構造・責任・時間の惑星が存在に密着。木星との合と同時に土星とも合を持つことは、「自由と制約」「拡張と収縮」を同時に体現する二重の課題を示す。この緊張が成長の原動力。
+        </div>
+      </div>
+      <div class="aspect-card">
+        <div class="aspect-planets">地球 ☍ 火星</div>
+        <div class="aspect-type">OPPOSITION · 177.21°（≒180°）</div>
+        <div class="aspect-body">
+          行動・情熱・戦いの惑星と対置。「在ること」と「動くこと」の永続的な緊張関係。内向きの存在感と外向きの衝動が拮抗し、その均衡点を探す旅が続く。
+        </div>
+      </div>
+    </div>
+
+    <!-- Half Sum -->
+    <div class="halfsum-block">
+      <div class="halfsum-title">HALF SUM · 中点配置の読み解き</div>
+
+      <div class="halfsum-item">
+        <div class="halfsum-formula">
+          金星 / 地球 = 水星<br>
+          <span class="orb">ハーフサム 271.66° → 水星 270.68°（orb 0.98°）</span>
+        </div>
+        <div class="halfsum-text">
+          「美・調和（金星）」と「存在・現実（地球）」の中間点に「言語・知性（水星）」が重なる。美しさを現実に落とし込む回路として「言葉」が機能する構造。伝えることで、内なる美が実体を持つ。
+        </div>
+      </div>
+
+      <div class="halfsum-item">
+        <div class="halfsum-formula">
+          地球 / 土星 = 木星<br>
+          <span class="orb">ハーフサム 185.88° → 木星 185.47°（orb 0.41°）</span>
+        </div>
+        <div class="halfsum-text">
+          「存在（地球）」と「制約・試練（土星）」の中間点に「拡張・祝福（木星）」。試練の真ん中に恵みが宿る構造——制限を受け入れた瞬間に最大の拡張が起きる逆説。土星の壁が木星への扉になる。
+        </div>
+      </div>
+    </div>
+
+    <!-- Antiscia Deep -->
+    <div class="antiscia-block">
+      <div class="halfsum-title">VEDIC · カルマの軸（ラーフ／ケートゥ）</div>
+
+      <div class="antiscia-item">
+        <div class="antiscia-planets">
+          ラーフ（蟹座 14°28'）<br>
+          第9室 · プシャー
+          <span class="antiscia-orb">魂の課題：拡大・執着の方向</span>
+        </div>
+        <div class="antiscia-text">
+          第9室は哲学・信仰・遠方の旅。蟹座の情緒性と9室の探求が組み合わさり「精神的な庇護者・教師」への執着が示される。安心できる世界観を求めつつも、そこに留まることへの警戒が必要。
+        </div>
+      </div>
+
+      <div class="antiscia-item">
+        <div class="antiscia-planets">
+          ケートゥ（山羊座 14°28'）<br>
+          第3室 · シュラヴァナ
+          <span class="antiscia-orb">魂の既得：手放すべき過去の資質</span>
+        </div>
+        <div class="antiscia-text">
+          第3室は伝達・兄弟・近距離の行動。山羊座は組織と達成。「既に知っている実務的コミュニケーション」はすでに持っている資質。今生では9室的な大きな哲学への跳躍が求められている。
+        </div>
+      </div>
+    </div>
+
+    <!-- 四柱深層 -->
+    <div class="halfsum-block">
+      <div class="halfsum-title">FOUR PILLARS · 空亡と五行の偏り</div>
+      <div class="halfsum-item">
+        <div class="halfsum-formula">
+          空亡：辰・巳<br>
+          <span class="orb">（土のエネルギーの空洞）</span>
+        </div>
+        <div class="halfsum-text">
+          辰（土・現実化）と巳（火・変容）が空亡。現実への着地と情熱の点火が「効きにくい」ゾーン。五行は金3・木2・水1で火と土がゼロ——同じく欠落。「熱量で動く」「現実に根ざす」ことへの課題が深層パターンとして機能している。
+        </div>
+      </div>
+      <div class="halfsum-item">
+        <div class="halfsum-formula">
+          月刃格<br>
+          <span class="orb">日柱：癸卯</span>
+        </div>
+        <div class="halfsum-text">
+          月刃格は「剛柔を兼ね備えた刃」の格。表面は穏やかだが内側に強靭な意志を持つ。癸（水の陰）×卯（木の陰）は「しなやかに流れながら確実に浸透する」エネルギー。見えない形で環境を変えていく。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SURFACE LAYER -->
+<div class="surface-section" id="surface">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Layer 03 · Surface</div>
+      <div class="section-title">表層</div>
+      <div class="section-title-en">How You Meet the World</div>
+      <div class="divider"></div>
+      <div class="section-lead">
+        世界との接点。他者が感知するあなたの輪郭、<br>
+        そして現実という舞台での役割を読む層。
+      </div>
+    </div>
+
+    <div class="surface-grid">
+      <div class="surface-card">
+        <div class="surface-card-source">Numerology · Life Path</div>
+        <div class="surface-card-key">LP 3</div>
+        <div class="surface-card-body">
+          表現・創造・喜びの数。世界への現れ方は「楽しませること」「表現すること」。重さをユーモアに変換する才能。人前で光り輝く経路が人生の本流として設定されている。
+        </div>
+      </div>
+
+      <div class="surface-card">
+        <div class="surface-card-source">Western Astrology · Sun</div>
+        <div class="surface-card-key">牡羊座 5°<br><small style="font-size:13px;color:#888;">第1ハウス</small></div>
+        <div class="surface-card-body">
+          自己主張と先駆性。第1ハウスに太陽・金星・火星が集中——「存在そのもの」がアイデンティティ。世界への打ち出し方が直接的で力強い。先陣を切ることで本来の輝きが発動する。
+        </div>
+      </div>
+
+      <div class="surface-card">
+        <div class="surface-card-source">Numerology · Destiny</div>
+        <div class="surface-card-key">ディスティニー 6</div>
+        <div class="surface-card-body">
+          調和・愛・責任の数。人生で果たすべき役割は「癒し手・調停者」。美と調和を世界にもたらすことへの使命。内側の刃（月刃格）を愛の表現として世界に向けるとき、真の使命が動き出す。
+        </div>
+      </div>
+
+      <div class="surface-card">
+        <div class="surface-card-source">Four Pillars · Day Pillar</div>
+        <div class="surface-card-key">癸卯<br><small style="font-size:13px;color:#888;">日主：身旺（+5）</small></div>
+        <div class="surface-card-body">
+          水の陰干×木の陰支。「霧の中の竹林」のイメージ——視界は定まらなくとも、しなやかに育ち続ける。身旺は自我の強さ。食神（乙）が蔵干にあり、表現と才能の発露が外の世界への自然な橋渡しになる。
+        </div>
+      </div>
+
+      <div class="surface-card">
+        <div class="surface-card-source">Vedic · Rahu Node</div>
+        <div class="surface-card-key">PoF 射手座0.1°<br><small style="font-size:13px;color:#888;">第9ハウス</small></div>
+        <div class="surface-card-body">
+          幸運点（Part of Fortune）が第9室の入口。哲学・旅・高次の学びの領域に幸運の座がある。探求を続けることそのものが豊かさへの道。「遠いところ」に向かうほど運が開く構造。
+        </div>
+      </div>
+
+      <div class="surface-card">
+        <div class="surface-card-source">Heliocentric · Earth Position</div>
+        <div class="surface-card-key">地球 天秤座5°<br><small style="font-size:13px;color:#888;">木星・土星と合</small></div>
+        <div class="surface-card-body">
+          太陽から見た「地球の位置」＝魂が宿った座標。天秤座は関係性・美・均衡。そこに木星と土星が重なることで、「美しい秩序を通して世界と繋がる」という現れ方が宇宙的に設定されている。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SYNTHESIS -->
+<div class="synthesis-section" id="synthesis">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Synthesis</div>
+      <div class="section-title" style="color:#f0ebe0;">統合読み</div>
+      <div class="section-title-en">The Story Across All Layers</div>
+      <div class="divider" style="background:rgba(184,147,74,0.4);"></div>
+    </div>
+
+    <div class="synthesis-block">
+
+      <div class="synthesis-subtitle">I. 魂の設計——何のために生まれてきたのか</div>
+      <div class="synthesis-para">
+        魂の層から読み解くと、見本夏子という存在は<span class="synthesis-keyword">「言葉を媒体にして、より大きなものを伝える」</span>という設計を持って生まれている。白い風のkin、アヌラーダーのナクシャトラ、そして金星/地球＝水星というハーフサム——三つの独立した占術が、いずれも「言語と伝達が魂の通路である」ことを指し示す。複数の座標系が同じ方向を指すとき、そこには魂が繰り返し刻んできたテーマがある。
+      </div>
+      <div class="synthesis-para">
+        アヌラーダーの守護神ミトラは「誓約の神」である。軽やかに言葉を操るのではなく、<span class="synthesis-keyword">言葉によって何かと誓いを結ぶ——それがこの魂の伝達の質</span>だ。白い風の「音10」は「完璧な現れ」を意味する。内なるものが外にそのまま現れる透明性。言葉を「作る」のではなく、「通す」存在として設計されている。
+
+      </div>
+
+      <div class="synthesis-subtitle">II. 深層のパターン——何が詰まり、何が解放の鍵か</div>
+      <div class="synthesis-para">
+        深層には<span class="synthesis-keyword">「拡張と制約の同時抱合」</span>という構造がある。地球に木星と土星が0.1°・1°という精密な誤差で同時に重なるヘリオのパターンは、五行の火と土がゼロという欠落と呼応する。「熱くなれない」「現実に着地できない」という体感的な詰まりは、外から見れば弱さに映るかもしれない。しかしヘリオが示すのは、その「詰まり」自体が宇宙的に設計された緊張装置であるということだ。
+      </div>
+      <div class="synthesis-para">
+        ハーフサムの公式は明快だ——<span class="synthesis-keyword">「地球/土星の中点に木星が宿る」</span>。制約を受け入れた瞬間に最大の拡張が起きる、という逆説的な構造。土星の壁を「越えよう」とするのではなく、「壁そのものに意味がある」と認識したとき、木星のドアが開く。月刃格の刃も同じ語彙で語れる——刃は振り下ろすためではなく、精度を持って動くために研がれている。
+      </div>
+      <div class="synthesis-para">
+        空亡の辰・巳は裏を返せば<span class="synthesis-keyword">「この世界の重力に縛られない自由」</span>でもある。現実化と情熱が「効きにくい」ということは、現実の論理から少し浮いた位置に立てるということだ。ケートゥが示す「手放すべき実務的コミュニケーションへの依存」を手放したとき、ラーフの「哲学・信仰・探求」への跳躍が可能になる。
+      </div>
+
+      <div class="synthesis-subtitle">III. 表層の役割——どう世界に現れるべきか</div>
+      <div class="synthesis-para">
+        表層では<span class="synthesis-keyword">LP3×ディスティニー6×牡羊座第1ハウスの集中</span>という、強く「外向きの表現」を求める構造が現れている。太陽・金星・火星が第1ハウスに集中するのは、「存在そのもの」が最大の表現媒体であることを示す。着飾る必要はない。立っているだけで場が変わる。それがこの人の表層の設計だ。
+      </div>
+      <div class="synthesis-para">
+        しかし注意が必要なのは、LP3の「軽さ」とソウルナンバー4の「重さ」の乖離だ。外から見えるのは喜びと表現力（3）だが、魂が本当に求めているのは秩序と構築（4）である。<span class="synthesis-keyword">この二層構造を自覚することが、表層と魂を統合する鍵</span>になる。「楽しそうに見えるが、実は真剣に土台を作っている」——それがこの人の本来の在り方だ。
+      </div>
+
+      <div class="synthesis-subtitle">IV. 魂の最終座標——アンティシアが指し示すもの</div>
+      <div class="synthesis-para">
+        アンティシアの示す<span class="synthesis-keyword">「地球・木星・土星が魚座24〜25°に集結」</span>という構造は、この鑑定書全体の中で最も深い示唆を持っている。夏至点を軸にした鏡の向こう側——「見えない次元での現実」において、この三者は魚座の深部で一致している。魚座は境界の溶解であり、より大きな流れへの帰還だ。「個を超えた何かに仕えることで本領を発揮する」という使命の輪郭がここに浮かぶ。
+      </div>
+      <div class="synthesis-para">
+        9室のラーフとPoFが共に射手座・9室に位置することを合わせると、精神的な意味での<span class="synthesis-keyword">「道案内人・哲学的な伴走者」</span>としての役割が、この人の天命として浮かび上がる。ヴィムショッタリーダシャーは現在、土星期——最も重い学びと構造化の時間の中にある。しかしこれは罰ではない。制約の中でこそ、この魂は最も深く輝く。土星期が終わり水星期に入ったとき（2027年末〜）、ここで築かれた言語と構造が、世界への新しい伝達として解放される。<span class="synthesis-keyword">今はまだ、研ぎの時間だ。</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section" id="timeline">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Timeline</div>
+      <div class="section-title">時の流れ</div>
+      <div class="section-title-en">Dashas & Cycles</div>
+      <div class="divider"></div>
+      <div class="section-lead">
+        ヴィムショッタリーダシャーが示す、<br>魂が「次に何を学ぶか」のスケジュール。
+      </div>
+    </div>
+
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div class="timeline-period">2024.10 → 2025.04</div>
+        <div class="timeline-title">土星期 × 土星期（ダブル土星）</div>
+        <div class="timeline-body">最も重い収縮と構造化のフェーズ。手放し、削ぎ落とし、基盤を問い直す時間。ここで根を張り直したものが次のサイクルの土台になる。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">2025.04 → 2025.09</div>
+        <div class="timeline-title">土星期 × 水星期</div>
+        <div class="timeline-body">構造（土星）の中に言語・知性（水星）が入る。整理された言葉、体系化されたコミュニケーションが開花し始める時期。書くこと・伝えることへの集中が吉。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">2025.12 → 2026.06</div>
+        <div class="timeline-title">土星期 × 金星期</div>
+        <div class="timeline-body">美・調和・人間関係（金星）が動く。ディスティニー6の使命が実感しやすい期間。関係性の質が上がり、創造的な表現が評価される流れ。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">2027.12 → 2028.05</div>
+        <div class="timeline-title">水星期 × ケートゥ期</div>
+        <div class="timeline-body">過去のカルマ（ケートゥ）の解放と知性の統合。古いコミュニケーションパターンを手放し、新しい伝達の形が生まれる変容期。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">2028.07 → 2030.05</div>
+        <div class="timeline-title">水星期 × 金星・太陽・月期</div>
+        <div class="timeline-body">水星期の後半に金星・太陽・月が連続。表現力、自己輝き、感情的な充足が連鎖する比較的豊かな期間。外向きの活動と自己表現が連動しやすい。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-note">
+    本鑑定書は、数秘術・マヤ暦・四柱推命・西洋占星術（ジオ/ヘリオ）・インド占星術の複合読みにより作成されました。出生時刻不明のため、アセンダント・ハウス配置は参考値として扱っています。
+  </div>
+</div>
+
+<script>
+// Star field
+const sf = document.getElementById('starField');
+for(let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2 + 0.5;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    --d:${2+Math.random()*4}s;
+    --max-op:${0.3+Math.random()*0.7};
+    animation-delay:${Math.random()*5}s;
+  `;
+  sf.appendChild(s);
+}
+
+// Nav active
+const sections = document.querySelectorAll('[id]');
+const navItems = document.querySelectorAll('.layer-nav-item');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      navItems.forEach(n => n.classList.remove('active'));
+      const active = document.querySelector(`.layer-nav-item[href="#${e.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
