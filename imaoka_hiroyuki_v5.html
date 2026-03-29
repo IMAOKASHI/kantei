@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>魂の設計図 ｜ 今岡寛之</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1410;--parchment:#f5f0e8;--gold:#b8934a;--gold-light:#d4aa6a;
+  --soul-bg:#0d0f1e;--soul-accent:#6b7fd4;--deep-bg:#1a1e30;--surface-bg:#f8f4ec;
+  --now-bg:#2a1e08;--now-accent:#c8a050;
+  --manual-bg:#0f1a0f;--manual-accent:#6aaa6a;
+  --relation-bg:#1a0f1a;--relation-accent:#b06ab0;
+  --anxiety-bg:#0f0f1a;--anxiety-accent:#6a8ab0;
+  --money-bg:#1a1408;--money-accent:#c0a030;
+  --calendar-bg:#f0ebe0;
+  --lifetime-bg:#05050d;--lifetime-accent:#7060c4;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--parchment);color:var(--ink);font-family:'Noto Serif JP',serif;font-weight:300;line-height:1.9;}
+
+/* COVER */
+.cover{min-height:100vh;background:var(--soul-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:60px 40px;}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(107,127,212,0.15) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(184,147,74,0.08) 0%,transparent 60%);}
+.star-field{position:absolute;inset:0;overflow:hidden;}
+.star{position:absolute;background:white;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite alternate;}
+@keyframes twinkle{from{opacity:0.1}to{opacity:var(--max-op,0.8)}}
+.cover-inner{position:relative;z-index:2;text-align:center;max-width:600px;}
+.cover-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.4em;color:var(--gold);margin-bottom:40px;opacity:0;animation:fadeUp 1s 0.3s forwards;}
+.cover-title{font-weight:200;font-size:clamp(28px,5vw,44px);color:#f0ebe0;letter-spacing:0.15em;line-height:1.5;margin-bottom:16px;opacity:0;animation:fadeUp 1s 0.6s forwards;}
+.cover-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--gold-light);margin-bottom:60px;opacity:0;animation:fadeUp 1s 0.9s forwards;}
+.cover-divider{width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:0 auto 50px;opacity:0;animation:fadeUp 1s 1.1s forwards;}
+.cover-name{font-weight:400;font-size:clamp(22px,4vw,36px);color:#f0ebe0;letter-spacing:0.3em;margin-bottom:12px;opacity:0;animation:fadeUp 1s 1.3s forwards;}
+.cover-name-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(240,235,224,0.5);margin-bottom:50px;opacity:0;animation:fadeUp 1s 1.5s forwards;}
+.cover-meta{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 1s 1.7s forwards;}
+.cover-meta-item{text-align:center;}
+.cover-meta-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--gold);display:block;margin-bottom:4px;}
+.cover-meta-value{font-size:13px;color:rgba(240,235,224,0.7);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ENTRY — 今日の入口 */
+.entry-section{background:var(--ink);padding:50px 40px;}
+.entry-inner{max-width:700px;margin:0 auto;text-align:center;}
+.entry-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.4em;color:rgba(184,147,74,0.6);margin-bottom:20px;}
+.entry-title{font-size:18px;font-weight:300;color:rgba(240,235,224,0.7);margin-bottom:32px;letter-spacing:0.1em;}
+.entry-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+.entry-btn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;padding:12px 20px;border:1px solid rgba(184,147,74,0.35);color:rgba(240,235,224,0.6);background:transparent;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;}
+.entry-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,147,74,0.05);}
+
+/* NAV */
+.nav-wrapper{position:sticky;top:0;z-index:100;background:var(--ink);}
+.nav-row{display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-row::-webkit-scrollbar{display:none;}
+.nav-divider{height:1px;background:rgba(255,255,255,0.06);}
+.nav-item{flex-shrink:0;padding:11px 14px;text-align:center;cursor:pointer;font-family:'Cinzel',serif;font-size:7px;letter-spacing:0.2em;color:rgba(240,235,224,0.3);transition:all 0.3s;border-bottom:2px solid transparent;text-decoration:none;}
+.nav-item:hover,.nav-item.active{color:var(--gold);border-bottom-color:var(--gold);}
+.nav-item span{display:block;font-family:'Noto Serif JP',serif;font-size:8px;font-weight:300;margin-top:2px;color:rgba(240,235,224,0.2);}
+.nav-label{padding:3px 14px;font-family:'Cinzel',serif;font-size:6px;letter-spacing:0.3em;color:rgba(255,255,255,0.18);display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.nav-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.07);}
+
+/* SECTION BASE */
+.section{padding:80px 40px;max-width:900px;margin:0 auto;}
+.section-header{text-align:center;margin-bottom:56px;}
+.layer-badge{display:inline-block;font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.4em;padding:6px 20px;border:1px solid currentColor;margin-bottom:20px;}
+.section-title{font-weight:200;font-size:clamp(22px,4vw,34px);letter-spacing:0.2em;margin-bottom:12px;}
+.section-title-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;opacity:0.5;}
+.section-lead{max-width:600px;margin:24px auto 0;font-size:13px;line-height:2;text-align:center;opacity:0.75;}
+.divider{width:60px;height:1px;background:currentColor;margin:20px auto;opacity:0.3;}
+
+/* SOUL */
+.soul-section{background:var(--soul-bg);color:#e8e4f0;padding:80px 40px;position:relative;overflow:hidden;}
+.soul-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(107,127,212,0.1) 0%,transparent 70%);}
+.soul-section .section{color:#e8e4f0;position:relative;}
+.soul-section .layer-badge{color:var(--soul-accent);border-color:var(--soul-accent);}
+.soul-section .section-title{color:#f0ebe0;}
+.soul-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:44px;}
+.soul-card{background:rgba(255,255,255,0.04);border:1px solid rgba(107,127,212,0.3);padding:28px;transition:border-color 0.3s;}
+.soul-card:hover{border-color:rgba(107,127,212,0.6);}
+.soul-card-source{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--soul-accent);margin-bottom:10px;}
+.soul-card-key{font-weight:400;font-size:18px;color:#f0ebe0;letter-spacing:0.1em;margin-bottom:12px;}
+.soul-card-body{font-size:13px;line-height:2;color:rgba(232,228,240,0.72);}
+.soul-highlight{background:var(--deep-bg);border:1px solid rgba(107,127,212,0.3);padding:32px;margin-top:32px;}
+.soul-highlight-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.3em;color:var(--soul-accent);margin-bottom:14px;}
+.soul-highlight-text{font-size:13px;line-height:2.2;color:rgba(232,228,240,0.8);}
+
+/* DEEP */
+.deep-section{background:var(--deep-bg);color:#dde0ec;padding:80px 40px;}
+.deep-section .layer-badge{color:#8a9fd4;border-color:#8a9fd4;}
+.deep-section .section-title{color:#e8e4f0;}
+.deep-section .section-lead{color:rgba(221,224,236,0.72);}
+.aspect-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:32px;}
+.aspect-card{background:rgba(255,255,255,0.04);border-left:3px solid #4a5a9a;padding:22px;}
+.aspect-card.hl{border-left-color:var(--gold);}
+.aspect-planets{font-family:'Cormorant Garamond',serif;font-size:15px;color:#b0bde8;margin-bottom:5px;}
+.aspect-type{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--gold);margin-bottom:10px;}
+.aspect-body{font-size:13px;line-height:2;color:rgba(200,205,230,0.78);}
+.sub-block{margin-top:44px;border-top:1px solid rgba(255,255,255,0.07);padding-top:44px;}
+.sub-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.4em;color:#8a9fd4;margin-bottom:24px;}
+.hs-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.hs-formula{flex-shrink:0;width:160px;font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gold-light);line-height:1.6;}
+.hs-formula small{font-size:10px;color:rgba(200,180,100,0.5);display:block;margin-top:4px;}
+.hs-text{font-size:13px;line-height:2;color:rgba(200,205,230,0.78);}
+
+/* SURFACE */
+.surface-section{background:var(--surface-bg);padding:80px 40px;}
+.surface-section .layer-badge{color:#8b3a2a;border-color:#8b3a2a;}
+.surface-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:32px;}
+.surf-card{background:white;border:1px solid #ddd5c5;padding:26px;position:relative;}
+.surf-card::before{content:'';position:absolute;top:0;left:0;width:36px;height:3px;background:var(--gold);}
+.surf-source{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--gold);margin:8px 0 10px;}
+.surf-key{font-size:17px;font-weight:400;letter-spacing:0.08em;margin-bottom:12px;color:#2a2d5e;}
+.surf-body{font-size:13px;line-height:2;color:#444;}
+
+/* SYNTHESIS */
+.synthesis-section{background:var(--ink);color:#e8e4f0;padding:80px 40px;}
+.synthesis-section .layer-badge{color:var(--gold);border-color:var(--gold);}
+.synthesis-section .section-title{color:#f0ebe0;}
+.synth-block{max-width:700px;margin:44px auto 0;}
+.synth-sub{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.35em;color:var(--gold);margin:36px 0 14px;}
+.synth-para{font-size:13px;line-height:2.4;color:rgba(232,228,240,0.82);margin-bottom:28px;padding-left:18px;border-left:2px solid rgba(184,147,74,0.3);}
+.synth-kw{color:var(--gold-light);font-weight:400;}
+
+/* NOW */
+.now-section{background:var(--now-bg);color:#f0e0b0;padding:80px 40px;position:relative;overflow:hidden;}
+.now-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(200,160,80,0.07) 0%,transparent 70%);}
+.now-section .section{position:relative;z-index:1;}
+.now-section .layer-badge{color:var(--now-accent);border-color:var(--now-accent);}
+.now-section .section-title{color:#f5e8c0;}
+.now-date{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:rgba(200,160,80,0.5);text-align:center;margin-top:12px;}
+.now-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:44px;}
+.now-card{background:rgba(255,255,255,0.04);border:1px solid rgba(200,160,80,0.2);padding:26px;}
+.now-card-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--now-accent);margin-bottom:10px;}
+.now-card-title{font-size:16px;font-weight:400;color:#f5e8c0;margin-bottom:12px;}
+.now-card-body{font-size:13px;line-height:2;color:rgba(240,224,176,0.75);}
+.action-block{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px;}
+.action-card{padding:20px;border:1px solid rgba(200,160,80,0.12);}
+.action-card.do{border-color:rgba(100,180,100,0.28);background:rgba(100,180,100,0.04);}
+.action-card.dont{border-color:rgba(180,100,100,0.28);background:rgba(180,100,100,0.04);}
+.action-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;margin-bottom:10px;}
+.action-card.do .action-label{color:rgba(120,200,120,0.8);}
+.action-card.dont .action-label{color:rgba(200,120,120,0.8);}
+.action-items{font-size:13px;line-height:2.2;color:rgba(240,224,176,0.7);}
+.now-turning{background:rgba(200,160,80,0.08);border:1px solid rgba(200,160,80,0.32);padding:28px 36px;margin-top:32px;text-align:center;}
+.now-turning-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.4em;color:var(--now-accent);margin-bottom:12px;}
+.now-turning-date{font-size:26px;font-weight:300;color:#f5e8c0;letter-spacing:0.2em;margin-bottom:10px;}
+.now-turning-desc{font-size:13px;line-height:2;color:rgba(240,224,176,0.7);}
+
+/* TIMELINE */
+.timeline-section{background:#f0ebe0;padding:80px 40px;}
+.timeline-section .layer-badge{color:#2a2d5e;border-color:#2a2d5e;}
+.tl-outer{max-width:800px;margin:44px auto 0;}
+.tl-phase{margin-bottom:52px;}
+.tl-phase-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.tl-phase-line{flex:1;height:1px;background:linear-gradient(to right,var(--gold),transparent);}
+.tl-phase-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--gold);white-space:nowrap;}
+.tl-items{position:relative;padding-left:34px;}
+.tl-items::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(184,147,74,0.1));}
+.tl-item{position:relative;margin-bottom:26px;}
+.tl-item::before{content:'';position:absolute;left:-29px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid #f0ebe0;}
+.tl-item.current::before{background:var(--now-accent);box-shadow:0 0 8px rgba(200,160,80,0.6);width:12px;height:12px;left:-31px;top:4px;}
+.tl-period{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--gold);margin-bottom:4px;}
+.tl-item.current .tl-period{color:var(--now-accent);}
+.tl-title{font-size:15px;font-weight:400;color:#2a2d5e;margin-bottom:6px;}
+.tl-body{font-size:13px;line-height:2;color:#555;}
+.tl-tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
+.tl-tag{font-family:'Cinzel',serif;font-size:7px;letter-spacing:0.2em;padding:3px 10px;border:1px solid;}
+.tl-tag.do{border-color:rgba(80,150,80,0.5);color:rgba(60,120,60,0.9);}
+.tl-tag.dont{border-color:rgba(150,80,80,0.5);color:rgba(120,60,60,0.9);}
+.tl-tag.sign{border-color:rgba(184,147,74,0.5);color:rgba(140,100,40,0.9);}
+
+/* ACCORDION — 使い方辞典共通 */
+.accordion-section{padding:0;}
+.accordion-header{display:flex;align-items:center;justify-content:space-between;padding:24px 32px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.06);transition:background 0.3s;user-select:none;}
+.accordion-header:hover{background:rgba(255,255,255,0.03);}
+.accordion-header-left{display:flex;align-items:center;gap:16px;}
+.accordion-icon{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;}
+.accordion-title{font-size:15px;font-weight:300;letter-spacing:0.1em;}
+.accordion-arrow{font-size:12px;transition:transform 0.3s;opacity:0.5;}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height 0.5s ease;}
+.accordion-body.open{max-height:9999px;}
+.accordion-content{padding:40px 32px;}
+
+/* MANUAL */
+.manual-wrap{background:var(--manual-bg);color:#d0e8d0;}
+.manual-wrap .accordion-header{color:#d0e8d0;}
+.manual-wrap .accordion-icon{color:var(--manual-accent);}
+.manual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.manual-card{background:rgba(255,255,255,0.04);border:1px solid rgba(106,170,106,0.18);padding:24px;}
+.manual-card-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--manual-accent);margin-bottom:12px;}
+.manual-list{list-style:none;}
+.manual-list li{font-size:13px;line-height:2;color:rgba(208,232,208,0.75);padding-left:14px;position:relative;margin-bottom:3px;}
+.manual-list li::before{content:'—';position:absolute;left:0;color:rgba(106,170,106,0.4);}
+.manual-highlight{background:rgba(106,170,106,0.06);border:1px solid rgba(106,170,106,0.22);padding:24px 32px;margin-top:28px;text-align:center;}
+.manual-highlight-text{font-size:14px;line-height:2.2;color:rgba(208,232,208,0.82);font-style:italic;}
+
+/* RELATION */
+.relation-wrap{background:var(--relation-bg);color:#e8d0e8;}
+.relation-wrap .accordion-header{color:#e8d0e8;}
+.relation-wrap .accordion-icon{color:var(--relation-accent);}
+.relation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.relation-card{background:rgba(255,255,255,0.04);border:1px solid rgba(176,106,176,0.18);padding:24px;}
+.relation-card-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--relation-accent);margin-bottom:12px;}
+.relation-list{list-style:none;}
+.relation-list li{font-size:13px;line-height:2;color:rgba(232,208,232,0.75);padding-left:14px;position:relative;margin-bottom:3px;}
+.relation-list li::before{content:'—';position:absolute;left:0;color:rgba(176,106,176,0.4);}
+.relation-note{background:rgba(176,106,176,0.06);border:1px solid rgba(176,106,176,0.22);padding:24px 32px;margin-top:28px;}
+.relation-note-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.3em;color:var(--relation-accent);margin-bottom:12px;}
+.relation-note-body{font-size:13px;line-height:2.2;color:rgba(232,208,232,0.8);}
+
+/* ANXIETY */
+.anxiety-wrap{background:var(--anxiety-bg);color:#d0d8e8;}
+.anxiety-wrap .accordion-header{color:#d0d8e8;}
+.anxiety-wrap .accordion-icon{color:var(--anxiety-accent);}
+.anxiety-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;}
+.anxiety-card{background:rgba(255,255,255,0.04);border:1px solid rgba(106,138,176,0.18);padding:24px;}
+.anxiety-state{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--anxiety-accent);margin-bottom:8px;}
+.anxiety-title{font-size:15px;font-weight:400;color:#e8eef8;margin-bottom:12px;}
+.anxiety-why{font-size:12px;line-height:1.9;color:rgba(208,216,232,0.55);margin-bottom:12px;padding:8px 12px;background:rgba(255,255,255,0.03);border-left:2px solid rgba(106,138,176,0.28);}
+.anxiety-how{font-size:13px;line-height:2;color:rgba(208,216,232,0.8);}
+.anxiety-how strong{color:var(--anxiety-accent);font-weight:400;}
+
+/* MONEY */
+.money-wrap{background:var(--money-bg);color:#f0e8c0;}
+.money-wrap .accordion-header{color:#f0e8c0;}
+.money-wrap .accordion-icon{color:var(--money-accent);}
+.money-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.money-card{background:rgba(255,255,255,0.04);border:1px solid rgba(192,160,48,0.18);padding:24px;}
+.money-card-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--money-accent);margin-bottom:12px;}
+.money-list{list-style:none;}
+.money-list li{font-size:13px;line-height:2;color:rgba(240,232,192,0.75);padding-left:14px;position:relative;margin-bottom:3px;}
+.money-list li::before{content:'—';position:absolute;left:0;color:rgba(192,160,48,0.4);}
+.money-warning{background:rgba(192,160,48,0.06);border:1px solid rgba(192,160,48,0.22);padding:24px 32px;margin-top:28px;}
+.money-warning-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.3em;color:var(--money-accent);margin-bottom:12px;}
+.money-warning-body{font-size:13px;line-height:2.2;color:rgba(240,232,192,0.8);}
+
+/* CALENDAR */
+.calendar-section{background:var(--calendar-bg);padding:80px 40px;}
+.calendar-section .layer-badge{color:#2a2d5e;border-color:#2a2d5e;}
+.cal-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:16px;margin-top:44px;scrollbar-width:thin;scrollbar-color:rgba(184,147,74,0.3) transparent;}
+.cal-scroll::-webkit-scrollbar{height:4px;}
+.cal-scroll::-webkit-scrollbar-thumb{background:rgba(184,147,74,0.3);border-radius:2px;}
+.cal-card{flex-shrink:0;width:220px;background:white;border:1px solid #ddd5c5;padding:22px;}
+.cal-card.current{border-color:var(--gold);background:#fffdf8;}
+.cal-card.special{border-color:#9a7a6a;}
+.cal-month{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--gold);margin-bottom:6px;}
+.cal-star{font-size:10px;color:#999;margin-bottom:6px;}
+.cal-theme{font-size:14px;font-weight:400;color:#2a2d5e;margin-bottom:8px;}
+.cal-energy{font-size:12px;line-height:1.9;color:#666;margin-bottom:10px;}
+.cal-money-label{font-family:'Cinzel',serif;font-size:7px;letter-spacing:0.2em;color:var(--gold);margin-bottom:4px;}
+.cal-money{font-size:12px;line-height:1.9;color:#888;}
+
+/* LIFETIME */
+.lifetime-section{background:var(--lifetime-bg);color:#c8c0e8;padding:80px 40px;position:relative;overflow:hidden;}
+.lifetime-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(112,96,196,0.08) 0%,transparent 70%);}
+.lifetime-section .section{position:relative;}
+.lifetime-section .layer-badge{color:var(--lifetime-accent);border-color:var(--lifetime-accent);}
+.lifetime-section .section-title{color:#e8e0f8;}
+.lifetime-preface{max-width:640px;margin:0 auto 56px;font-size:13px;line-height:2.4;color:rgba(200,192,232,0.78);text-align:center;font-style:italic;}
+.lifetime-phases{position:relative;max-width:800px;margin:0 auto;}
+.lifetime-phases::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--lifetime-accent),rgba(112,96,196,0.1));transform:translateX(-50%);}
+.lifetime-phase{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;margin-bottom:60px;align-items:center;}
+.lifetime-phase-left{text-align:right;padding-right:32px;}
+.lifetime-phase-right{padding-left:32px;}
+.lifetime-phase-center{display:flex;flex-direction:column;align-items:center;gap:8px;z-index:1;}
+.lifetime-dot{width:16px;height:16px;border-radius:50%;background:var(--lifetime-accent);border:3px solid var(--lifetime-bg);box-shadow:0 0 12px rgba(112,96,196,0.4);}
+.lifetime-dot.now{background:var(--now-accent);box-shadow:0 0 16px rgba(200,160,80,0.5);}
+.lifetime-age{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:rgba(200,192,232,0.5);white-space:nowrap;}
+.lifetime-period{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.25em;color:var(--lifetime-accent);margin-bottom:8px;}
+.lifetime-period.now-label{color:var(--now-accent);}
+.lifetime-theme{font-size:15px;font-weight:400;color:#e8e0f8;margin-bottom:8px;letter-spacing:0.05em;}
+.lifetime-desc{font-size:12px;line-height:2;color:rgba(200,192,232,0.68);}
+.lifetime-key{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--lifetime-accent);margin-top:8px;}
+.lifetime-sources{font-family:'Cinzel',serif;font-size:7px;letter-spacing:0.2em;color:rgba(200,192,232,0.35);margin-top:6px;}
+.lifetime-footer{max-width:640px;margin:60px auto 0;text-align:center;border-top:1px solid rgba(112,96,196,0.2);padding-top:40px;}
+.lifetime-footer-text{font-size:13px;line-height:2.2;color:rgba(200,192,232,0.65);margin-bottom:24px;}
+.lifetime-cta{display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.3em;padding:14px 32px;border:1px solid rgba(112,96,196,0.4);color:rgba(200,192,232,0.7);transition:all 0.3s;}
+.lifetime-cta:hover{border-color:var(--lifetime-accent);color:var(--lifetime-accent);}
+
+/* FOOTER */
+.footer{background:var(--soul-bg);color:rgba(240,235,224,0.4);text-align:center;padding:50px 40px;}
+.footer-note{font-size:11px;line-height:1.8;max-width:500px;margin:0 auto 20px;}
+.footer-update{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.3em;color:var(--gold);opacity:0.6;}
+
+@media(max-width:600px){
+  .section,.soul-section,.deep-section,.surface-section,.synthesis-section,.now-section,.timeline-section,.calendar-section,.lifetime-section{padding:60px 24px;}
+  .accordion-content{padding:32px 24px;}
+  .accordion-header{padding:20px 24px;}
+  .hs-item{flex-direction:column;}.hs-formula{width:auto;}
+  .action-block{grid-template-columns:1fr;}
+  .lifetime-phases::before{left:20px;}
+  .lifetime-phase{grid-template-columns:24px 1fr;grid-template-rows:auto auto;}
+  .lifetime-phase-left{display:none;}
+  .lifetime-phase-center{flex-direction:row;justify-content:flex-start;}
+  .lifetime-phase-right{padding-left:16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover" id="cover">
+  <div class="star-field" id="starField"></div>
+  <div class="cover-inner">
+    <div class="cover-label">Soul Blueprint · Living Design</div>
+    <div class="cover-title">魂の設計図</div>
+    <div class="cover-subtitle">A Map You Return To, Again and Again</div>
+    <div class="cover-divider"></div>
+    <div class="cover-name">今岡　寛之</div>
+    <div class="cover-name-en">Imaoka Hiroyuki</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><span class="cover-meta-label">Date of Birth</span><span class="cover-meta-value">1980年10月30日</span></div>
+      <div class="cover-meta-item"><span class="cover-meta-label">Time</span><span class="cover-meta-value">05:41</span></div>
+      <div class="cover-meta-item"><span class="cover-meta-label">Place</span><span class="cover-meta-value">鳥取県米子市</span></div>
+      <div class="cover-meta-item"><span class="cover-meta-label">Kin</span><span class="cover-meta-value">kin175 青い鷲</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ENTRY -->
+<div class="entry-section">
+  <div class="entry-inner">
+    <div class="entry-label">Today's Entry · 今日はどこから読む？</div>
+    <div class="entry-title">今の状態に合わせて、読み始める場所を選んでください</div>
+    <div class="entry-buttons">
+      <a href="#now" class="entry-btn">今どう動くか知りたい</a>
+      <a href="#anxiety" class="entry-btn">なんか重い・整えたい</a>
+      <a href="#manual" class="entry-btn">自分の扱い方を確認</a>
+      <a href="#relation" class="entry-btn">人間関係で悩んでいる</a>
+      <a href="#money" class="entry-btn">お金・仕事の流れを見たい</a>
+      <a href="#calendar" class="entry-btn">今月のテーマを確認</a>
+      <a href="#soul" class="entry-btn">最初から読む</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrapper">
+  <div class="nav-row">
+    <div class="nav-label">設計図</div>
+    <a href="#soul" class="nav-item">SOUL<span>魂の層</span></a>
+    <a href="#deep" class="nav-item">DEEP<span>深層</span></a>
+    <a href="#surface" class="nav-item">SURFACE<span>表層</span></a>
+    <a href="#synthesis" class="nav-item">SYNTHESIS<span>統合</span></a>
+    <a href="#now" class="nav-item">NOW<span>今のあなたへ</span></a>
+    <a href="#timeline" class="nav-item">TIMELINE<span>航海図</span></a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-row">
+    <div class="nav-label">使い方辞典</div>
+    <a href="#manual" class="nav-item">取扱<span>自分の扱い方</span></a>
+    <a href="#relation" class="nav-item">関係性<span>人との相性</span></a>
+    <a href="#anxiety" class="nav-item">不安<span>整え方</span></a>
+    <a href="#money" class="nav-item">お金<span>豊かさの回路</span></a>
+    <a href="#calendar" class="nav-item">月暦<span>2026年</span></a>
+    <a href="#lifetime" class="nav-item">付録<span>生涯設計図</span></a>
+  </div>
+</div>
+
+<!-- SOUL -->
+<div class="soul-section" id="soul">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Layer 01 · Soul</div>
+      <div class="section-title">魂の層</div>
+      <div class="section-title-en">Who You Are at the Core</div>
+      <div class="divider" style="background:rgba(107,127,212,0.4)"></div>
+      <div class="section-lead">時代や環境が変わっても変わらない、あなたの本質。</div>
+    </div>
+    <div class="soul-cards">
+      <div class="soul-card">
+        <div class="soul-card-source">マヤ暦 · kin175</div>
+        <div class="soul-card-key">青い鷲<small style="font-size:12px;opacity:0.5;display:block;margin-top:4px">音6 · 潜在意識：白い犬</small></div>
+        <div class="soul-card-body">高所から全体を見渡す創造的知性。「視る」ことが魂の媒体だ。音6は均衡とリズム——流れながら構造を生む力。潜在意識の白い犬は、忠誠と愛と仲間への絆。知性と愛情が、この魂の二本柱。</div>
+      </div>
+      <div class="soul-card">
+        <div class="soul-card-source">インド占星術 · 月の星宿</div>
+        <div class="soul-card-key">プナルヴァス<small style="font-size:12px;opacity:0.5;display:block;margin-top:4px">蟹座3° · 社会的使命の場</small></div>
+        <div class="soul-card-body">「再生・帰還・本質への回帰」の星宿。守護女神アディティは無限の慈悲の源。社会的使命の場に月が宿る——感情と仕事が一体化している設計。何度削ぎ落としても本質に戻る力。</div>
+      </div>
+      <div class="soul-card">
+        <div class="soul-card-source">数秘術 · ソウルナンバー</div>
+        <div class="soul-card-key">8——本物の影響力への渇望</div>
+        <div class="soul-card-body">魂の奥底が求めるのは「本物の力」。表舞台より、仕組みそのものを動かす位置への衝動。∞を縦にしたもの——見える世界と見えない世界が交差する軸に立つ設計。</div>
+      </div>
+    </div>
+    <div class="soul-highlight">
+      <div class="soul-highlight-title">★ 見えない回路——鏡像点（アンティシア）が示すもの</div>
+      <div class="soul-highlight-text">太陽中心の視点で夏至点を軸に各天体の「鏡の位置」を計算すると、<strong style="color:#b0bde8">地球・木星・土星の三者が魚座23〜25°という同じ場所に集結している</strong>。「存在（地球）」「広がり（木星）」「試練（土星）」が、見えない次元で魚座に映し出される。魚座は「境界が溶けてより大きなものへ帰る」エネルギー——個を超えた何かに仕えるとき、この魂は最も力を発揮する。</div>
+    </div>
+  </div>
+</div>
+
+<!-- DEEP -->
+<div class="deep-section" id="deep">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge" style="color:#8a9fd4;border-color:#8a9fd4">Layer 02 · Deep</div>
+      <div class="section-title" style="color:#e8e4f0">深層</div>
+      <div class="section-title-en">Patterns, Karma & the Invisible Drives</div>
+      <div class="divider" style="background:rgba(138,159,212,0.4)"></div>
+      <div class="section-lead">無意識のパターン、過去からの課題、内側の動力源。</div>
+    </div>
+    <div class="sub-title" style="margin-top:0">太陽中心から見た、宇宙的な役割の構造</div>
+    <div class="aspect-grid">
+      <div class="aspect-card hl">
+        <div class="aspect-planets">地球 ☌ 木星 ☌ 土星</div>
+        <div class="aspect-type">三重の合</div>
+        <div class="aspect-body">「在るだけで場が広がる」資質と「制約の中で成長する」課題が同時に設定されている。この緊張があなたの創造の永続的な動力源だ。</div>
+      </div>
+      <div class="aspect-card hl">
+        <div class="aspect-planets">地球 △ 火星</div>
+        <div class="aspect-type">調和の角度 · 0.1°という奇跡的な精度</div>
+        <div class="aspect-body">「存在すること」と「動くこと」がほぼ完璧な調和で繋がっている。動けば動くほど本来の自分になれる——詰まった時の解放鍵は「まず体を動かすこと」だ。</div>
+      </div>
+      <div class="aspect-card">
+        <div class="aspect-planets">木星 △ 海王星</div>
+        <div class="aspect-type">調和の角度 · 0.24°</div>
+        <div class="aspect-body">哲学（木星）と霊的直感（海王星）の精密な調和。理屈を超えた確信で動ける瞬間がある——それは錯覚ではなく本物の能力だ。</div>
+      </div>
+    </div>
+    <div class="sub-block">
+      <div class="sub-title">中点配置（ハーフサム）——隠れた回路</div>
+      <div class="hs-item">
+        <div class="hs-formula">地球 / 土星 = 木星<small>誤差0.41°</small></div>
+        <div class="hs-text">制約を受け入れた瞬間に最大の拡張が起きる——この魂の根本的な解放の公式。土星の壁は木星への扉になる。</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-formula">金星 / 地球 = 水星<small>誤差0.98°</small></div>
+        <div class="hs-text">美しさを言葉にするほど現実に意味が生まれる——言語化は表現ではなく、現実を作る行為だ。</div>
+      </div>
+    </div>
+    <div class="sub-block">
+      <div class="sub-title">過去からの課題（ラーフ／ケートゥ）</div>
+      <div class="hs-item">
+        <div class="hs-formula">ラーフ<br>蟹座22°<br>社会の場（第10室）<small>魂が向かう方向</small></div>
+        <div class="hs-text">「人々の感情に寄り添いながら社会的に影響を持つ位置」への引力がある。その執着の向かう先が「人を導くこと」であれば、それは天命になる。</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-formula">ケートゥ<br>山羊座22°<br>家の場（第4室）<small>手放すべき過去</small></div>
+        <div class="hs-text">「一人で内側に安全を築く力」はすでに持っている。今生のテーマは、その安全を手放して外の世界へ飛び出すこと。</div>
+      </div>
+    </div>
+    <div class="sub-block">
+      <div class="sub-title">四柱推命——生まれ持ったエネルギーの構造</div>
+      <div class="hs-item">
+        <div class="hs-formula">空亡：申・酉<small>効きにくいゾーン</small></div>
+        <div class="hs-text">鋭さ・判断力を表す金のエネルギーが「空洞」になっている。切れ味で勝負しようとするほど空回りする——刃は自然に研がれるのを待つ構造だ。</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-formula">日柱：丙子<br>流れの中で掴む格局<small>身弱・感受性が高い</small></div>
+        <div class="hs-text">固定した資産より流れの中で機会をつかむ資質。身弱は環境・他者の影響を受けやすい——その感受性こそが最大の強みだ。「海面に輝く太陽」足元は常に深く揺れている。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SURFACE -->
+<div class="surface-section" id="surface">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Layer 03 · Surface</div>
+      <div class="section-title">表層</div>
+      <div class="section-title-en">How You Meet the World</div>
+      <div class="divider"></div>
+      <div class="section-lead">世界との接点。他者が感知するあなたの輪郭と現実での役割。</div>
+    </div>
+    <div class="surface-grid">
+      <div class="surf-card">
+        <div class="surf-source">数秘術 · LP</div>
+        <div class="surf-key">22——夢を現実に建てる人</div>
+        <div class="surf-body">宇宙規模のビジョンを地に足のついた形にする稀有な力。スケールを縮小しないことが、このナンバーへの唯一の敬意だ。</div>
+      </div>
+      <div class="surf-card">
+        <div class="surf-source">インド占星術 · 上昇宮</div>
+        <div class="surf-key">天秤座 第1室集中</div>
+        <div class="surf-body">太陽・水星・上昇宮が第1室に集中——「存在そのもの」が世界への最初の印象になる。天秤座の均衡感覚と美的知性が洗練された存在感として映る。</div>
+      </div>
+      <div class="surf-card">
+        <div class="surf-source">数秘術 · ディスティニー</div>
+        <div class="surf-key">4——土台を作る使命</div>
+        <div class="surf-body">LP22（宇宙規模の建設）×4（構築）——スケールは宇宙的だが作るものは徹底して実用的でなければならない。</div>
+      </div>
+      <div class="surf-card">
+        <div class="surf-source">四柱推命 · 日柱</div>
+        <div class="surf-key">丙子——海面の太陽</div>
+        <div class="surf-body">光は圧倒的だが足元は常に深く揺れている。社会的な役割やルールへの感受性が高く、制度や構造の中で光り輝く設計だ。</div>
+      </div>
+      <div class="surf-card">
+        <div class="surf-source">ヒューマンデザイン</div>
+        <div class="surf-key">プロジェクター 3/5<small style="font-size:12px;color:#888;display:block;margin-top:4px">招待を待つ</small></div>
+        <div class="surf-body">他者のエネルギーを読みシステムを最適化する観察者タイプ。動き出す前に「招き」がある。3/5は「試行錯誤で学び、異端者として世界を変える」役割。</div>
+      </div>
+      <div class="surf-card">
+        <div class="surf-source">太陽中心 · 地球の位置</div>
+        <div class="surf-key">牡羊座6° · 火星と精密調和</div>
+        <div class="surf-body">魂が宿った宇宙的な座標。牡羊座は先駆者・開拓。火星との精密な調和角度が重なり「在るだけで前進が起きる」という設計が見える。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SYNTHESIS -->
+<div class="synthesis-section" id="synthesis">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Synthesis</div>
+      <div class="section-title" style="color:#f0ebe0">統合読み</div>
+      <div class="section-title-en">The Story Across All Layers</div>
+      <div class="divider" style="background:rgba(184,147,74,0.4)"></div>
+    </div>
+    <div class="synth-block">
+      <div class="synth-sub">I. 魂の設計——何のために生まれてきたのか</div>
+      <div class="synth-para">青い鷲・プナルヴァス・ソウル8——三つの占術が「知性と影響力の統合」という同じテーマを指している。鷲は高く飛ぶが、白い犬（潜在意識）は地面で仲間を守る。<span class="synth-kw">「全体を見渡す知性」と「人を愛する心」の共存が、この魂の稀有さだ。</span>「洗練師」「視点をずらす人」というポジションは後天的に作ったものではなく、魂レベルで設定されたテーマの言語化だ。</div>
+      <div class="synth-sub">II. 深層のパターン——何が詰まり、何が解放の鍵か</div>
+      <div class="synth-para">金の空亡と身弱が示すのは<span class="synth-kw">「一人で完結しようとするほど詰まる」</span>という深層パターンだ。地球/土星＝木星の公式がその答えを持っている——制約の中に潜る。土星の壁が木星の扉になる瞬間は、必ず「降伏」の後に来る。苦悩が入ると思考がネガティブに向かう傾向も、この水の深さと連動している。抜け出す鍵は「動くこと」だ。</div>
+      <div class="synth-sub">III. 表層の役割——どう世界に現れるべきか</div>
+      <div class="synth-para">LP22×ディスティニー4×プロジェクター——これだけの「建設者」の設計が揃っている。しかし<span class="synth-kw">プロジェクターの本質は「動く人」ではなく「視る人」だ。</span>招待が来るまで動かない——これはLP22の「スケールを縮小しない」と響き合う。招きを待つ間に構造を磨く。それがこの設計の正しい使い方だ。</div>
+      <div class="synth-sub">IV. 魂の最終座標——今、どの時間にいるか</div>
+      <div class="synth-para">地球・木星・土星のアンティシアが魚座23〜25°に集結する。個を超えた何かに仕えるとき、この魂は最も力を発揮する。<span class="synth-kw">今、土星期の最終盤——最も重い収縮の時間が終わりに近づいている。</span>次の扉は、すでに目の前にある。</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOW -->
+<div class="now-section" id="now">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Now · 今のあなたへ</div>
+      <div class="section-title" style="color:#f5e8c0">今、ここにいるあなたへ</div>
+      <div class="section-title-en">Where You Stand · What to Do Next</div>
+      <div class="now-date">鑑定日：2026年3月27日時点</div>
+    </div>
+    <div class="now-grid">
+      <div class="now-card">
+        <div class="now-card-label">現在の流れ（インド占星術）</div>
+        <div class="now-card-title">土星期 × ラーフ期<small style="font-size:12px;opacity:0.6;display:block;margin-top:4px">〜2026年5月14日</small></div>
+        <div class="now-card-body">土星期の中でも最も揺さぶりが強い時期の最終盤。「本当に向かいたい方向」と「惰性で続けてきたもの」の乖離が鮮明になる。不快な鮮明さは、正しい方向への再調整のサインだ。</div>
+      </div>
+      <div class="now-card">
+        <div class="now-card-label">今年のテーマ（紫微斗数）</div>
+        <div class="now-card-title">2026年 · 変化・移動・外への展開</div>
+        <div class="now-card-body">今年は「移動・変化・外への展開」の宮に2026年の星が重なる。現状維持を許さない強いエネルギーが外側から押し寄せる年。動きたくないと思っても動かされる——ならば自分で舵を握る方がいい。</div>
+      </div>
+      <div class="now-card">
+        <div class="now-card-label">ヒューマンデザイン · 今</div>
+        <div class="now-card-title">招待の気配を感じているか</div>
+        <div class="now-card-body">プロジェクターの「動けない感覚」は、招待が来ていないサインかもしれない。招待なしに動くと消耗する。今は自分の洞察と知識を深める時間として使うのが正解だ。</div>
+      </div>
+    </div>
+    <div class="action-block">
+      <div class="action-card do">
+        <div class="action-label">今やること</div>
+        <div class="action-items">・鑑定書・コンテンツの仕込みを深める<br>・「招かれる準備」としての発信を続ける<br>・土星期に気づいた「手放すべきもの」を整理する<br>・5月以降に向けて種を蒔く</div>
+      </div>
+      <div class="action-card dont">
+        <div class="action-label">今しないこと</div>
+        <div class="action-items">・招待なしで大きな判断をしない<br>・一人で無理に完結させようとしない<br>・鋭さだけで勝負しようとしない<br>・苦悩の中で重要な決断をしない</div>
+      </div>
+    </div>
+    <div class="now-turning">
+      <div class="now-turning-label">次のターニングポイント</div>
+      <div class="now-turning-date">2026年5月14日〜</div>
+      <div class="now-turning-desc">土星の制約の中に木星の祝福が入り始める。仕込んできたものが形を持ち始める。この日以降、動き始めた流れを信頼すること。</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section" id="timeline">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Timeline · 航海図</div>
+      <div class="section-title">これからの流れ</div>
+      <div class="section-title-en">2026 → 2032</div>
+      <div class="divider"></div>
+      <div class="section-lead">今どこにいるかを知り、次にどこへ向かうかを選ぶ。</div>
+    </div>
+    <div class="tl-outer">
+      <div class="tl-phase">
+        <div class="tl-phase-header"><div class="tl-phase-label">2026 前半</div><div class="tl-phase-line"></div></div>
+        <div class="tl-items">
+          <div class="tl-item current">
+            <div class="tl-period">★ NOW → 2026年5月14日</div>
+            <div class="tl-title">揺さぶりの最終章——仕込みの時間</div>
+            <div class="tl-body">土星×ラーフ期の最終盤。「本当に向かいたい方向」が炙り出される。不快な明晰さはサイン。動くより仕込む時間として使い切ること。</div>
+            <div class="tl-tags"><span class="tl-tag do">コンテンツ仕込み</span><span class="tl-tag do">発信継続</span><span class="tl-tag dont">大判断は保留</span><span class="tl-tag sign">招待の気配を感じたら動く</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-header"><div class="tl-phase-label">2026 後半</div><div class="tl-phase-line"></div></div>
+        <div class="tl-items">
+          <div class="tl-item">
+            <div class="tl-period">2026年5月14日〜9月</div>
+            <div class="tl-title">土星期 × 木星期——扉が開く</div>
+            <div class="tl-body">「地球/土星＝木星」の公式が時間軸に現れる。仕込んできたものが形を持ち始める。この時期に動いた流れは本物だ。</div>
+            <div class="tl-tags"><span class="tl-tag do">新メニュー展開</span><span class="tl-tag sign">突然の繋がり・コラボ話はサイン</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-period">2026年9月〜年末</div>
+            <div class="tl-title">土星期 × ケートゥ期——手放しの時間</div>
+            <div class="tl-body">「本当に必要なもの」と「惰性で持っていたもの」の最終的な仕分けが起きる。軽くなることで次のサイクルへの準備が整う。</div>
+            <div class="tl-tags"><span class="tl-tag do">整理・手放し</span><span class="tl-tag dont">無理な拡大は控える</span><span class="tl-tag sign">内側が静かになったらサイン</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-header"><div class="tl-phase-label">2027 → 2028</div><div class="tl-phase-line"></div></div>
+        <div class="tl-items">
+          <div class="tl-item">
+            <div class="tl-period">2027年〜</div>
+            <div class="tl-title">表現と関係性の開花期</div>
+            <div class="tl-body">美しさを言語化する回路が本格稼働する。鑑定書のクオリティと評判が自然に広がる流れ。</div>
+            <div class="tl-tags"><span class="tl-tag do">価格改定・整備</span><span class="tl-tag sign">評判が自然に広がり始めたらサイン</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-period">2027年末〜2028年</div>
+            <div class="tl-title">言葉と構造の解放期</div>
+            <div class="tl-body">土星期が終わり水星期が始まる。本当の自分の言葉で本当の場所から世界に届ける時間。プナルヴァスの「帰還」が現実の形を取る。</div>
+            <div class="tl-tags"><span class="tl-tag do">書く・話す・体系化</span><span class="tl-tag sign">「全身でわかる」体験が来たらサイン</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-header"><div class="tl-phase-label">2029 → 2032</div><div class="tl-phase-line"></div></div>
+        <div class="tl-items">
+          <div class="tl-item">
+            <div class="tl-period">2029〜2030年</div>
+            <div class="tl-title">LP22の本格的な発動</div>
+            <div class="tl-body">積み重ねてきたものが「他者のための土台」として機能し始める。自分が作ったものが独立して動き出す感覚——それがLP22発火の証。スケールを縮めないこと。</div>
+            <div class="tl-tags"><span class="tl-tag do">スケールを縮小しない</span><span class="tl-tag sign">「あなたから学びたい」という招きが増える</span></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-period">2030年以降</div>
+            <div class="tl-title">社会的な影響力の開花</div>
+            <div class="tl-body">「人々の感情と共鳴しながら公的な役割を果たす」という魂の設計が現実の形を取る。影響力が権力にならないよう常に内側の静けさを参照すること。</div>
+            <div class="tl-tags"><span class="tl-tag do">公的な場への展開</span><span class="tl-tag dont">権力への執着に気をつける</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 使い方辞典 — ACCORDION -->
+
+<!-- MANUAL -->
+<div class="manual-wrap accordion-section" id="manual">
+  <div class="accordion-header" onclick="toggleAccordion('manual-body')">
+    <div class="accordion-header-left">
+      <span class="accordion-icon" style="color:var(--manual-accent)">Manual</span>
+      <span class="accordion-title" style="color:#d0e8d0">取扱説明書——自分の正しい扱い方</span>
+    </div>
+    <span class="accordion-arrow" style="color:#6aaa6a">▼</span>
+  </div>
+  <div class="accordion-body" id="manual-body">
+    <div class="accordion-content">
+      <div class="manual-grid">
+        <div class="manual-card">
+          <div class="manual-card-label">得意なこと</div>
+          <ul class="manual-list">
+            <li>高いところから全体を見渡すこと</li>
+            <li>美しさを言葉にすること</li>
+            <li>仕組みの問題点を一瞬で見抜くこと</li>
+            <li>流れを読んで最適なタイミングを待つこと</li>
+            <li>深く潜って本質を引き出すこと</li>
+          </ul>
+        </div>
+        <div class="manual-card">
+          <div class="manual-card-label">苦手なこと・消耗するパターン</div>
+          <ul class="manual-list">
+            <li>招待なしに自分から動き続けること</li>
+            <li>鋭さだけで勝負しようとすること</li>
+            <li>一人で全部やろうとすること</li>
+            <li>苦悩が入った状態で考え続けること</li>
+            <li>現実への着地を急ぐこと</li>
+          </ul>
+        </div>
+        <div class="manual-card">
+          <div class="manual-card-label">エネルギーの回復法</div>
+          <ul class="manual-list">
+            <li>とにかく体を動かす（これが一番効く）</li>
+            <li>美しいものを見る・触れる</li>
+            <li>一人の静かな時間で内省する</li>
+            <li>自然の中にいる</li>
+            <li>言葉にする・書き出す</li>
+          </ul>
+        </div>
+        <div class="manual-card">
+          <div class="manual-card-label">決断するときのコツ</div>
+          <ul class="manual-list">
+            <li>「招待されているか」を確認する</li>
+            <li>制約の中に答えがある（壁は扉）</li>
+            <li>腹落ちするまで待つ</li>
+            <li>動いた時の体の感覚で判断する</li>
+            <li>苦悩の中では決断しない</li>
+          </ul>
+        </div>
+      </div>
+      <div class="manual-highlight">
+        <div class="manual-highlight-text">「動くことで開く」という回路が設定されている。<br>詰まった時の答えは、いつも「まず体を動かすこと」だ。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATION -->
+<div class="relation-wrap accordion-section" id="relation">
+  <div class="accordion-header" onclick="toggleAccordion('relation-body')">
+    <div class="accordion-header-left">
+      <span class="accordion-icon" style="color:var(--relation-accent)">Relation</span>
+      <span class="accordion-title" style="color:#e8d0e8">関係性——人との相性パターン</span>
+    </div>
+    <span class="accordion-arrow" style="color:#b06ab0">▼</span>
+  </div>
+  <div class="accordion-body" id="relation-body">
+    <div class="accordion-content">
+      <div class="relation-grid">
+        <div class="relation-card">
+          <div class="relation-card-label">自然に惹かれやすい人</div>
+          <ul class="relation-list">
+            <li>深く考える人・哲学的な人</li>
+            <li>感情に正直な人</li>
+            <li>独自のビジョンを持っている人</li>
+            <li>あなたの価値を認めて招いてくれる人</li>
+            <li>何かを本気で変えようとしている人</li>
+          </ul>
+        </div>
+        <div class="relation-card">
+          <div class="relation-card-label">消耗しやすい関係</div>
+          <ul class="relation-list">
+            <li>急かす人・結果を急かす環境</li>
+            <li>あなたのエネルギーを一方的に使う人</li>
+            <li>表面的なやりとりだけの関係</li>
+            <li>競争を煽ってくる人</li>
+            <li>感情を抑圧している人</li>
+          </ul>
+        </div>
+        <div class="relation-card">
+          <div class="relation-card-label">招待をもたらしやすい人</div>
+          <ul class="relation-list">
+            <li>あなたの「視る力」を必要としている人</li>
+            <li>仕組みを変えたいと思っている人</li>
+            <li>感情的に行き詰まっている人</li>
+            <li>深い対話を求めている人</li>
+          </ul>
+        </div>
+        <div class="relation-card">
+          <div class="relation-card-label">愛し方・愛され方の傾向</div>
+          <ul class="relation-list">
+            <li>深く関わることで本当の力が出る</li>
+            <li>「分かってもらえている」感覚が安心の源</li>
+            <li>表面的な承認より深い理解を求める</li>
+            <li>一度信頼した人への献身は深い</li>
+          </ul>
+        </div>
+      </div>
+      <div class="relation-note">
+        <div class="relation-note-title">合わない理由がわかると楽になる</div>
+        <div class="relation-note-body">消耗する関係に入った時、それはあなたの問題ではなく「設計の違い」だ。プロジェクタータイプは持続的にエネルギーを発し続けるタイプと長時間一緒にいると消耗しやすい。「合わない」ではなく「エネルギーの種類が違う」と理解するだけで、ずいぶん楽になる。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANXIETY -->
+<div class="anxiety-wrap accordion-section" id="anxiety">
+  <div class="accordion-header" onclick="toggleAccordion('anxiety-body')">
+    <div class="accordion-header-left">
+      <span class="accordion-icon" style="color:var(--anxiety-accent)">Anxiety</span>
+      <span class="accordion-title" style="color:#d0d8e8">不安が来たときの整え方</span>
+    </div>
+    <span class="accordion-arrow" style="color:#6a8ab0">▼</span>
+  </div>
+  <div class="accordion-body" id="anxiety-body">
+    <div class="accordion-content">
+      <div class="anxiety-cards">
+        <div class="anxiety-card">
+          <div class="anxiety-state">思考がネガティブにはまった時</div>
+          <div class="anxiety-title">考えるのをやめて、動く</div>
+          <div class="anxiety-why">苦悩が入ると深い水が底に向かって流れ始める。考え続けるほど深みにはまる設計。</div>
+          <div class="anxiety-how"><strong>まず体を動かす。</strong>散歩でも掃除でも。地球×火星の回路が、思考の渦から体を引き剥がしてくれる。</div>
+        </div>
+        <div class="anxiety-card">
+          <div class="anxiety-state">動けない・消耗している時</div>
+          <div class="anxiety-title">一人の時間を確保する</div>
+          <div class="anxiety-why">招待なしに動き続けたプロジェクターの消耗パターン。</div>
+          <div class="anxiety-how"><strong>何もしない時間が充電だ。</strong>プロジェクターは一人になることで回復する。サボりではなく設計通りの行動。</div>
+        </div>
+        <div class="anxiety-card">
+          <div class="anxiety-state">一人で抱えすぎている時</div>
+          <div class="anxiety-title">誰かに話す・頼る</div>
+          <div class="anxiety-why">「一人で完結しなければ」という過去からの癖が発動している。</div>
+          <div class="anxiety-how"><strong>助けを求めることは弱さではない。</strong>身弱の設計は「他者の力を借りることで輝く」——それが正しい使い方だ。</div>
+        </div>
+        <div class="anxiety-card">
+          <div class="anxiety-state">ただ重い・理由がわからない時</div>
+          <div class="anxiety-title">美しいものに触れる</div>
+          <div class="anxiety-why">土星期の収縮エネルギーや空亡の時期に重なっている可能性がある。</div>
+          <div class="anxiety-how"><strong>美術館でも、好きな音楽でも、自然でも。</strong>美しさに触れると言語化の回路が動き始める。</div>
+        </div>
+        <div class="anxiety-card">
+          <div class="anxiety-state">この流れでいいのか不安な時</div>
+          <div class="anxiety-title">タイムラインを見直す</div>
+          <div class="anxiety-why">「招待を待つ」時間は、プロジェクターにとって特に不安になりやすい。</div>
+          <div class="anxiety-how"><strong>今がどの時期かを確認する。</strong>「今はこういう時期だ」と理解できると、不安が流れの中の一部に変わる。</div>
+        </div>
+        <div class="anxiety-card">
+          <div class="anxiety-state">消耗のサインに気づいたら</div>
+          <div class="anxiety-title">早めに立ち止まる</div>
+          <div class="anxiety-why"></div>
+          <div class="anxiety-how">・急に鋭く判断しようとしている<br>・「自分でやった方が早い」と思い始めた<br>・理由なく焦っている<br>・何日も一人の時間が取れていない<br>・美しいものへの感受性が鈍くなっている</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MONEY -->
+<div class="money-wrap accordion-section" id="money">
+  <div class="accordion-header" onclick="toggleAccordion('money-body')">
+    <div class="accordion-header-left">
+      <span class="accordion-icon" style="color:var(--money-accent)">Money</span>
+      <span class="accordion-title" style="color:#f0e8c0">お金と仕事——豊かさの回路</span>
+    </div>
+    <span class="accordion-arrow" style="color:#c0a030">▼</span>
+  </div>
+  <div class="accordion-body" id="money-body">
+    <div class="accordion-content">
+      <div class="money-grid">
+        <div class="money-card">
+          <div class="money-card-label">豊かさが来るパターン</div>
+          <ul class="money-list">
+            <li>流れに乗った時（流動性が命）</li>
+            <li>招待された仕事・依頼された仕事</li>
+            <li>自分の「視る力」が必要とされる時</li>
+            <li>人との縁から発展するもの</li>
+            <li>美しさや言葉が価値として認められる時</li>
+          </ul>
+        </div>
+        <div class="money-card">
+          <div class="money-card-label">稼ぎ方の設計</div>
+          <ul class="money-list">
+            <li>固定収入より、流れの中の機会を掴む</li>
+            <li>「この人に頼みたい」という指名で来る仕事</li>
+            <li>動きのある市場・変化の早い分野が合う</li>
+            <li>他者のエネルギーを借りることで増幅する</li>
+            <li>一つの柱より複数の流れを持つ</li>
+          </ul>
+        </div>
+        <div class="money-card">
+          <div class="money-card-label">やってはいけないパターン</div>
+          <ul class="money-list">
+            <li>一人で全部やろうとする</li>
+            <li>競争で勝ちに行く</li>
+            <li>急いで結果を出そうとする</li>
+            <li>自分を安く売る（ソウル8の設計に反する）</li>
+            <li>金の空亡時期に大きな投資をする</li>
+          </ul>
+        </div>
+        <div class="money-card">
+          <div class="money-card-label">空亡時期の動き方</div>
+          <ul class="money-list">
+            <li>鋭さで金運を取りにいかない</li>
+            <li>大きな投資・固定費増加は避ける</li>
+            <li>仕込みと準備に使う</li>
+            <li>縁・人間関係を大切にする時期</li>
+          </ul>
+        </div>
+      </div>
+      <div class="money-warning">
+        <div class="money-warning-title">プロジェクターとお金の法則</div>
+        <div class="money-warning-body">招待された仕事で動いた時、お金は後からついてくる。招待なしに動いた仕事でいくら稼いでも、消耗と「苦味」が残る。どちらの方法で稼いだかで、人生の質が変わる。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div class="calendar-section" id="calendar">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Calendar · 月の羅針盤</div>
+      <div class="section-title">2026年の月別テーマ</div>
+      <div class="section-title-en">Monthly Navigation · Nine Star Ki</div>
+      <div class="divider"></div>
+      <div class="section-lead">本命星：二黒土星 / 月命星：三碧木星<br>横にスクロールして各月を確認できます</div>
+    </div>
+    <div class="cal-scroll">
+      <div class="cal-card">
+        <div class="cal-month">FEB · 2月</div>
+        <div class="cal-star">八白土星</div>
+        <div class="cal-theme">内側を整える</div>
+        <div class="cal-energy">山のような静けさ。動かないことに意味がある。焦りは充電中のサインだ。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">既存の関係を深める。契約の見直しに良い。大きな投資は来月以降に。</div>
+      </div>
+      <div class="cal-card current">
+        <div class="cal-month">MAR · 3月 ◎NOW</div>
+        <div class="cal-star">七赤金星</div>
+        <div class="cal-theme">発信・表現・人前に出る</div>
+        <div class="cal-energy">言葉と表現が光る月。話すこと、書くこと、見せることが力を持つ。社交的なエネルギーが高まる。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">発信・コンテンツに良いタイミング。新しい縁が生まれやすい。鑑定書の反応が出やすい月。</div>
+      </div>
+      <div class="cal-card">
+        <div class="cal-month">APR · 4月</div>
+        <div class="cal-star">六白金星</div>
+        <div class="cal-theme">決断・前進</div>
+        <div class="cal-energy">天の力が降りてくる感覚。判断が明確になり迷いが減る。リーダーシップを発揮しやすい。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">重要な決断に向いている。価格設定の見直しに良い。お金の流れが動き始める。</div>
+      </div>
+      <div class="cal-card special">
+        <div class="cal-month">MAY · 5月 ⚡重要</div>
+        <div class="cal-star">五黄土星</div>
+        <div class="cal-theme">変化の中心・大転換</div>
+        <div class="cal-energy">全ての中心に立つ月。良くも悪くも増幅される。ポジティブな行動は大きく実る。</div>
+        <div class="cal-money-label">仕事・お金 ★超重要</div>
+        <div class="cal-money">ダシャー切り替わり（5/14）と重なる。動いた流れが本物になる大転換月。</div>
+      </div>
+      <div class="cal-card">
+        <div class="cal-month">JUN · 6月</div>
+        <div class="cal-star">四緑木星</div>
+        <div class="cal-theme">学び・情報収集</div>
+        <div class="cal-energy">風のように動き回る月。固定せず流れに乗る。新しい情報・人との出会いが多くなる。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">インプットに最適。学びへの投資が実になる。直接の収益より種まきの月。</div>
+      </div>
+      <div class="cal-card special">
+        <div class="cal-month">JUL · 7月 ★月命星</div>
+        <div class="cal-star">三碧木星（月命星）</div>
+        <div class="cal-theme">行動・挑戦・自分らしさ全開</div>
+        <div class="cal-energy">自分らしさが最も出やすい月。直感が冴え雷のような突破力が出る。やりたいことへの衝動が強くなる。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">新規案件・新メニューに最適。行動した分だけ結果が出やすい。スピードが大事な月。</div>
+      </div>
+      <div class="cal-card special">
+        <div class="cal-month">AUG · 8月 ★本命星</div>
+        <div class="cal-star">二黒土星（本命星）</div>
+        <div class="cal-theme">丁寧に・縁を育てる</div>
+        <div class="cal-energy">原点に戻る感覚。地に足をつけ一つひとつを丁寧に。縁と信頼を育てることに力がある。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">既存クライアントとの関係を深める。長期的な信頼構築に最適。</div>
+      </div>
+      <div class="cal-card">
+        <div class="cal-month">SEP · 9月</div>
+        <div class="cal-star">一白水星</div>
+        <div class="cal-theme">独立・種まき</div>
+        <div class="cal-energy">新しいサイクルの始まり。水が流れ始めるような静かな動き出し。次の方向性を定める時間。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">新しいビジネスの種まきに最適。独立した動きが吉。自分で判断することで運が開く。</div>
+      </div>
+      <div class="cal-card">
+        <div class="cal-month">OCT · 10月</div>
+        <div class="cal-star">九紫火星</div>
+        <div class="cal-theme">評価される・光が当たる</div>
+        <div class="cal-energy">積み上げてきたものが外から見える状態になる。評価・認知・賞賛が来やすい。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">発信の成果が出やすい。口コミ・紹介が増える。価格を上げるタイミングとして最適。</div>
+      </div>
+      <div class="cal-card">
+        <div class="cal-month">NOV · 11月</div>
+        <div class="cal-star">八白土星</div>
+        <div class="cal-theme">蓄積・来年への準備</div>
+        <div class="cal-energy">山に戻る月。外向きのエネルギーを内側に向ける。次のサイクルへの土台を固める。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">来年の計画・価格設定の整備に最適。今年の収益を振り返り何を続け何を手放すかを整理する。</div>
+      </div>
+      <div class="cal-card">
+        <div class="cal-month">DEC · 12月</div>
+        <div class="cal-star">七赤金星</div>
+        <div class="cal-theme">収穫・喜び・人と楽しむ</div>
+        <div class="cal-energy">一年の実りを受け取る月。言葉と表現が活きる。軽やかに楽しむことに許可を出す。</div>
+        <div class="cal-money-label">仕事・お金</div>
+        <div class="cal-money">感謝を伝える。年末の発信が響きやすい。来年への期待感を育てる時期。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIFETIME — 付録 -->
+<div class="lifetime-section" id="lifetime">
+  <div class="section">
+    <div class="section-header">
+      <div class="layer-badge">Appendix · 付録</div>
+      <div class="section-title" style="color:#e8e0f8">魂の大きな流れ</div>
+      <div class="section-title-en">A Lifetime Blueprint · Soul Seasons</div>
+      <div class="divider" style="background:rgba(112,96,196,0.4)"></div>
+    </div>
+    <div class="lifetime-preface">
+      これは予言ではなく、魂の季節の地図だ。<br>
+      春があり夏があり秋があり冬がある——どの季節も意味を持ち、どの季節も終わる。<br>
+      今あなたがどの季節にいるかを知ることで、次の季節の準備ができる。<br>
+      この設計図は、80歳になるまであなたの傍にある。
+    </div>
+
+    <div class="lifetime-phases">
+
+      <div class="lifetime-phase">
+        <div class="lifetime-phase-left">
+          <div class="lifetime-period">〜2024年</div>
+          <div class="lifetime-theme">基盤構築期</div>
+          <div class="lifetime-desc">4として生きる時間。地道な積み上げと試行錯誤。LP22が動き出す前の土台づくり。</div>
+          <div class="lifetime-sources">数秘 · インド占星術</div>
+        </div>
+        <div class="lifetime-phase-center">
+          <div class="lifetime-dot"></div>
+          <div class="lifetime-age">〜43歳</div>
+        </div>
+        <div class="lifetime-phase-right"></div>
+      </div>
+
+      <div class="lifetime-phase">
+        <div class="lifetime-phase-left"></div>
+        <div class="lifetime-phase-center">
+          <div class="lifetime-dot now"></div>
+          <div class="lifetime-age">43〜52歳</div>
+        </div>
+        <div class="lifetime-phase-right">
+          <div class="lifetime-period now-label">★ 今ここ · 2024〜2033年頃</div>
+          <div class="lifetime-theme">天職の確立期</div>
+          <div class="lifetime-desc">インド占星術の土星期（19年）と紫微斗数の「天職の宮」大限が完全に重なる。最も重い収縮と最大の構造化が同時に起きる時間——これがイマヲカシという天職を世界に確立する10年だ。</div>
+          <div class="lifetime-key">「今やっていることが、ここで形を持つ」</div>
+          <div class="lifetime-sources">インド占星術 · 紫微斗数 · 数秘LP22</div>
+        </div>
+      </div>
+
+      <div class="lifetime-phase">
+        <div class="lifetime-phase-left">
+          <div class="lifetime-period">2033〜2043年頃</div>
+          <div class="lifetime-theme">影響力の拡大期</div>
+          <div class="lifetime-desc">紫微斗数「仲間・コミュニティの宮」大限。土星期の後半——仕込んできた構造が外に向かって展開する。LP22×ラーフ10室が重なり始め、社会的な影響力が可視化される。</div>
+          <div class="lifetime-key">「建てたものが歩き出す」</div>
+          <div class="lifetime-sources">紫微斗数 · インド占星術 · 数秘</div>
+        </div>
+        <div class="lifetime-phase-center">
+          <div class="lifetime-dot"></div>
+          <div class="lifetime-age">52〜62歳</div>
+        </div>
+        <div class="lifetime-phase-right"></div>
+      </div>
+
+      <div class="lifetime-phase">
+        <div class="lifetime-phase-left"></div>
+        <div class="lifetime-phase-center">
+          <div class="lifetime-dot"></div>
+          <div class="lifetime-age">62〜79歳</div>
+        </div>
+        <div class="lifetime-phase-right">
+          <div class="lifetime-period">2043〜2060年頃</div>
+          <div class="lifetime-theme">言語と知識の解放期</div>
+          <div class="lifetime-desc">インド占星術の水星期（17年）が始まる。「言語・伝達・知性の解放」が17年続く。紫微斗数「外への展開の宮」大限と重なり、積み上げてきた言語と構造が世界に届く時間。</div>
+          <div class="lifetime-key">「思想と言葉を世界に届ける17年」</div>
+          <div class="lifetime-sources">インド占星術 · 紫微斗数 · 数秘LP22</div>
+        </div>
+      </div>
+
+      <div class="lifetime-phase">
+        <div class="lifetime-phase-left">
+          <div class="lifetime-period">2060〜2067年頃</div>
+          <div class="lifetime-theme">内的統合の時間</div>
+          <div class="lifetime-desc">インド占星術のケートゥ期（7年）。過去のカルマの解放と霊的統合。外への展開より内側の完成へ。教えることより「在ること」が力を持つ時間。</div>
+          <div class="lifetime-key">「魂の深い静けさの時間」</div>
+          <div class="lifetime-sources">インド占星術 · 紫微斗数</div>
+        </div>
+        <div class="lifetime-phase-center">
+          <div class="lifetime-dot"></div>
+          <div class="lifetime-age">79〜86歳</div>
+        </div>
+        <div class="lifetime-phase-right"></div>
+      </div>
+
+    </div>
+
+    <div class="lifetime-footer">
+      <div class="lifetime-footer-text">
+        この設計図は、今年だけのものではない。<br>
+        10年後・20年後に見返した時、「ああ、この時期はこういう意味だったのか」と<br>
+        腑に落ちる体験のために作られている。<br><br>
+        年次アップデートでは、その年のダシャー・大限・九星気学を組み合わせた<br>
+        「今年のあなたへ」を届けることができる。
+      </div>
+      <a href="#now" class="lifetime-cta">今年の流れを詳しく見る</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-note">本鑑定書は、数秘術・マヤ暦・四柱推命・西洋占星術（ジオ/ヘリオ）・インド占星術（Lahiriアヤナムシャ）・ヒューマンデザイン・紫微斗数・九星気学の複合読みにより作成されました。鑑定日：2026年3月27日。</div>
+  <div class="footer-update">年次アップデート・タイミング相談は随時受付中</div>
+</div>
+
+<script>
+// Stars
+const sf=document.getElementById('starField');
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');s.className='star';
+  const sz=Math.random()*2+0.5;
+  s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--max-op:${0.3+Math.random()*0.7};animation-delay:${Math.random()*5}s;`;
+  sf.appendChild(s);
+}
+
+// Accordion
+function toggleAccordion(id){
+  const body=document.getElementById(id);
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  const arrow=body.previousElementSibling.querySelector('.accordion-arrow');
+  if(arrow)arrow.style.transform=isOpen?'':'rotate(180deg)';
+}
+
+// Nav active
+const allSections=document.querySelectorAll('[id]');
+const navItems=document.querySelectorAll('.nav-item');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navItems.forEach(n=>n.classList.remove('active'));
+      const a=document.querySelector(`.nav-item[href="#${e.target.id}"]`);
+      if(a)a.classList.add('active');
+    }
+  });
+},{threshold:0.2});
+allSections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
