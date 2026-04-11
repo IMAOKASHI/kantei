@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>制度に潰された宗教の純度</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #050508;
+  --deep: #0a0a12;
+  --surface: #0f0f1a;
+  --rim: #1a1a2e;
+  --gold: #c9a84c;
+  --gold-dim: #7a6230;
+  --silver: #8899bb;
+  --silver-dim: #3a4560;
+  --ember: #c4502a;
+  --ember-dim: #6a2a15;
+  --jade: #2a7a6a;
+  --jade-dim: #153d35;
+  --text-primary: #e8e4d8;
+  --text-secondary: #9090a0;
+  --text-muted: #505060;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--void);
+  color: var(--text-primary);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── SLIDE SYSTEM ── */
+.slides { width: 100%; }
+
+.slide {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rim);
+}
+
+/* ── STARFIELD ── */
+.stars {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle var(--d, 4s) ease-in-out infinite var(--delay, 0s);
+}
+@keyframes twinkle {
+  0%,100% { opacity: var(--min, .1); }
+  50% { opacity: var(--max, .6); }
+}
+
+/* ── SLIDE 1: TITLE ── */
+#s1 { background: radial-gradient(ellipse at 50% 60%, #0d0d22 0%, var(--void) 70%); }
+
+.s1-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: .35em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards .3s;
+}
+
+.s1-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.3;
+  text-align: center;
+  letter-spacing: .05em;
+  color: var(--text-primary);
+  opacity: 0;
+  animation: fadeUp .9s ease forwards .6s;
+}
+
+.s1-title em {
+  font-style: normal;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.s1-divider {
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 2.5rem auto;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards 1s;
+}
+
+.s1-paradox {
+  font-size: clamp(.9rem, 2.5vw, 1.1rem);
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 2;
+  max-width: 560px;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards 1.2s;
+}
+
+.s1-paradox strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.s1-bottom {
+  position: absolute;
+  bottom: 40px;
+  display: flex; gap: 40px;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards 1.6s;
+}
+
+.s1-stat {
+  text-align: center;
+}
+.s1-stat-num {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.s1-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: .1em;
+  margin-top: 4px;
+}
+
+/* ── SLIDE 2: 4 DANGERS ── */
+#s2 { background: radial-gradient(ellipse at 20% 50%, #0e0a18 0%, var(--void) 60%); }
+
+.slide-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: .4em;
+  color: var(--gold-dim);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.slide-heading {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: .06em;
+  color: var(--text-primary);
+  margin-bottom: .6rem;
+}
+
+.slide-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.dangers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  max-width: 760px;
+  width: 100%;
+}
+
+.danger-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border: 1px solid var(--rim);
+  border-radius: 2px;
+  padding: 1.8rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s;
+}
+
+.danger-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--accent, var(--gold));
+}
+
+.danger-card:hover {
+  border-color: var(--silver-dim);
+}
+
+.danger-num {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--accent, var(--gold));
+  margin-bottom: .8rem;
+}
+
+.danger-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: .7rem;
+  letter-spacing: .05em;
+}
+
+.danger-desc {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+.danger-why {
+  margin-top: .8rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--rim);
+  font-size: 11px;
+  color: var(--ember);
+  line-height: 1.7;
+}
+
+/* ── SLIDE 3: 6 RELIGIONS MAP ── */
+#s3 { background: radial-gradient(ellipse at 80% 30%, #0a1018 0%, var(--void) 60%); padding: 60px 20px; }
+
+.religions-wrap {
+  max-width: 860px;
+  width: 100%;
+}
+
+.religion-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--rim);
+  align-items: stretch;
+}
+
+.religion-row:first-of-type { border-top: 1px solid var(--rim); }
+
+.rel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  padding: 1.1rem .5rem;
+  background: var(--deep);
+  border-right: 1px solid var(--rim);
+}
+
+.rel-body {
+  padding: 1.1rem 1.4rem;
+  border-right: 1px solid var(--rim);
+}
+
+.rel-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: .2rem;
+  letter-spacing: .04em;
+}
+
+.rel-origin {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: .6rem;
+  letter-spacing: .05em;
+}
+
+.rel-essence {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.rel-gem {
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.rel-gem-inner {
+  font-size: 12px;
+  color: var(--gold);
+  line-height: 1.8;
+  font-style: italic;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.rel-gem-inner::before {
+  content: '✦ ';
+  font-style: normal;
+  font-size: 10px;
+  opacity: .6;
+}
+
+/* axis label */
+.axis-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 1fr;
+  margin-bottom: .4rem;
+}
+.axis-cell {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: .25em;
+  color: var(--text-muted);
+  padding: 0 1.4rem;
+  text-transform: uppercase;
+}
+.axis-cell:first-child { padding: 0 .5rem; text-align: center; }
+
+/* ── SLIDE 4: FUTURE ── */
+#s4 { background: radial-gradient(ellipse at 50% 100%, #0a0818 0%, var(--void) 60%); }
+
+.future-wrap {
+  max-width: 720px;
+  width: 100%;
+}
+
+.polarity {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  margin: 2rem 0;
+  align-items: stretch;
+}
+
+.pole {
+  background: var(--surface);
+  border: 1px solid var(--rim);
+  padding: 1.6rem 1.4rem;
+}
+
+.pole-left { border-radius: 2px 0 0 2px; }
+.pole-right { border-radius: 0 2px 2px 0; }
+
+.pole-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: .3em;
+  color: var(--text-muted);
+  margin-bottom: .7rem;
+}
+
+.pole-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: .6rem;
+  letter-spacing: .04em;
+}
+
+.pole-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+.pole-tag {
+  display: inline-block;
+  margin-top: .8rem;
+  font-size: 10px;
+  padding: 3px 10px;
+  border: 1px solid var(--silver-dim);
+  color: var(--silver);
+  border-radius: 1px;
+  letter-spacing: .05em;
+}
+
+.vs-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: .15em;
+  background: var(--deep);
+  border-top: 1px solid var(--rim);
+  border-bottom: 1px solid var(--rim);
+}
+
+.bottom-block {
+  margin-top: 1.8rem;
+  padding: 1.8rem 2rem;
+  background: linear-gradient(135deg, #0d0d18, #080810);
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  position: relative;
+}
+
+.bottom-block::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 30px; right: 30px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.bottom-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--gold);
+  margin-bottom: .8rem;
+  letter-spacing: .06em;
+}
+
+.bottom-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 2;
+}
+
+.bottom-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.closing {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: .1em;
+  font-style: italic;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeUp .7s ease forwards;
+}
+
+/* slide number */
+.slide-num {
+  position: absolute;
+  bottom: 24px; right: 32px;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--text-muted);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .dangers-grid { grid-template-columns: 1fr; }
+  .religion-row { grid-template-columns: 40px 1fr; }
+  .rel-gem { display: none; }
+  .axis-cell:last-child { display: none; }
+  .polarity { grid-template-columns: 1fr; }
+  .vs-col { display: none; }
+  .pole-left, .pole-right { border-radius: 2px; margin-bottom: .5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="slides">
+
+<!-- ════════════════════════════════
+     SLIDE 1 : TITLE
+════════════════════════════════ -->
+<section class="slide" id="s1">
+  <div class="stars" id="stars1"></div>
+
+  <div class="s1-eyebrow">Marginal Religions · 辺境の宗教論</div>
+
+  <h1 class="s1-title">
+    制度に<em>潰された</em>宗教が<br>持つ、本質の純度
+  </h1>
+
+  <div class="s1-divider"></div>
+
+  <p class="s1-paradox">
+    <strong>メジャー宗教は生き残るために妥協した。</strong><br>
+    マイナー宗教は妥協しなかったから潰された。<br>
+    逆説的に、その純度が高い。<br><br>
+    「負けた宗教」の廃墟の中にこそ、<br>
+    どの時代も恐れられた思想の核が眠っている。
+  </p>
+
+  <div class="s1-bottom">
+    <div class="s1-stat">
+      <div class="s1-stat-num">6</div>
+      <div class="s1-stat-label">注目宗教</div>
+    </div>
+    <div class="s1-stat">
+      <div class="s1-stat-num">4</div>
+      <div class="s1-stat-label">共通危険思想</div>
+    </div>
+    <div class="s1-stat">
+      <div class="s1-stat-num">1</div>
+      <div class="s1-stat-label">底にある問い</div>
+    </div>
+  </div>
+
+  <div class="slide-num">01 / 04</div>
+</section>
+
+<!-- ════════════════════════════════
+     SLIDE 2 : 4 DANGEROUS IDEAS
+════════════════════════════════ -->
+<section class="slide" id="s2">
+  <div class="stars" id="stars2"></div>
+
+  <div class="slide-label">Common Thread</div>
+  <h2 class="slide-heading">共通して「危険視」された4つの思想</h2>
+  <p class="slide-sub">これを持っていたから、潰された</p>
+
+  <div class="dangers-grid">
+    <div class="danger-card" style="--accent: var(--gold)">
+      <div class="danger-num">01</div>
+      <div class="danger-name">内なる神性</div>
+      <div class="danger-desc">
+        神は外にいない、自分の中にいる。<br>
+        聖職者・教会・権威が不要になる。<br>
+        仲介者を全員失業させる思想。
+      </div>
+      <div class="danger-why">→ 教会・権力機構の存在意義が消える</div>
+    </div>
+
+    <div class="danger-card" style="--accent: var(--ember)">
+      <div class="danger-num">02</div>
+      <div class="danger-name">物質世界への懐疑</div>
+      <div class="danger-desc">
+        この世界は不完全か偽物。<br>
+        創った神が「本当の神」じゃないかもしれない。<br>
+        封建制・国家秩序の正当性を根底から崩す。
+      </div>
+      <div class="danger-why">→ 農奴が「従わなくていい」と気づく</div>
+    </div>
+
+    <div class="danger-card" style="--accent: var(--jade)">
+      <div class="danger-num">03</div>
+      <div class="danger-name">統合・相対化の衝動</div>
+      <div class="danger-desc">
+        どの宗教も「部分的な真実」に過ぎない。<br>
+        自分がより完全な版を持っている、という自負。<br>
+        既存宗教を全部相対化するから全員の敵になる。
+      </div>
+      <div class="danger-why">→ 複数帝国が共同で根絶（マニ教の末路）</div>
+    </div>
+
+    <div class="danger-card" style="--accent: var(--silver)">
+      <div class="danger-num">04</div>
+      <div class="danger-name">口伝による純度保存</div>
+      <div class="danger-desc">
+        書かない、言わない、固定しない。<br>
+        知識を文字に閉じ込めた瞬間に死ぬという直感。<br>
+        秘密主義が生存戦略であり純度保存になった。
+      </div>
+      <div class="danger-why">→ 逆説的に本質が最も長く生き残った</div>
+    </div>
+  </div>
+
+  <div class="slide-num">02 / 04</div>
+</section>
+
+<!-- ════════════════════════════════
+     SLIDE 3 : 6 RELIGIONS
+════════════════════════════════ -->
+<section class="slide" id="s3">
+  <div class="stars" id="stars3"></div>
+
+  <div class="slide-label">The Six</div>
+  <h2 class="slide-heading" style="margin-bottom:.4rem">6つの宗教 比較マップ</h2>
+  <p class="slide-sub" style="margin-bottom:1.8rem">本質として残ったもの</p>
+
+  <div class="religions-wrap">
+    <div class="axis-row">
+      <div class="axis-cell"></div>
+      <div class="axis-cell">宗教 · 起源 · 本質構造</div>
+      <div class="axis-cell">最も鋭い「かけら」</div>
+    </div>
+
+    <div class="religion-row">
+      <div class="rel-icon">🦅</div>
+      <div class="rel-body">
+        <div class="rel-name">ゾロアスター教</div>
+        <div class="rel-origin">前1500年頃 · ペルシャ · 世界最古の啓示宗教</div>
+        <div class="rel-essence">善悪二元論・終末論・天使悪魔論の原型。イスラムに吸収され消えた。フラワシ（魂の先行存在）＝肉体に宿る前の魂の形。</div>
+      </div>
+      <div class="rel-gem">
+        <div class="rel-gem-inner">魂は肉体より先に存在する設計図として宇宙に在った</div>
+      </div>
+    </div>
+
+    <div class="religion-row">
+      <div class="rel-icon">🐍</div>
+      <div class="rel-body">
+        <div class="rel-name">グノーシス主義</div>
+        <div class="rel-origin">1〜3世紀 · 地中海 · 初期キリスト教の傍流</div>
+        <div class="rel-essence">デミウルゴス（偽の神）がこの世界を作った。真の神は別にいる。内なる光の欠片（プレーロマ）の発見が救済。</div>
+      </div>
+      <div class="rel-gem">
+        <div class="rel-gem-inner">この世界を作ったのは本当の神ではない——それが証拠に世界は不完全だ</div>
+      </div>
+    </div>
+
+    <div class="religion-row">
+      <div class="rel-icon">✡️</div>
+      <div class="rel-body">
+        <div class="rel-name">カバラ</div>
+        <div class="rel-origin">12世紀体系化 · ユダヤ · 秘教的神秘主義</div>
+        <div class="rel-essence">ツィムツーム（神の自己収縮）で空間が生まれた。引き算で宇宙が始まる。数秘術の直接の源泉。</div>
+      </div>
+      <div class="rel-gem">
+        <div class="rel-gem-inner">神が自ら引き縮んだ「空白」に、宇宙が生まれた</div>
+      </div>
+    </div>
+
+    <div class="religion-row">
+      <div class="rel-icon">☮️</div>
+      <div class="rel-body">
+        <div class="rel-name">ボゴミル派</div>
+        <div class="rel-origin">10世紀 · ブルガリア発 · 1463年消滅</div>
+        <div class="rel-essence">主の祈り一文だけに削ぎ落とした引き算の極限。教会・洗礼・十字架・聖餐を全否定。制度を構造ごと解体した。</div>
+      </div>
+      <div class="rel-gem">
+        <div class="rel-gem-inner">礼拝に必要なのは言葉だけ。建物も神父も、何も要らない</div>
+      </div>
+    </div>
+
+    <div class="religion-row">
+      <div class="rel-icon">🎵</div>
+      <div class="rel-body">
+        <div class="rel-name">アレヴィー教</div>
+        <div class="rel-origin">13〜16世紀 · アナトリア · 現在も国家未認定</div>
+        <div class="rel-essence">音楽と踊りが礼拝そのもの。「神はモスクより人の心にいる」。女性完全参加。場と身体が先、言語と教義が後。</div>
+      </div>
+      <div class="rel-gem">
+        <div class="rel-gem-inner">サズの音が鳴った瞬間、そこが聖地になる</div>
+      </div>
+    </div>
+
+    <div class="religion-row">
+      <div class="rel-icon">☀️</div>
+      <div class="rel-body">
+        <div class="rel-name">マニ教</div>
+        <div class="rel-origin">3世紀 · ペルシャ · 東西同時に根絶された</div>
+        <div class="rel-essence">全宗教の「正しい部分だけ」を抽出した統合理論。光の粒子が物質に捕らわれているという宇宙観。美しい図像経典。</div>
+      </div>
+      <div class="rel-gem">
+        <div class="rel-gem-inner">すべての宗教は不完全版だ——俺が完成版を作る</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-num">03 / 04</div>
+</section>
+
+<!-- ════════════════════════════════
+     SLIDE 4 : FUTURE
+════════════════════════════════ -->
+<section class="slide" id="s4">
+  <div class="stars" id="stars4"></div>
+
+  <div class="slide-label">The Future</div>
+  <h2 class="slide-heading">宗教の未来——二極化と、底</h2>
+  <p class="slide-sub">融合が進む一方で、同時に起きていること</p>
+
+  <div class="future-wrap">
+
+    <div class="polarity">
+      <div class="pole pole-left">
+        <div class="pole-label">Dissolution · 霧散</div>
+        <div class="pole-title">個人哲学への溶解</div>
+        <div class="pole-desc">
+          宗教の所属・実践・信念がバラバラになる。<br>
+          「カトリックだけど瞑想もするし神道的な自然観も持ってる」が普通になる。<br>
+          宗教という器が消えて、問いだけが残る。
+        </div>
+        <span class="pole-tag">アラカルト化</span>
+      </div>
+
+      <div class="vs-col">vs</div>
+
+      <div class="pole pole-right">
+        <div class="pole-label">Crystallization · 結晶化</div>
+        <div class="pole-title">原理主義の先鋭化</div>
+        <div class="pole-desc">
+          曖昧になるのが怖い人たちが逆に「純粋な〇〇教徒」としてアイデンティティを固める。<br>
+          融合・個人化する人たちと同時に、対極に向かう人たちが生まれる。
+        </div>
+        <span class="pole-tag">アイデンティティの砦</span>
+      </div>
+    </div>
+
+    <div class="bottom-block">
+      <div class="bottom-title">底に名前をつけない限り、宗教にならない</div>
+      <div class="bottom-text">
+        どの宗教を削ぎ落としても残る<strong>「何か」</strong>がある。<br>
+        ゾロアスターもグノーシスもシク教も、一番奥まで行くと<strong>「内なる光」</strong>という同じ場所に着く。<br>
+        その底に名前をつけた瞬間、また制度への入口になる。<br><br>
+        言語化を避けながら指し示す——<br>
+        ヌーソロジーが「ψ」という記号を使うのも、<br>
+        イマヲカシが「設計図」という比喩を使うのも、<strong>同じ戦略</strong>だ。
+      </div>
+    </div>
+
+  </div>
+
+  <p class="closing">名前のないところに、本質は宿る</p>
+
+  <div class="slide-num">04 / 04</div>
+</section>
+
+</div><!-- /slides -->
+
+<script>
+// Starfield generator
+function makeStars(containerId, count) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 1.8 + .4;
+    s.style.cssText = [
+      `width:${size}px`,
+      `height:${size}px`,
+      `left:${Math.random()*100}%`,
+      `top:${Math.random()*100}%`,
+      `--d:${(Math.random()*4+3).toFixed(1)}s`,
+      `--delay:${(Math.random()*5).toFixed(1)}s`,
+      `--min:${(Math.random()*.15).toFixed(2)}`,
+      `--max:${(Math.random()*.5+.2).toFixed(2)}`,
+    ].join(';');
+    el.appendChild(s);
+  }
+}
+makeStars('stars1', 120);
+makeStars('stars2', 80);
+makeStars('stars3', 60);
+makeStars('stars4', 100);
+
+// Scroll-triggered fade-in for slides 2-4
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.danger-card, .religion-row, .pole, .bottom-block, .closing').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(14px)';
+        el.style.transition = `opacity .6s ease ${i * .1}s, transform .6s ease ${i * .1}s`;
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 100);
+      });
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('#s2,#s3,#s4').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
