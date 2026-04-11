@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>守護神仏・生命の樹｜赤瀬一路</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c10;
+  --bg2: #0d1218;
+  --gold: #8ab4d4;
+  --gold2: #b8d4e8;
+  --gold-dim: rgba(138,180,212,0.18);
+  --vermillion: #4a90c4;
+  --paper: #e8f0f8;
+  --smoke: #6a8090;
+  --smoke2: #8aa0b0;
+  --pr: #5a9e7a;
+  --pc: #8ab4d4;
+  --pl: #7a6aaa;
+  --node-size: 72px;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  background: var(--bg);
+  font-family: 'Noto Serif JP', serif;
+  color: var(--paper);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 10%, rgba(138,180,212,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 50% 90%, rgba(90,158,122,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 80% 50%, rgba(122,106,170,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* イントロ */
+#intro {
+  position: fixed; inset: 0;
+  background: #000;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.8s ease 2.4s;
+}
+#intro.hide { opacity: 0; pointer-events: none; }
+.ink-circle {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: inkSpread 2s cubic-bezier(0.2,0.8,0.3,1) forwards;
+}
+@keyframes inkSpread {
+  0%   { transform: scale(0); opacity: 1; }
+  40%  { transform: scale(60); opacity: 0.9; background: #080c10; }
+  100% { transform: scale(260); opacity: 0; }
+}
+
+.page {
+  max-width: 480px; margin: 0 auto;
+  padding: 0 0 120px;
+  opacity: 0;
+  animation: pageIn 0.8s ease 2.8s forwards;
+  position: relative; z-index: 1;
+}
+@keyframes pageIn {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ヘッダー */
+.header {
+  text-align: center;
+  padding: 48px 24px 28px;
+}
+.header::after {
+  content: '';
+  display: block;
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 20px auto 0;
+}
+.header-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 9px; letter-spacing: 0.5em;
+  color: var(--gold); opacity: 0.6;
+  margin-bottom: 14px;
+}
+.header-title {
+  font-size: 22px; font-weight: 300;
+  letter-spacing: 0.45em; line-height: 1.7;
+  color: var(--paper);
+}
+.header-subtitle {
+  font-size: 11px; color: var(--smoke2);
+  letter-spacing: 0.2em; margin-top: 6px;
+  font-weight: 300;
+}
+.header-name {
+  font-size: 13px; color: var(--smoke2);
+  letter-spacing: 0.3em; margin-top: 10px;
+  font-weight: 300;
+}
+
+/* コンセプトバナー */
+.concept-banner {
+  margin: 0 16px 28px;
+  border: 1px solid rgba(138,180,212,0.2);
+  background: rgba(138,180,212,0.04);
+  padding: 14px 18px;
+}
+.concept-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 9px; letter-spacing: 0.2em;
+  color: var(--gold);
+  border: 1px solid rgba(138,180,212,0.3);
+  padding: 3px 8px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.concept-text {
+  font-size: 11px; color: var(--smoke2);
+  line-height: 1.8; font-weight: 300;
+}
+
+/* 柱ラベル */
+.pillar-labels {
+  display: flex; justify-content: space-between;
+  padding: 0 16px; margin-bottom: 8px;
+}
+.pl-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7px; letter-spacing: 0.2em;
+  text-align: center; width: 33%;
+}
+.pl-label.r { color: var(--pr); }
+.pl-label.c { color: var(--pc); }
+.pl-label.l { color: var(--pl); }
+.pl-label span { display: block; font-family: 'Noto Serif JP', serif; font-size: 9px; margin-top: 3px; opacity: 0.6; }
+
+/* 生命の樹 */
+.tree-wrap { position: relative; padding: 0 16px; }
+
+.tree-svg {
+  position: absolute; top: 0; left: 16px;
+  width: calc(100% - 32px); height: 100%;
+  pointer-events: none; z-index: 0;
+}
+.path-r { stroke: rgba(90,158,122,0.22); fill: none; stroke-width: 1; }
+.path-c { stroke: rgba(138,180,212,0.28); fill: none; stroke-width: 1; }
+.path-l { stroke: rgba(122,106,170,0.22); fill: none; stroke-width: 1; }
+.path-x { stroke: rgba(138,180,212,0.1); fill: none; stroke-width: 1; }
+.path-d { stroke: rgba(138,180,212,0.18); fill: none; stroke-width: 1; stroke-dasharray: 3,3; }
+
+.tree-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: relative; z-index: 1;
+}
+
+.s {
+  display: flex; flex-direction: column;
+  align-items: center; padding: 8px 4px;
+  cursor: pointer;
+  -webkit-user-select: none; user-select: none;
+}
+.s-node {
+  width: var(--node-size); height: var(--node-size);
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.s:active .s-node { transform: scale(0.94); }
+
+.s.r .s-node { background: radial-gradient(circle at 40% 40%, rgba(90,158,122,0.2), rgba(90,158,122,0.05)); border: 1px solid rgba(90,158,122,0.4); }
+.s.c .s-node { background: radial-gradient(circle at 40% 40%, rgba(138,180,212,0.18), rgba(138,180,212,0.05)); border: 1px solid rgba(138,180,212,0.45); }
+.s.l .s-node { background: radial-gradient(circle at 40% 40%, rgba(122,106,170,0.2), rgba(122,106,170,0.05)); border: 1px solid rgba(122,106,170,0.4); }
+
+.s.daat .s-node {
+  width: calc(var(--node-size) * 0.85);
+  height: calc(var(--node-size) * 0.85);
+  background: transparent;
+  border: 1px dashed rgba(138,180,212,0.28);
+}
+.s.malkuth .s-node {
+  border-radius: 6px;
+  width: calc(var(--node-size) * 1.05);
+  height: calc(var(--node-size) * 1.05);
+  background: radial-gradient(circle at 40% 40%, rgba(138,180,212,0.15), rgba(8,12,16,0.8));
+  border: 1.5px solid rgba(138,180,212,0.4);
+}
+
+.s-num { font-family: 'Cinzel', serif; font-size: 6px; color: rgba(138,180,212,0.45); letter-spacing: 0.1em; margin-bottom: 1px; }
+.s-icon { font-size: 18px; line-height: 1; margin-bottom: 1px; }
+.s-heb { font-family: 'Cinzel', serif; font-size: 6px; opacity: 0.35; letter-spacing: 0.05em; }
+
+.s-label { text-align: center; margin-top: 6px; }
+.s-name { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; color: var(--paper); line-height: 1.4; margin-bottom: 2px; }
+.s.daat .s-name { color: rgba(232,240,248,0.55); font-size: 9px; }
+.s-role { font-size: 8px; color: var(--smoke); font-weight: 300; line-height: 1.5; max-width: 80px; }
+
+/* グリッド配置 */
+.s-keter    { grid-column:2; grid-row:1; }
+.s-chokmah  { grid-column:1; grid-row:2; }
+.s-binah    { grid-column:3; grid-row:2; }
+.s-daat-pos { grid-column:2; grid-row:3; }
+.s-chesed   { grid-column:1; grid-row:4; }
+.s-geburah  { grid-column:3; grid-row:4; }
+.s-tiferet  { grid-column:2; grid-row:5; }
+.s-netzach  { grid-column:1; grid-row:6; }
+.s-hod      { grid-column:3; grid-row:6; }
+.s-yesod    { grid-column:2; grid-row:7; }
+.s-malkuth  { grid-column:2; grid-row:8; }
+
+/* アニメーション */
+.s { opacity:0; animation: sIn 0.5s ease both; }
+.s-keter    { animation-delay: 2.9s; }
+.s-chokmah  { animation-delay: 3.0s; }
+.s-binah    { animation-delay: 3.0s; }
+.s-daat-pos { animation-delay: 3.1s; }
+.s-chesed   { animation-delay: 3.2s; }
+.s-geburah  { animation-delay: 3.2s; }
+.s-tiferet  { animation-delay: 3.3s; }
+.s-netzach  { animation-delay: 3.4s; }
+.s-hod      { animation-delay: 3.4s; }
+.s-yesod    { animation-delay: 3.5s; }
+.s-malkuth  { animation-delay: 3.6s; }
+@keyframes sIn {
+  from { opacity:0; transform:scale(0.85); }
+  to   { opacity:1; transform:scale(1); }
+}
+
+/* 凡例 */
+.legend {
+  display: flex; justify-content: center;
+  gap: 16px; padding: 16px 16px 0; flex-wrap: wrap;
+}
+.leg-item { display: flex; align-items: center; gap: 5px; }
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.leg-text { font-family: 'Cinzel', serif; font-size: 7px; letter-spacing: 0.15em; opacity: 0.5; }
+
+/* ボトムシート */
+#detail-panel {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  max-width: 480px; margin: 0 auto;
+  background: #0d1218;
+  border-top: 1px solid rgba(138,180,212,0.3);
+  border-radius: 20px 20px 0 0;
+  padding: 0 0 40px;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
+  z-index: 50;
+  max-height: 82vh; overflow-y: auto;
+}
+#detail-panel.open { transform: translateY(0); }
+#detail-panel::-webkit-scrollbar { display: none; }
+
+.panel-handle {
+  width: 36px; height: 4px;
+  background: rgba(138,180,212,0.3);
+  border-radius: 2px;
+  margin: 12px auto 20px;
+}
+.panel-inner { padding: 0 24px 20px; }
+
+.panel-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+.panel-icon { font-size: 32px; line-height: 1; flex-shrink: 0; }
+.panel-name-block { flex: 1; }
+.panel-seph { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.25em; color: var(--gold); opacity: 0.6; margin-bottom: 4px; }
+.panel-name { font-size: 20px; font-weight: 500; letter-spacing: 0.2em; color: var(--paper); margin-bottom: 4px; }
+.panel-tagline { font-size: 10px; color: var(--smoke2); font-weight: 300; line-height: 1.6; }
+
+.panel-divider { height: 1px; background: rgba(138,180,212,0.12); margin: 16px 0; }
+.panel-section-title { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.3em; color: var(--gold); opacity: 0.6; margin-bottom: 8px; }
+
+.panel-body { font-size: 12px; line-height: 2; color: rgba(232,240,248,0.75); font-weight: 300; margin-bottom: 16px; }
+.panel-voice {
+  background: rgba(138,180,212,0.05);
+  border-left: 2px solid rgba(138,180,212,0.4);
+  padding: 12px 16px;
+  font-size: 12px; line-height: 1.9;
+  color: rgba(232,240,248,0.8);
+  font-style: italic; font-weight: 300;
+  margin-bottom: 16px;
+}
+.panel-mantra {
+  background: rgba(8,12,16,0.6);
+  border: 1px solid rgba(138,180,212,0.2);
+  padding: 12px 16px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 12px;
+  cursor: pointer; transition: background 0.2s;
+}
+.panel-mantra:active { background: rgba(138,180,212,0.08); }
+.mantra-text { font-size: 12px; letter-spacing: 0.2em; color: var(--gold2); font-weight: 300; }
+.mantra-copy { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.2em; color: var(--smoke); border: 1px solid rgba(138,180,212,0.2); padding: 3px 8px; white-space: nowrap; flex-shrink: 0; }
+
+.panel-benefits { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.benefit-tag { font-size: 9px; color: var(--smoke2); border: 1px solid rgba(138,180,212,0.15); padding: 3px 10px; letter-spacing: 0.05em; }
+.panel-shrine { font-size: 11px; color: rgba(232,240,248,0.55); font-weight: 300; line-height: 1.9; }
+
+/* コピー通知 */
+#copy-toast {
+  position: fixed; bottom: 90px; left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(138,180,212,0.9);
+  color: #080c10; font-size: 11px;
+  letter-spacing: 0.2em; padding: 8px 20px;
+  opacity: 0; transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none; z-index: 60;
+}
+#copy-toast.show { opacity:1; transform: translateX(-50%) translateY(0); }
+
+#overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 40; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+#overlay.show { opacity:1; pointer-events: all; }
+</style>
+</head>
+<body>
+
+<div id="intro"><div class="ink-circle"></div></div>
+<div id="overlay" onclick="closePanel()"></div>
+<div id="copy-toast">真言をコピーしました</div>
+
+<div class="page">
+
+  <div class="header">
+    <div class="header-brand">IMAOKASHI · GUARDIAN DEITIES</div>
+    <div class="header-title">守護神仏<br>生命の樹</div>
+    <div class="header-subtitle">風の時代の統合者</div>
+    <div class="header-name">赤瀬　一路</div>
+  </div>
+
+  <div class="concept-banner">
+    <div class="concept-badge">SOUL MISSION</div>
+    <div class="concept-text">複雑な世界をシンプルに整理し、異なる世界を自然につなぐ。あなたの守護神仏はその使命を11の神格で支えている。</div>
+  </div>
+
+  <div class="pillar-labels">
+    <div class="pl-label r">MERCY<span>慈悲</span></div>
+    <div class="pl-label c">MIDDLE<span>均衡</span></div>
+    <div class="pl-label l">SEVERITY<span>峻厳</span></div>
+  </div>
+
+  <div class="tree-wrap">
+
+    <svg class="tree-svg" viewBox="0 0 448 920" preserveAspectRatio="xMidYMid meet">
+      <line x1="75"  y1="60"  x2="75"  y2="860" stroke="rgba(90,158,122,0.05)"  stroke-width="1"/>
+      <line x1="224" y1="40"  x2="224" y2="900" stroke="rgba(138,180,212,0.05)" stroke-width="1"/>
+      <line x1="373" y1="60"  x2="373" y2="860" stroke="rgba(122,106,170,0.05)" stroke-width="1"/>
+
+      <line x1="224" y1="80"  x2="75"  y2="190" class="path-c"/>
+      <line x1="224" y1="80"  x2="373" y2="190" class="path-c"/>
+      <line x1="75"  y1="190" x2="373" y2="190" class="path-x"/>
+      <line x1="75"  y1="240" x2="224" y2="310" class="path-d"/>
+      <line x1="373" y1="240" x2="224" y2="310" class="path-d"/>
+      <line x1="224" y1="80"  x2="224" y2="310" class="path-d"/>
+      <line x1="75"  y1="240" x2="75"  y2="420" class="path-r"/>
+      <line x1="373" y1="240" x2="373" y2="420" class="path-l"/>
+      <line x1="224" y1="365" x2="75"  y2="420" class="path-x"/>
+      <line x1="224" y1="365" x2="373" y2="420" class="path-x"/>
+      <line x1="75"  y1="420" x2="373" y2="420" class="path-x"/>
+      <line x1="75"  y1="475" x2="224" y2="535" class="path-c"/>
+      <line x1="373" y1="475" x2="224" y2="535" class="path-c"/>
+      <line x1="224" y1="590" x2="224" y2="650" class="path-c"/>
+      <line x1="75"  y1="475" x2="75"  y2="650" class="path-r"/>
+      <line x1="373" y1="475" x2="373" y2="650" class="path-l"/>
+      <line x1="75"  y1="650" x2="373" y2="650" class="path-x"/>
+      <line x1="75"  y1="650" x2="224" y2="590" class="path-x"/>
+      <line x1="373" y1="650" x2="224" y2="590" class="path-x"/>
+      <line x1="75"  y1="705" x2="224" y2="765" class="path-c"/>
+      <line x1="373" y1="705" x2="224" y2="765" class="path-c"/>
+      <line x1="224" y1="820" x2="224" y2="845" class="path-c" stroke-width="1.5"/>
+    </svg>
+
+    <div class="tree-grid">
+
+      <!-- ケテル：天御中主神 -->
+      <div class="s c s-keter" onclick="openPanel('keter')">
+        <div class="s-node">
+          <div class="s-num">01·KETER</div>
+          <div class="s-icon">✦</div>
+          <div class="s-heb">王冠</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">天御中主神</div>
+          <div class="s-role">宇宙の中心</div>
+        </div>
+      </div>
+
+      <!-- コクマー：妙見菩薩 -->
+      <div class="s r s-chokmah" onclick="openPanel('chokmah')">
+        <div class="s-node">
+          <div class="s-num">02·CHOKMAH</div>
+          <div class="s-icon">⭐</div>
+          <div class="s-heb">知恵</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">妙見菩薩</div>
+          <div class="s-role">北極星の直感</div>
+        </div>
+      </div>
+
+      <!-- ビナー：龍田姫 -->
+      <div class="s l s-binah" onclick="openPanel('binah')">
+        <div class="s-node">
+          <div class="s-num">03·BINAH</div>
+          <div class="s-icon">🌊</div>
+          <div class="s-heb">理解</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">龍田姫</div>
+          <div class="s-role">感情の波・調和</div>
+        </div>
+      </div>
+
+      <!-- ダアト：瀬織津姫 -->
+      <div class="s c daat s-daat-pos" onclick="openPanel('daat')">
+        <div class="s-node">
+          <div class="s-num">DA'AT</div>
+          <div class="s-icon">🪞</div>
+          <div class="s-heb">隠れた知</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">瀬織津姫</div>
+          <div class="s-role">鏡・見えない祓い</div>
+        </div>
+      </div>
+
+      <!-- ケセド：宗像三女神 -->
+      <div class="s r s-chesed" onclick="openPanel('chesed')">
+        <div class="s-node">
+          <div class="s-num">04·CHESED</div>
+          <div class="s-icon">🌉</div>
+          <div class="s-heb">慈悲</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">宗像三女神</div>
+          <div class="s-role">橋渡し・つなぐ</div>
+        </div>
+      </div>
+
+      <!-- ゲブラー：建御雷神 -->
+      <div class="s l s-geburah" onclick="openPanel('geburah')">
+        <div class="s-node">
+          <div class="s-num">05·GEBURAH</div>
+          <div class="s-icon">⚡</div>
+          <div class="s-heb">峻厳</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">建御雷神</div>
+          <div class="s-role">革新・新秩序</div>
+        </div>
+      </div>
+
+      <!-- ティファレト：天照大御神 -->
+      <div class="s c s-tiferet" onclick="openPanel('tiferet')">
+        <div class="s-node">
+          <div class="s-num">06·TIFERET</div>
+          <div class="s-icon">☀️</div>
+          <div class="s-heb">美・統合</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">天照大御神</div>
+          <div class="s-role">光・表現の中心</div>
+        </div>
+      </div>
+
+      <!-- ネツァク：弁財天 -->
+      <div class="s r s-netzach" onclick="openPanel('netzach')">
+        <div class="s-node">
+          <div class="s-num">07·NETZACH</div>
+          <div class="s-icon">🎵</div>
+          <div class="s-heb">勝利</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">弁財天</div>
+          <div class="s-role">美・調和・芸術</div>
+        </div>
+      </div>
+
+      <!-- ホド：普賢菩薩 -->
+      <div class="s l s-hod" onclick="openPanel('hod')">
+        <div class="s-node">
+          <div class="s-num">08·HOD</div>
+          <div class="s-icon">📿</div>
+          <div class="s-heb">栄光</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">普賢菩薩</div>
+          <div class="s-role">完成・実践</div>
+        </div>
+      </div>
+
+      <!-- イェソド：荼枳尼天 -->
+      <div class="s c s-yesod" onclick="openPanel('yesod')">
+        <div class="s-node">
+          <div class="s-num">09·YESOD</div>
+          <div class="s-icon">🦊</div>
+          <div class="s-heb">基盤</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">荼枳尼天</div>
+          <div class="s-role">深層の引力</div>
+        </div>
+      </div>
+
+      <!-- マルクト：后土神 -->
+      <div class="s c malkuth s-malkuth" onclick="openPanel('malkuth')">
+        <div class="s-node">
+          <div class="s-num">10·MALKUTH</div>
+          <div class="s-icon">⚫</div>
+          <div class="s-heb">王国・地</div>
+        </div>
+        <div class="s-label">
+          <div class="s-name">后土神</div>
+          <div class="s-role">完成された大地</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:rgba(90,158,122,0.6)"></div><div class="leg-text" style="color:var(--pr)">慈悲</div></div>
+    <div class="leg-item"><div class="leg-dot" style="background:rgba(138,180,212,0.6)"></div><div class="leg-text" style="color:var(--pc)">均衡</div></div>
+    <div class="leg-item"><div class="leg-dot" style="background:rgba(122,106,170,0.6)"></div><div class="leg-text" style="color:var(--pl)">峻厳</div></div>
+  </div>
+
+</div>
+
+<!-- 詳細パネル -->
+<div id="detail-panel">
+  <div class="panel-handle"></div>
+  <div class="panel-inner" id="panel-content"></div>
+</div>
+
+<script>
+const deities = {
+  keter: {
+    icon:'✦', seph:'01 · KETER · 王冠', name:'天御中主神',
+    tagline:'宇宙の中心に座す根源神',
+    body:'天地が生まれる前から存在した宇宙の中心。水瓶座に4天体が集中するあなたの魂には、普遍的な知性が宿っている。個人の枠を超えて、時代全体が必要としている理解を自然と引き寄せる設計だ。「なぜそんなことがわかるの？」と言われる体験は、この神格との接続が起きている瞬間。',
+    voice:'「すべてはつながっている。お前が整理するとき、宇宙が整理される。」',
+    mantra:null,
+    benefits:['根源的な知性の開花','普遍的理解','時代との共鳴','宇宙的な視点'],
+    shrine:'北辰妙見を祀る神社全般、千葉・妙見寺'
+  },
+  chokmah: {
+    icon:'⭐', seph:'02 · CHOKMAH · 知恵', name:'妙見菩薩',
+    tagline:'北極星の光で道を照らす高次直感',
+    body:'ソウル11・マチュリティ11のダブル発動は、個人を超えた高次の直感が二重に備わっている証。妙見菩薩は北極星を象徴し、すべての星が動いても動かない軸。混乱した議論を整理する時、あなたの中で静かに光っているのはこの菩薩の目だ。',
+    voice:'「動かない軸があるから、動くものの方向がわかる。お前の静けさが羅針盤になる。」',
+    mantra:'オン・ソチリシュタ・ソワカ',
+    benefits:['高次の直感強化','方向感覚の明晰化','混乱の中での冷静さ','使命の明確化'],
+    shrine:'千葉神社（千葉）、能勢妙見山（大阪）、九頭龍神社'
+  },
+  binah: {
+    icon:'🌊', seph:'03 · BINAH · 理解', name:'龍田姫',
+    tagline:'感情の波を季節に変える調和の女神',
+    body:'感情的権威を持つあなたにとって、感情の波は弱さではなく精密なセンサーだ。龍田姫は風と季節を司り、変化を美しい流れとして表現する。感情が波打つとき、それは集合的な何かを敏感に受信しているサイン。その波を信じることが、最も正確な判断につながる。',
+    voice:'「波があるから航路がわかる。感じることを恐れるな、それがお前の羅針盤だ。」',
+    mantra:null,
+    benefits:['感情センサーの精度向上','変化への適応','関係性の調和','自然なタイミングの感知'],
+    shrine:'龍田大社（奈良）、竜田神社全般'
+  },
+  daat: {
+    icon:'🪞', seph:"DA'AT · 隠れた知", name:'瀬織津姫',
+    tagline:'真実を映す鏡・見えない場所で祓う',
+    body:'白い鏡の紋章は「真実をそのままに映す」力。瀬織津姫は大祓詞にのみ存在し、記紀に名前がない隠れた祓いの女神。あなたが「本当のことを話してもいい気がする」と思わせる力は、この神格が場を浄化しているから。見えない場所で常に祓いが働いている。',
+    voice:'「映すことが祓いになる。真実を映すだけで、汚れは自然に落ちていく。」',
+    mantra:null,
+    benefits:['場の浄化','信頼関係の構築','真実を映す力','無意識の浄化'],
+    shrine:'丹生川上神社（奈良）、水の流れる神社全般'
+  },
+  chesed: {
+    icon:'🌉', seph:'04 · CHESED · 慈悲', name:'宗像三女神',
+    tagline:'海を渡り世界をつなぐ橋渡しの女神',
+    body:'KIN126「白い世界の橋渡し」は、異なる世界の間に橋を架ける使命を持つ。宗像三女神は海上を司り、大陸と日本を結んだ古代の橋渡し役。あなたが対立する人々の間を自然に仲裁できるのは、この女神たちの力が流れているから。どんな立場の人とも話せる「通訳者」の才能はここから来ている。',
+    voice:'「海は隔てるのではなく、つなぐためにある。お前の言葉は橋になる。」',
+    mantra:null,
+    benefits:['橋渡し・仲裁の力','異文化理解','コミュニケーション円滑化','縁結び'],
+    shrine:'宗像大社（福岡）、厳島神社（広島）、宗像系神社全般'
+  },
+  geburah: {
+    icon:'⚡', seph:'05 · GEBURAH · 峻厳', name:'建御雷神',
+    tagline:'古い秩序を壊さず美しく更新する雷神',
+    body:'山羊座天王星が示す革新は「破壊」ではなく「進化」。建御雷神は剣と雷で旧来の秩序を打ち砕くが、その目的は破壊ではなく新しい秩序の構築だ。AかBかの二択に第三の答えを見つける才能は、この神の力が働いている瞬間。誰も思いつかなかったCを発見する天才。',
+    voice:'「壊すのではない。古いものの中に眠っている可能性を目覚めさせているだけだ。」',
+    mantra:null,
+    benefits:['革新的なアイデア','既成概念の突破','新しい秩序の構築','問題解決力'],
+    shrine:'鹿島神宮（茨城）、春日大社（奈良）、雷を祀る神社全般'
+  },
+  tiferet: {
+    icon:'☀️', seph:'06 · TIFERET · 美', name:'天照大御神',
+    tagline:'獅子座の光で世界の中心に立つ',
+    body:'ヘリオセントリック（太陽中心）で見た地球が獅子座に位置する。これは宇宙的な視点で「表現すること・光を放つことが魂の使命」として設定されている。生命の樹の中心に位置するティファレトに天照が座るのは必然。複雑なものを美しく整理した時、その光は自然と周囲を照らす。',
+    voice:'「光は遠慮しない。お前が輝くほど、周りが見えやすくなる。」',
+    mantra:null,
+    benefits:['表現力の開花','存在感の輝き','中心としての安定','光を放つ勇気'],
+    shrine:'伊勢神宮（三重）、全国の天照大御神を祀る神社'
+  },
+  netzach: {
+    icon:'🎵', seph:'07 · NETZACH · 勝利', name:'弁財天',
+    tagline:'美しく調和する言葉と芸術の女神',
+    body:'山羊座金星11度は「美しいものを実用的な形で実現する」力。弁財天は音楽・言語・美・財を司り、「美しいガウンをまとった婦人形」というサビアンが示す「思考の美しいお手本」と対応する。複雑な問題をシンプルに整理する言葉が美しいのは、弁財天の祝福があるから。',
+    voice:'「美しい言葉は刃にも薬にもなる。あなたの言葉は人の心の形を変える。」',
+    mantra:'オン・ソラソバテイエイ・ソワカ',
+    benefits:['言語表現の美しさ','芸術的才能','財運','対人関係の調和'],
+    shrine:'厳島神社（広島）、竹生島（滋賀）、江ノ島（神奈川）'
+  },
+  hod: {
+    icon:'📿', seph:'08 · HOD · 栄光', name:'普賢菩薩',
+    tagline:'意図の完成を行動で実現する実践の菩薩',
+    body:'音9「意図の完成」は、理解と解決が同時に起こる認知パターン。問題の本質を理解した瞬間に解決策も見える。普賢菩薩は行動・実践の菩薩であり、KIN126の「意図の完成」システムを現実世界に着地させる役割を担う。理論家にとどまらず実践者になれるのはこの菩薩の力。',
+    voice:'「わかった瞬間が、もう動いている。理解と実践の間に隙間はない。」',
+    mantra:'オン・サンマヤ・サトバン',
+    benefits:['理解を行動に変える力','実践力','継続する意志','理論と実践の統合'],
+    shrine:'金剛峯寺・高野山（和歌山）、比叡山延暦寺（滋賀）'
+  },
+  yesod: {
+    icon:'🦊', seph:'09 · YESOD · 基盤', name:'荼枳尼天',
+    tagline:'第8ハウスの深層に働く見えない引力',
+    body:'第8ハウス集中は「見えない力・変容・深層のリソース」を示す。荼枳尼天は見えない場所で強烈な引力を発揮する神格。あなたが意図せず「鍵となる人物」と出会い、「偶然」重要な情報が集まってくるのは、この引力が常に働いているから。使命に向かって動く時に最も強く後押しする。',
+    voice:'「偶然はない。必要なものはすでに引き寄せられている。動け。」',
+    mantra:'オン・シラ・バッタ・ニリ・ウン・ソワカ',
+    shrine:'伏見稲荷大社（京都）、豊川稲荷（愛知）'
+  },
+  malkuth: {
+    icon:'⚫', seph:'10 · MALKUTH · 王国', name:'后土神',
+    tagline:'完成された大地が人を育む',
+    body:'己土・身旺格局は「完成された畑の土」。木0・水0という一見欠如に見える構造は、実は「もう成長する必要がないほど内的に安定している」ことを意味する。后土神は大地の受容と変容を司る。あなたが自然と人の成長を支援できるのは、自分自身が完成された土台を持っているから。',
+    voice:'「土は何も主張しない。ただ受け入れ、育てる。それが最も深い力だ。」',
+    mantra:null,
+    benefits:['安定した基盤','他者の成長支援','受容と包容','長期的な繁栄'],
+    shrine:'后土神を祀る神社、大地の神を祀る場所全般'
+  }
+};
+
+function openPanel(key) {
+  const d = deities[key];
+  if (!d) return;
+
+  const mantraBlock = d.mantra ? `
+    <div class="panel-divider"></div>
+    <div class="panel-section-title">MANTRA · 真言・祝詞</div>
+    <div class="panel-mantra">
+      <span class="mantra-text">${d.mantra}</span>
+    </div>` : '';
+
+  let html = `
+    <div class="panel-top">
+      <div class="panel-icon">${d.icon}</div>
+      <div class="panel-name-block">
+        <div class="panel-seph">${d.seph}</div>
+        <div class="panel-name">${d.name}</div>
+        <div class="panel-tagline">${d.tagline}</div>
+      </div>
+    </div>
+    <div class="panel-divider"></div>
+    <div class="panel-section-title">READING</div>
+    <p class="panel-body">${d.body}</p>
+    <div class="panel-voice">${d.voice}</div>
+    ${mantraBlock}
+    <div class="panel-divider"></div>
+    <div class="panel-section-title">BENEFIT · ご利益</div>
+    <div class="panel-benefits">${d.benefits.map(b=>`<span class="benefit-tag">${b}</span>`).join('')}</div>
+    <div class="panel-divider"></div>
+    <div class="panel-section-title">SHRINE · 縁のある社寺</div>
+    <div class="panel-shrine">${d.shrine}</div>`;
+
+  document.getElementById('panel-content').innerHTML = html;
+  document.getElementById('detail-panel').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+
+function closePanel() {
+  document.getElementById('detail-panel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+function copyMantra(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const t = document.getElementById('copy-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  });
+}
+
+setTimeout(() => {
+  document.getElementById('intro').classList.add('hide');
+  setTimeout(() => document.getElementById('intro').remove(), 1000);
+}, 2500);
+
+let startY = 0;
+document.getElementById('detail-panel').addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive:true});
+document.getElementById('detail-panel').addEventListener('touchmove', e => { if (e.touches[0].clientY - startY > 60) closePanel(); }, {passive:true});
+</script>
+</body>
+</html>
