@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中村 咲｜簡易鑑定書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --soul-bg: #0d0f1e;
+  --soul-accent: #6b7fd4;
+  --soul-gold: #c8a050;
+  --now-bg: #2a1e08;
+  --now-accent: #c8a050;
+  --manual-bg: #0f1a0f;
+  --manual-accent: #6aaa6a;
+  --cal-bg: #f0ebe0;
+  --footer-bg: #0d0f1e;
+  --text-light: rgba(255,255,255,0.88);
+  --text-dim: rgba(255,255,255,0.55);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  line-height: 1.95;
+  background: var(--soul-bg);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+/* ========== NAV ========== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(13,15,30,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(107,127,212,0.18);
+  padding: 0 24px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(107,127,212,0.7);
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--soul-accent); }
+
+/* ========== COVER ========== */
+#cover {
+  min-height: 100vh;
+  background: var(--soul-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+#cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 40%, rgba(107,127,212,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 75% 65%, rgba(200,160,80,0.07) 0%, transparent 70%);
+}
+
+#cover::after {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(107,127,212,0.08);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-ring 8s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+  50% { transform: translate(-50%, -50%) scale(1.06); opacity: 0.1; }
+}
+
+.cover-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 540px;
+}
+
+.cover-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--soul-accent);
+  opacity: 0.7;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.cover-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(32px, 6vw, 48px);
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: 8px;
+}
+
+.cover-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.12em;
+  margin-bottom: 48px;
+}
+
+.cover-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, rgba(107,127,212,0.5), transparent);
+  margin: 0 auto 48px;
+}
+
+.cover-kin-block {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.kin-item {
+  text-align: center;
+}
+
+.kin-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  color: var(--soul-accent);
+  opacity: 0.6;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.kin-value {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.08em;
+}
+
+.cover-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em;
+}
+
+/* ========== SECTION BASE ========== */
+section {
+  padding: 96px 24px;
+}
+
+.section-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  opacity: 0.55;
+}
+
+.section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(22px, 4vw, 30px);
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  opacity: 0.45;
+  margin-bottom: 52px;
+}
+
+.section-rule {
+  width: 48px;
+  height: 1px;
+  margin-bottom: 52px;
+  opacity: 0.35;
+}
+
+.highlight {
+  color: var(--soul-gold);
+  font-weight: 500;
+}
+
+/* ========== SOUL SECTION ========== */
+#soul {
+  background: var(--soul-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+#soul::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(107,127,212,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.soul-tag { color: var(--soul-accent); }
+.soul-title { color: rgba(255,255,255,0.92); }
+.soul-rule { background: var(--soul-accent); }
+.soul-subtitle { color: rgba(255,255,255,0.4); }
+
+.soul-intro {
+  font-size: 15px;
+  line-height: 2.0;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 48px;
+}
+
+.oracle-block {
+  border-left: 2px solid rgba(107,127,212,0.35);
+  padding: 24px 28px;
+  margin: 36px 0;
+  background: rgba(107,127,212,0.04);
+}
+
+.oracle-block p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  line-height: 2.0;
+  font-style: italic;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.04em;
+}
+
+.soul-body {
+  font-size: 15px;
+  line-height: 2.0;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 28px;
+}
+
+.data-tag {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  padding: 3px 10px;
+  border: 1px solid rgba(107,127,212,0.25);
+  color: rgba(107,127,212,0.6);
+  border-radius: 20px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+/* ========== NOW SECTION ========== */
+#now {
+  background: var(--now-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+#now::before {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(200,160,80,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.now-tag { color: var(--now-accent); }
+.now-title { color: rgba(255,255,255,0.92); }
+.now-rule { background: var(--now-accent); }
+.now-subtitle { color: rgba(255,255,255,0.4); }
+.now-highlight { color: #e8b860; font-weight: 500; }
+
+.now-body {
+  font-size: 15px;
+  line-height: 2.0;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 28px;
+}
+
+.turning-point {
+  border: 1px solid rgba(200,160,80,0.2);
+  padding: 28px 32px;
+  margin: 40px 0;
+  position: relative;
+}
+
+.turning-point::before {
+  content: 'TURNING POINT';
+  position: absolute;
+  top: -9px;
+  left: 20px;
+  background: var(--now-bg);
+  padding: 0 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: var(--now-accent);
+  opacity: 0.7;
+}
+
+.turning-point p {
+  font-size: 15px;
+  line-height: 2.0;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ========== MANUAL SECTION ========== */
+#manual {
+  background: var(--manual-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+#manual::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(106,170,106,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.manual-tag { color: var(--manual-accent); }
+.manual-title { color: rgba(255,255,255,0.92); }
+.manual-rule { background: var(--manual-accent); }
+.manual-subtitle { color: rgba(255,255,255,0.4); }
+.manual-highlight { color: #8acc8a; font-weight: 500; }
+
+.manual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 40px 0;
+}
+
+.manual-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(106,170,106,0.15);
+  padding: 24px 22px;
+}
+
+.manual-card-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  color: var(--manual-accent);
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.manual-card p {
+  font-size: 14px;
+  line-height: 1.95;
+  color: rgba(255,255,255,0.72);
+}
+
+.manual-body {
+  font-size: 15px;
+  line-height: 2.0;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 28px;
+}
+
+/* ========== CALENDAR SECTION ========== */
+#calendar {
+  background: var(--cal-bg);
+  padding: 96px 24px;
+}
+
+.cal-tag { color: #6b5c3e; opacity: 0.7; }
+.cal-title { color: #2c2416; }
+.cal-rule { background: #6b5c3e; }
+.cal-subtitle { color: #6b5c3e; }
+
+.cal-scroll-wrap {
+  overflow-x: auto;
+  margin-top: 8px;
+  padding-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cal-scroll-wrap::-webkit-scrollbar { height: 4px; }
+.cal-scroll-wrap::-webkit-scrollbar-track { background: rgba(107,92,62,0.1); }
+.cal-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(107,92,62,0.3); border-radius: 2px; }
+
+.cal-row {
+  display: flex;
+  gap: 16px;
+  min-width: max-content;
+  padding: 4px 2px;
+}
+
+.cal-card {
+  width: 200px;
+  border: 1px solid rgba(107,92,62,0.18);
+  background: rgba(255,255,255,0.65);
+  flex-shrink: 0;
+  padding: 20px 18px;
+}
+
+.cal-month {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: #6b5c3e;
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.cal-month-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #2c2416;
+  margin-bottom: 4px;
+}
+
+.cal-star {
+  font-size: 10px;
+  color: #9b7e4a;
+  margin-bottom: 14px;
+  font-family: 'Noto Serif JP', serif;
+}
+
+.cal-section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9b7e4a;
+  opacity: 0.75;
+  margin-bottom: 5px;
+}
+
+.cal-text {
+  font-size: 12px;
+  line-height: 1.85;
+  color: #3a2e1e;
+  margin-bottom: 12px;
+}
+
+.cal-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(107,92,62,0.15);
+  margin: 12px 0;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background: var(--footer-bg);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(107,127,212,0.07) 0%, transparent 70%);
+}
+
+.footer-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.footer-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 0.3em;
+  color: rgba(107,127,212,0.6);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.footer-note {
+  font-size: 13px;
+  line-height: 1.95;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 48px;
+}
+
+.footer-divider {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(107,127,212,0.4), transparent);
+  margin: 0 auto 40px;
+}
+
+.footer-full-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 28px;
+}
+
+.footer-list {
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 44px;
+}
+
+.footer-list li {
+  font-size: 13px;
+  line-height: 2.0;
+  color: rgba(255,255,255,0.5);
+  list-style: none;
+  padding-left: 16px;
+  position: relative;
+}
+
+.footer-list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--soul-accent);
+  opacity: 0.7;
+}
+
+.footer-cta {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(107,127,212,0.8);
+  border: 1px solid rgba(107,127,212,0.25);
+  padding: 14px 32px;
+  text-decoration: none;
+  transition: all 0.35s;
+}
+
+.footer-cta:hover {
+  background: rgba(107,127,212,0.08);
+  border-color: rgba(107,127,212,0.5);
+  color: rgba(107,127,212,1.0);
+}
+
+.footer-brand {
+  margin-top: 60px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.1em;
+}
+
+/* ========== FADE IN ========== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .manual-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 8.5px; }
+  .cal-card { width: 176px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">藍｜簡易鑑定書</span>
+  <ul class="nav-links">
+    <li><a href="#soul">Soul</a></li>
+    <li><a href="#now">Now</a></li>
+    <li><a href="#manual">取扱説明書</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+  </ul>
+</nav>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="cover-inner fade-in">
+    <p class="cover-label">Soul Reading · Simple Edition</p>
+    <h1 class="cover-name">中村　咲</h1>
+    <p class="cover-date">1990年3月15日生まれ</p>
+    <div class="cover-divider"></div>
+    <div class="cover-kin-block">
+      <div class="kin-item">
+        <p class="kin-label">Maya</p>
+        <p class="kin-value">KIN 216<br>黄色い戦士</p>
+      </div>
+      <div class="kin-item">
+        <p class="kin-label">Numerology</p>
+        <p class="kin-value">LP 1<br>Soul 7</p>
+      </div>
+      <div class="kin-item">
+        <p class="kin-label">Astrology</p>
+        <p class="kin-value">魚座<br>蠍座の月</p>
+      </div>
+      <div class="kin-item">
+        <p class="kin-label">Kigaku</p>
+        <p class="kin-value">一白水星<br>七赤金星</p>
+      </div>
+    </div>
+    <p class="cover-subtitle">5 Divinations · 4 Sections</p>
+  </div>
+</section>
+
+<!-- SOUL -->
+<section id="soul">
+  <div class="section-inner">
+    <p class="section-tag soul-tag fade-in">Section 01</p>
+    <h2 class="section-title soul-title fade-in">魂の層</h2>
+    <p class="section-subtitle soul-subtitle fade-in">Soul — 魂の本質と生涯テーマ</p>
+    <hr class="section-rule soul-rule fade-in">
+
+    <p class="soul-body fade-in">
+      あなたの魂には、<span class="highlight">問いを携えて生きる</span>という特性が刻まれている。それは怠惰な疑問ではなく、真実へと向かうための問いだ。マヤ暦のKIN216、<span class="highlight">黄色い戦士</span>は、恐れを手放して問いかけることを本質とする紋章だ。答えを集めるためではなく、問いそのものが道になる——そういう生き方を魂が選んでいる。
+    </p>
+
+    <div class="oracle-block fade-in">
+      <p>銀河の音8は、あなたに「統合する者」としての役割を与えている。バラバラに見えるものを見えない糸でつなぎ、ひとつの像を結ぶ。その能力は意識してはじめて輝く。</p>
+    </div>
+
+    <p class="soul-body fade-in">
+      数秘のソウルナンバー7は、魂の奥底に<span class="highlight">孤独な探求者</span>の原型を持つことを示す。表面的な答えでは満足できない。本質にたどり着くまで潜り続ける——その深さが、あなたの最大の才能であり、ときに最大の苦しみにもなる。
+    </p>
+
+    <p class="soul-body fade-in">
+      四柱推命の日柱「己卯」は、土の中で根を張る木の姿だ。<span class="highlight">柔らかく、しかし簡単には折れない</span>。その組み合わせは、しなやかな強さを象徴する。五行の水が希薄なため、感情の流れを意図的に作ることが、魂の充電になる——涙を許す、直感を流す、水辺に座る。そういったことが、あなたの根に水を送る。
+    </p>
+
+    <div class="data-tag fade-in">Maya KIN216 · 黄色い戦士 · 銀河の音8 · 赤い月のウェイブスペル</div>
+    <p class="soul-body fade-in">
+      ウェイブスペル「赤い月」は、あなたの潜在意識に<span class="highlight">浄化と流れ</span>というテーマを持つ。止まっているときではなく、流れているときに本来の力が発揮される。人生の転機はいつも、何かを手放したあとに来る。
+    </p>
+
+    <div class="oracle-block fade-in">
+      <p>魂の生涯テーマは「問いを恐れずに生き、統合した光を他者に手渡すこと」。それは複数の占術が、異なる角度から照らしている、同じひとつの像だ。</p>
+    </div>
+  </div>
+</section>
+
+<!-- NOW -->
+<section id="now">
+  <div class="section-inner">
+    <p class="section-tag now-tag fade-in">Section 02</p>
+    <h2 class="section-title now-title fade-in">今のあなたへ</h2>
+    <p class="section-subtitle now-subtitle fade-in">Now — 現在地と直近の指針</p>
+    <hr class="section-rule now-rule fade-in" style="background: var(--now-accent);">
+
+    <p class="now-body fade-in">
+      今、あなたは数秘の<span class="now-highlight">個人年1サイクルの入口</span>に立っている。9年間のサイクルが新たに始まる年。これは「また同じことの繰り返し」ではなく、魂の螺旋が次の段階へと上がった瞬間だ。過去の問いが新しい形で戻ってくる——ただし今度は、以前とは違う深さで扱える自分がいる。
+    </p>
+
+    <p class="now-body fade-in">
+      太陽が魚座にある人間として、あなたは境界を溶かし、共鳴する能力を生まれつき持つ。しかし今この時期、<span class="now-highlight">魚座的な溶け方ではなく、黄色い戦士的な「自分から問いかける姿勢」</span>が求められている。受け取る側から、発する側へ。それが今年の核心だ。
+    </p>
+
+    <p class="now-body fade-in">
+      月が蠍座にある人は、感情の奥を潜る本能を持つ。表面の感情ではなく、その下にある真実の感情——それを自分で認識することが、今の指針になる。「なぜそれが気になるのか」「なぜそれが怖いのか」——蠍座の月は、正直な自己観察が開く鍵だ。
+    </p>
+
+    <p class="now-body fade-in">
+      九星気学で見ると、2026年の<span class="now-highlight">一白水星は内省・蓄積の気配</span>の中にある。表に出るより、根を張ること。すぐに結果が見えなくても、今やっていることは確実に地下水脈になっている。焦りを感じるなら、それはその焦りを観察するための情報だ。
+    </p>
+
+    <div class="turning-point fade-in">
+      <p>
+        <span class="now-highlight">次のターニングポイントは2026年秋〜冬。</span><br><br>
+        九星気学の9月（八白土星月）は変化・転換の質を持つ月で、あなたの本命星にとって「手放しと新生が同時に起きる」タイミングだ。11月（一白水星月）は本命星と同月が重なり、自分の本質を深く感じられる特別な時期になる。何かを決断するなら、この二つの月の間で生まれたものを大切にすること。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MANUAL -->
+<section id="manual">
+  <div class="section-inner">
+    <p class="section-tag manual-tag fade-in">Section 03</p>
+    <h2 class="section-title manual-title fade-in">取扱説明書</h2>
+    <p class="section-subtitle manual-subtitle fade-in">Manual — 得意・苦手・回復法・決断のコツ</p>
+    <hr class="section-rule manual-rule fade-in" style="background: var(--manual-accent);">
+
+    <div class="manual-grid fade-in">
+      <div class="manual-card">
+        <p class="manual-card-label">得意なこと</p>
+        <p>本質を見抜くこと。表面の情報に惑わされず、構造を感じ取る力がある。複雑なものを整理して、人が理解できる形にする——その翻訳作業が自然にできる。また、深く潜れることで、他者が気づいていない角度から物事を照らせる。</p>
+      </div>
+      <div class="manual-card">
+        <p class="manual-card-label">苦手なこと</p>
+        <p>浅い表面でのやり取りが続くとき。本質に触れない会話、意味を感じられない業務、なぜかわからないルールへの適応——これらは、あなたの水（五行）を消耗させる。早く決めることも苦手な傾向がある。熟考が本来の性質だからだ。</p>
+      </div>
+      <div class="manual-card">
+        <p class="manual-card-label">回復法</p>
+        <p>意識的に「水」を取り入れること。物理的な水辺、音楽、涙を流せる映画や本。また、「ひとりで考える時間」がエネルギーの回復になる。七赤金星の月命星は喜びとつながりを月のテーマに持つ——楽しいと感じることへの小さな投資が、深いところから回復させる。</p>
+      </div>
+      <div class="manual-card">
+        <p class="manual-card-label">決断のコツ</p>
+        <p>空亡「申西」のパターンを知ること——計画通りにいきにくい場所があっても、それはあなたの失敗ではない。決断のタイミングは「情報が揃ったとき」ではなく、「問いが消えたとき」。やたら問いが増えているなら、まだその時ではない。静かになったとき、答えは出ている。</p>
+      </div>
+    </div>
+
+    <p class="manual-body fade-in">
+      LP1の人は、<span class="manual-highlight">自分が先頭に立つことへの恐れとの戦い</span>が生涯のテーマになることが多い。先駆者の数字を持ちながら、先頭に出ることへの躊躇がある。しかしそれは欠点ではなく、ソウルナンバー7の「まず自分が深く理解してから動く」という性質との対話だ。準備ができたと感じる前に動いてもいい。準備は歩きながら整う。
+    </p>
+
+    <p class="manual-body fade-in">
+      黄色い戦士の性質は「恐れを認識した上で進む」こと。恐れがないのが戦士ではない。<span class="manual-highlight">恐れを見て、それでも問いかけることを選ぶ</span>のが、あなたの戦士としての姿だ。
+    </p>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar">
+  <div class="section-inner">
+    <p class="section-tag cal-tag fade-in">Section 04</p>
+    <h2 class="section-title cal-title fade-in">月別カレンダー</h2>
+    <p class="section-subtitle cal-subtitle fade-in">Calendar — 九星気学による12ヶ月のエネルギー</p>
+    <hr class="section-rule cal-rule fade-in" style="background: #9b7e4a; opacity: 0.4;">
+
+    <div class="cal-scroll-wrap fade-in">
+      <div class="cal-row">
+
+        <!-- 2026年4月 -->
+        <div class="cal-card">
+          <p class="cal-month">Apr 2026</p>
+          <p class="cal-month-ja">4月</p>
+          <p class="cal-star">三碧木星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">眠っていたものが動き出す月。春の水が溶け出すように、停滞していたエネルギーが流れ始める。新しい種をまくより、芽吹きに気づくこと。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">新しい出会いや情報が入りやすい。ただし即断より観察。この月の縁は後につながるものが多い。</p>
+        </div>
+
+        <!-- 2026年5月 -->
+        <div class="cal-card">
+          <p class="cal-month">May 2026</p>
+          <p class="cal-month-ja">5月</p>
+          <p class="cal-star">四緑木星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">人と人がつながる気配。コミュニケーションが活発になり、縁が広がりやすい。移動・発信・会話——流れに乗ることが吉。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">紹介や口コミが動きやすい。人に声をかける、自分から発信することで仕事の流れが生まれる。</p>
+        </div>
+
+        <!-- 2026年6月 -->
+        <div class="cal-card">
+          <p class="cal-month">Jun 2026</p>
+          <p class="cal-month-ja">6月</p>
+          <p class="cal-star">五黄土星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">エネルギーが重くなりやすい月。無理に動こうとするとき、体と心がブレーキをかける。それは信号。内側を整える時間として使うこと。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">大きな決断は避け、現状の見直しに充てる。丁寧に掃除し、整理することが次の展開を準備する。</p>
+        </div>
+
+        <!-- 2026年7月 -->
+        <div class="cal-card">
+          <p class="cal-month">Jul 2026</p>
+          <p class="cal-month-ja">7月</p>
+          <p class="cal-star">六白金星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">直感が冴えやすい月。上からの視点——全体を見渡す目が開く。ここ数ヶ月の出来事を俯瞰して、意味を読む練習をするといい。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">リーダーシップや意思決定が求められる場面が来る。自分の判断を信じること。答えは出ている。</p>
+        </div>
+
+        <!-- 2026年8月 -->
+        <div class="cal-card">
+          <p class="cal-month">Aug 2026</p>
+          <p class="cal-month-ja">8月</p>
+          <p class="cal-star">七赤金星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">月命星と同じ七赤の気が来る。喜び・享楽・豊かさの波。深く潜りすぎてきた分、浮上して楽しむこと。笑いと感謝が充電になる。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">表現・発信が実を結びやすい。ひとりで抱えていたものを外に出す絶好のタイミング。</p>
+        </div>
+
+        <!-- 2026年9月 -->
+        <div class="cal-card">
+          <p class="cal-month">Sep 2026</p>
+          <p class="cal-month-ja">9月</p>
+          <p class="cal-star">八白土星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">転換点。山を越えるような感覚がある月。手放すことと新しく始まることが同時に起きる。怖くても、今終わっているものは終わらせること。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">環境や役割の変化が起きやすい。変化を抵抗せず受け入れることが、次の展開を早める。</p>
+        </div>
+
+        <!-- 2026年10月 -->
+        <div class="cal-card">
+          <p class="cal-month">Oct 2026</p>
+          <p class="cal-month-ja">10月</p>
+          <p class="cal-star">九紫火星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">認められ、見えてくる月。これまでの積み重ねが外側に現れる。人前に出る機会を避けないこと——それが今月の意味だ。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">評判・信頼が仕事に結びつきやすい。紹介・露出・評価が動く月。自分を見せることを躊躇わないで。</p>
+        </div>
+
+        <!-- 2026年11月 -->
+        <div class="cal-card">
+          <p class="cal-month">Nov 2026</p>
+          <p class="cal-month-ja">11月</p>
+          <p class="cal-star">一白水星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">本命星と同じ月。魂の周波数と月のエネルギーが一致する特別な時期。静かに深いところに入っていける。直感と本音を信じる月。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">表向きの動きより、内側の確信を固める時間として使う。ここでの決断は、長く効く。</p>
+        </div>
+
+        <!-- 2026年12月 -->
+        <div class="cal-card">
+          <p class="cal-month">Dec 2026</p>
+          <p class="cal-month-ja">12月</p>
+          <p class="cal-star">二黒土星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">地道に積み重ねてきたものが実を結ぶ月。華やかさより、確かさ。一つひとつ丁寧に完結させることが年末の清め方になる。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">継続してきたことからの収穫がある。大きく動くよりも、既存のものを丁寧に守り育てる意識で。</p>
+        </div>
+
+        <!-- 2027年1月 -->
+        <div class="cal-card">
+          <p class="cal-month">Jan 2027</p>
+          <p class="cal-month-ja">1月</p>
+          <p class="cal-star">三碧木星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">動けるエネルギーが戻ってくる。言葉、声、発信——外に出すことへの意欲が自然に湧く。新しい年の勢いに乗ること。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">発信・行動の効果が出やすい。温めていたアイデアや企画を動かし始めるいいタイミング。</p>
+        </div>
+
+        <!-- 2027年2月 -->
+        <div class="cal-card">
+          <p class="cal-month">Feb 2027</p>
+          <p class="cal-month-ja">2月</p>
+          <p class="cal-star">四緑木星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">縁がつながる月。遠くから縁が来る——旅、出会い、学び。行動範囲を広げることで、思ってもいない扉が開く。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">異業種・異ジャンルとの交流が刺激をもたらす。固定した場所より、動いている場所に良縁がある。</p>
+        </div>
+
+        <!-- 2027年3月 -->
+        <div class="cal-card">
+          <p class="cal-month">Mar 2027</p>
+          <p class="cal-month-ja">3月</p>
+          <p class="cal-star">五黄土星月</p>
+          <p class="cal-section-label">エネルギー</p>
+          <p class="cal-text">サイクルの締めくくり。内側を静かに見つめ直す時間。無理に動かず、次のサイクルへの橋渡しをするつもりで。</p>
+          <div class="cal-divider"></div>
+          <p class="cal-section-label">仕事・お金</p>
+          <p class="cal-text">決算・整理・手放し。この1年で残すものと、ここで完結させるものを丁寧に見極めること。</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-tag">この鑑定書について</p>
+    <p class="footer-note">
+      本鑑定書は5占術・4セクションの簡易版です。<br>
+      より深い読みをご希望の方は、完全版「魂の設計図」をご覧ください。
+    </p>
+    <div class="footer-divider"></div>
+    <p class="footer-full-title">魂の設計図（完全版・22,000円）では……</p>
+    <ul class="footer-list">
+      <li>深層・表層・統合の3レイヤーによる精密な読み</li>
+      <li>2〜6年のタイムライン（航海図）</li>
+      <li>関係性・不安の整え方・お金と仕事のセクション</li>
+      <li>生涯設計図（80歳までの魂の季節地図）</li>
+      <li>9占術を統合した完全個人鑑定</li>
+    </ul>
+    <a href="https://coconala.com/services/4152472" target="_blank" class="footer-cta">Coconala で詳細を見る →</a>
+    <p class="footer-brand">藍｜イマヲカシ</p>
+  </div>
+</footer>
+
+<script>
+// Fade in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
