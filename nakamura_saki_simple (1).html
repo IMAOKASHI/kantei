@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中村 咲｜魂の簡易鑑定書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --indigo: #6b7fd4;
+  --indigo-dim: rgba(107,127,212,0.15);
+  --amber: #c8a050;
+  --amber-dim: rgba(200,160,80,0.12);
+  --forest: #6aaa6a;
+  --forest-dim: rgba(106,170,106,0.12);
+  --paper: #f0ebe0;
+  --paper-ink: #2a2218;
+  --gold: #c8a050;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: var(--ink);
+  color: #e8e4dc;
+  line-height: 2.0;
+  font-size: 15px;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(13,15,30,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(107,127,212,0.2);
+  padding: 0 24px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(232,228,220,0.55);
+  text-decoration: none;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+nav a:hover { color: var(--indigo); }
+
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  color: var(--indigo) !important;
+  padding-right: 24px !important;
+  border-right: 1px solid rgba(107,127,212,0.25);
+  margin-right: 8px;
+}
+
+/* ── COVER ── */
+#cover {
+  min-height: 100vh;
+  background: #0d0f1e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+#cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 40%, rgba(107,127,212,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 75% 65%, rgba(200,160,80,0.05) 0%, transparent 60%);
+}
+
+.cover-stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cover-stars::before {
+  content: '·  ·   ·      ·   ·  ·        ·   ·  ·    ·      ·  ·   ·    ·       ·  ·    ·   ·      ·  ·      ·   ·  ·        ·   ·  ·    ·';
+  position: absolute;
+  color: rgba(200,160,80,0.25);
+  font-size: 20px;
+  line-height: 3;
+  letter-spacing: 24px;
+  white-space: pre-wrap;
+  width: 200%;
+  top: 10%;
+  animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.cover-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--indigo);
+  opacity: 0.7;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.cover-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: #f0ece4;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.cover-reading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  color: rgba(240,236,228,0.4);
+  font-style: italic;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.cover-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--indigo), transparent);
+  margin: 0 auto 48px;
+  position: relative;
+}
+
+.cover-data {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  justify-content: center;
+  margin-bottom: 56px;
+  position: relative;
+}
+
+.cover-data-item {
+  text-align: center;
+}
+
+.cover-data-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--indigo);
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.cover-data-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  color: #e8e4dc;
+}
+
+.cover-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(240,236,228,0.35);
+  letter-spacing: 0.1em;
+  position: relative;
+}
+
+.cover-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: rgba(107,127,212,0.4);
+}
+
+.cover-scroll::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(107,127,212,0.4), transparent);
+  animation: pulse-line 2s ease-in-out infinite;
+}
+
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ── SECTION BASE ── */
+section {
+  padding: 80px 24px;
+}
+
+.section-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin-bottom: 40px;
+  line-height: 1.4;
+}
+
+.section-divider {
+  width: 60px;
+  height: 1px;
+  margin-bottom: 40px;
+}
+
+.highlight { color: var(--gold); }
+
+p + p { margin-top: 1.6em; }
+
+/* ── SOUL ── */
+#soul {
+  background: #0d0f1e;
+  position: relative;
+  overflow: hidden;
+}
+
+#soul::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(107,127,212,0.06), transparent 70%);
+}
+
+#soul .section-eyebrow { color: var(--indigo); }
+#soul .section-divider { background: linear-gradient(90deg, var(--indigo), transparent); }
+
+.soul-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 40px 0;
+}
+
+@media (max-width: 600px) {
+  .soul-grid { grid-template-columns: 1fr; }
+}
+
+.soul-card {
+  background: var(--indigo-dim);
+  border: 1px solid rgba(107,127,212,0.2);
+  border-radius: 2px;
+  padding: 24px;
+}
+
+.soul-card-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: var(--indigo);
+  opacity: 0.7;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.soul-card-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  letter-spacing: 0.1em;
+  color: #f0ece4;
+  margin-bottom: 12px;
+}
+
+.soul-card-body {
+  font-size: 13px;
+  color: rgba(232,228,220,0.7);
+  line-height: 1.9;
+}
+
+/* ── NOW ── */
+#now {
+  background: #2a1e08;
+  position: relative;
+  overflow: hidden;
+}
+
+#now::before {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,160,80,0.07), transparent 70%);
+}
+
+#now .section-eyebrow { color: var(--amber); }
+#now .section-divider { background: linear-gradient(90deg, var(--amber), transparent); }
+#now .highlight { color: var(--amber); }
+
+.now-block {
+  background: var(--amber-dim);
+  border-left: 2px solid var(--amber);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.now-block-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--amber);
+  opacity: 0.7;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* ── MANUAL ── */
+#manual {
+  background: #0f1a0f;
+  position: relative;
+  overflow: hidden;
+}
+
+#manual::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(106,170,106,0.07), transparent 70%);
+}
+
+#manual .section-eyebrow { color: var(--forest); }
+#manual .section-divider { background: linear-gradient(90deg, var(--forest), transparent); }
+#manual .highlight { color: var(--forest); }
+
+.manual-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px 24px;
+  align-items: start;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(106,170,106,0.1);
+}
+
+.manual-row:first-of-type { border-top: 1px solid rgba(106,170,106,0.1); }
+
+.manual-row-key {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--forest);
+  opacity: 0.8;
+  padding-top: 2px;
+}
+
+/* ── CALENDAR ── */
+#calendar {
+  background: var(--paper);
+  color: var(--paper-ink);
+}
+
+#calendar .section-eyebrow { color: rgba(42,34,24,0.5); }
+#calendar .section-divider { background: linear-gradient(90deg, rgba(42,34,24,0.4), transparent); }
+#calendar .section-title { color: var(--paper-ink); }
+#calendar p { color: rgba(42,34,24,0.75); }
+
+.calendar-scroll {
+  overflow-x: auto;
+  padding-bottom: 16px;
+  margin: 0 -24px;
+  padding: 0 24px 16px;
+}
+
+.calendar-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+}
+
+.cal-card {
+  width: 200px;
+  flex-shrink: 0;
+  border: 1px solid rgba(42,34,24,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.cal-card-header {
+  background: rgba(42,34,24,0.08);
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(42,34,24,0.1);
+}
+
+.cal-card-month {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--paper-ink);
+  opacity: 0.6;
+}
+
+.cal-card-star {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--paper-ink);
+  margin-top: 2px;
+}
+
+.cal-card-body {
+  padding: 16px;
+}
+
+.cal-card-section {
+  margin-bottom: 12px;
+}
+
+.cal-card-section:last-child { margin-bottom: 0; }
+
+.cal-card-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(42,34,24,0.45);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.cal-card-text {
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba(42,34,24,0.7);
+}
+
+/* ── MOON ── */
+#moon {
+  background: #0d0f1e;
+}
+
+#moon .section-eyebrow { color: var(--indigo); }
+#moon .section-divider { background: linear-gradient(90deg, var(--indigo), transparent); }
+
+.moon-scroll {
+  overflow-x: auto;
+  margin: 0 -24px;
+  padding: 0 24px 16px;
+}
+
+.moon-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+}
+
+/* flip card */
+.moon-card {
+  width: 220px;
+  height: 280px;
+  flex-shrink: 0;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.moon-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.moon-card.flipped .moon-card-inner {
+  transform: rotateY(180deg);
+}
+
+.moon-card-front,
+.moon-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  padding: 20px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 新月 front */
+.moon-card.shingetsu .moon-card-front {
+  background: rgba(107,127,212,0.08);
+  border: 1px solid rgba(107,127,212,0.25);
+}
+
+/* 満月 front */
+.moon-card.mangetsu .moon-card-front {
+  background: rgba(200,160,80,0.07);
+  border: 1px solid rgba(200,160,80,0.25);
+}
+
+.moon-card-back {
+  background: #141628;
+  border: 1px solid rgba(107,127,212,0.3);
+  transform: rotateY(180deg);
+  overflow-y: auto;
+}
+
+.moon-card.mangetsu .moon-card-back {
+  background: #1a1208;
+  border: 1px solid rgba(200,160,80,0.3);
+}
+
+.mc-type {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  margin-bottom: 10px;
+}
+
+.shingetsu .mc-type { color: var(--indigo); opacity: 0.7; }
+.mangetsu .mc-type { color: var(--amber); opacity: 0.7; }
+
+.mc-icon { font-size: 28px; margin-bottom: 8px; line-height: 1; }
+
+.mc-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: rgba(232,228,220,0.7);
+  margin-bottom: 4px;
+}
+
+.mc-sign {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: #f0ece4;
+  margin-bottom: auto;
+}
+
+.mc-invite {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(232,228,220,0.35);
+  margin-top: 16px;
+  text-align: center;
+}
+
+.mc-back-q {
+  font-size: 12px;
+  line-height: 1.9;
+  color: rgba(232,228,220,0.75);
+  margin-bottom: 12px;
+}
+
+.mc-back-q-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--indigo);
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.mangetsu .mc-back-q-label { color: var(--amber); }
+
+.mc-back-action {
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba(232,228,220,0.6);
+  padding: 10px 0;
+  border-top: 1px solid rgba(107,127,212,0.15);
+  margin-top: auto;
+}
+
+.mangetsu .mc-back-action { border-top-color: rgba(200,160,80,0.15); }
+
+.mc-back-personal {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(232,228,220,0.55);
+  padding-top: 8px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #07080f;
+  padding: 80px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(107,127,212,0.15);
+}
+
+.footer-inner { max-width: 560px; margin: 0 auto; }
+
+.footer-note {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: rgba(107,127,212,0.5);
+  margin-bottom: 40px;
+}
+
+.footer-upgrade {
+  background: rgba(107,127,212,0.07);
+  border: 1px solid rgba(107,127,212,0.2);
+  border-radius: 2px;
+  padding: 32px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.footer-upgrade-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--indigo);
+  margin-bottom: 20px;
+}
+
+.footer-upgrade ul {
+  list-style: none;
+  margin-bottom: 24px;
+}
+
+.footer-upgrade li {
+  font-size: 13px;
+  color: rgba(232,228,220,0.6);
+  padding: 6px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.footer-upgrade li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--indigo);
+  opacity: 0.5;
+}
+
+.footer-link {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--indigo);
+  border: 1px solid rgba(107,127,212,0.35);
+  padding: 12px 28px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.footer-link:hover {
+  background: rgba(107,127,212,0.1);
+  border-color: var(--indigo);
+}
+
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(107,127,212,0.35);
+  letter-spacing: 0.15em;
+}
+
+/* scrollbar paper */
+#calendar .calendar-scroll::-webkit-scrollbar,
+#moon .moon-scroll::-webkit-scrollbar { height: 4px; }
+#calendar .calendar-scroll::-webkit-scrollbar-track { background: rgba(42,34,24,0.1); }
+#calendar .calendar-scroll::-webkit-scrollbar-thumb { background: rgba(42,34,24,0.25); border-radius: 2px; }
+#moon .moon-scroll::-webkit-scrollbar-track { background: rgba(107,127,212,0.05); }
+#moon .moon-scroll::-webkit-scrollbar-thumb { background: rgba(107,127,212,0.2); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#cover">藍</a>
+  <a href="#soul">魂の層</a>
+  <a href="#now">今のあなたへ</a>
+  <a href="#manual">取扱説明書</a>
+  <a href="#calendar">月別</a>
+  <a href="#moon">満月・新月</a>
+</nav>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="cover-stars"></div>
+  <span class="cover-eyebrow">SIMPLE READING · 藍</span>
+  <h1 class="cover-name">中村 咲</h1>
+  <p class="cover-reading">Nakamura Saki · 1990.3.15</p>
+  <div class="cover-divider"></div>
+  <div class="cover-data">
+    <div class="cover-data-item">
+      <span class="cover-data-label">KIN</span>
+      <span class="cover-data-value">216</span>
+    </div>
+    <div class="cover-data-item">
+      <span class="cover-data-label">SOLAR SEAL</span>
+      <span class="cover-data-value">黄色い戦士</span>
+    </div>
+    <div class="cover-data-item">
+      <span class="cover-data-label">TONE</span>
+      <span class="cover-data-value">音8</span>
+    </div>
+    <div class="cover-data-item">
+      <span class="cover-data-label">SUN SIGN</span>
+      <span class="cover-data-value">魚座</span>
+    </div>
+    <div class="cover-data-item">
+      <span class="cover-data-label">LIFE PATH</span>
+      <span class="cover-data-value">1</span>
+    </div>
+    <div class="cover-data-item">
+      <span class="cover-data-label">HONMEISEI</span>
+      <span class="cover-data-value">一白水星</span>
+    </div>
+  </div>
+  <p class="cover-subtitle">5占術による、魂の簡易鑑定書</p>
+  <div class="cover-scroll">SCROLL</div>
+</section>
+
+<!-- SOUL -->
+<section id="soul">
+  <div class="section-inner">
+    <span class="section-eyebrow" style="color:var(--indigo)">SOUL · 魂の層</span>
+    <h2 class="section-title">あなたという<br>魂の設計</h2>
+    <div class="section-divider" style="background:linear-gradient(90deg,var(--indigo),transparent)"></div>
+
+    <p>
+      KIN216——<span class="highlight">黄色い戦士</span>の魂は、問いを携えて生まれてくる。<br>
+      それは単なる「疑問を持つ」ということではない。問いそのものを武器として、未知の地を切り拓いていく性質のことだ。
+    </p>
+    <p>
+      <span class="highlight">音8</span>は統合の音。7までに積み上げてきたものを、形にまとめ、世界へ渡していく段階を持って生まれた。この「まとめる・形にする」という衝動は、咲さんの中でとても自然に、そして時に義務感のように動いているはずだ。
+    </p>
+    <p>
+      ウェイブスペルは<span class="highlight">赤い月</span>。流れること、感じ取ること、浄化すること——これが咲さんの魂を底流で支えている力だ。黄色い戦士の問いの鋭さと、赤い月の感受の深さが交差するとき、他者には見えないものを見る力が生まれる。
+    </p>
+
+    <div class="soul-grid">
+      <div class="soul-card">
+        <span class="soul-card-label">SOUL NUMBER</span>
+        <div class="soul-card-value">7</div>
+        <div class="soul-card-body">魂の核に「探求」がある。表面の喧騒より、深部の静寂を好む。一人の時間に最も豊かに充電される構造を持っている。</div>
+      </div>
+      <div class="soul-card">
+        <span class="soul-card-label">日柱 · 五行</span>
+        <div class="soul-card-value">己卯</div>
+        <div class="soul-card-body">土の穏やかさと木の柔軟さを持つ日柱。五行は木・土が優勢で、水が空白。感情の処理に独自の回路を持つ。</div>
+      </div>
+      <div class="soul-card">
+        <span class="soul-card-label">空亡</span>
+        <div class="soul-card-value">申西</div>
+        <div class="soul-card-body">金の気が空洞になる構造。「決める・断ち切る」場面での迷いや停滞は、欠陥ではなくこの魂の仕様だ。</div>
+      </div>
+      <div class="soul-card">
+        <span class="soul-card-label">太陽星座 · サビアン</span>
+        <div class="soul-card-value">魚座 25°</div>
+        <div class="soul-card-body">「一人の聖人を讃える群衆」——見える形ではなく、本質を伝える存在になることへの呼びかけを持って生まれた。</div>
+      </div>
+    </div>
+
+    <p>
+      魂の生涯テーマを一文にするなら——<br>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--amber);display:block;margin-top:16px;line-height:1.7">「問いを立て続けることで、水が石を穿つように、この世界に深い轍を刻んでいく」</span>
+    </p>
+  </div>
+</section>
+
+<!-- NOW -->
+<section id="now">
+  <div class="section-inner">
+    <span class="section-eyebrow" style="color:var(--amber)">NOW · 今のあなたへ</span>
+    <h2 class="section-title" style="color:#f0ece4">現在地と、<br>次の一手</h2>
+    <div class="section-divider" style="background:linear-gradient(90deg,var(--amber),transparent)"></div>
+
+    <p>
+      2025年、咲さんは<span class="highlight" style="color:var(--amber)">個人年8年</span>の中にいる（LP1 × 2025年）。音8の生まれ持った性質と、この8年の流れが重なっている——つまり今は「自分の本来の力を、外側に形として出す」ことが最も天の流れと合致している時期だ。
+    </p>
+
+    <div class="now-block">
+      <span class="now-block-label">現在地</span>
+      <p style="font-size:14px;color:rgba(240,236,228,0.8)">
+        積み上げてきたものが、ようやく「形になる直前」の地点にいる。焦りや物足りなさを感じているとしたら、それは後退しているのではなく、出産直前の収縮と同じ種類の圧力だ。
+      </p>
+    </div>
+
+    <p>
+      一白水星の本命星は、2025年を<span class="highlight" style="color:var(--amber)">六白金星の年</span>として過ごしている。動きが加速する、判断を迫られる、外部との接触が増える——そういう年の質感を持っている。月命星・七赤金星の「言葉で伝える」力が、この流れをうまく受け取る鍵になる。
+    </p>
+    <p>
+      月星座・<span class="highlight" style="color:var(--amber)">蠍座</span>は、見えない底流で感じ取る力の座だ。水瓶座の金星・火星との組み合わせは、感情の深さと思考の距離感が独特に同居する構造をつくっている。感じていることを「言語化するまでに時間がかかる」という感覚は、欠点ではなくこの星配置の当然の帰結だ。
+    </p>
+
+    <div class="now-block">
+      <span class="now-block-label">次のターニングポイント</span>
+      <p style="font-size:14px;color:rgba(240,236,228,0.8)">
+        2026年春——個人年9年への移行期。手放すことと、新たな始まりの予兆が重なる。今年中に「完成させること・送り出すこと」が、次の扉を開ける鍵になる。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MANUAL -->
+<section id="manual">
+  <div class="section-inner">
+    <span class="section-eyebrow" style="color:var(--forest)">MANUAL · 取扱説明書</span>
+    <h2 class="section-title" style="color:#f0ece4">咲さんという<br>存在の扱い方</h2>
+    <div class="section-divider" style="background:linear-gradient(90deg,var(--forest),transparent)"></div>
+
+    <div class="manual-row">
+      <span class="manual-row-key">得意</span>
+      <p>本質を見抜く問いを立てること。表層の言葉ではなく、構造を感知する。魚座の太陽と蠍座の月が組み合わさって、「見えていないものを見る」という特殊な知覚が働く。一白水星の浸透力と合わさると、人の核心部に自然に触れてしまう。</p>
+    </div>
+
+    <div class="manual-row">
+      <span class="manual-row-key">苦手</span>
+      <p>「すぐ決める」こと全般。空亡・申西により、金の気（決断・断ち切り）が空洞になっている。即断が求められる場面では、意識的に「自分に24時間の猶予を与える」ことが最善手だ。これは優柔不断ではなく、この魂の構造的特徴だ。</p>
+    </div>
+
+    <div class="manual-row">
+      <span class="manual-row-key">回復法</span>
+      <p>ソウルナンバー7の構造上、<span class="highlight" style="color:var(--forest)">一人でいる時間</span>が最大の充電源になる。赤い月のウェイブスペルは「流す・浄化する」の力——水に触れること（風呂・海・川）が感情のデトックスとして機能する。喧騒ではなく静寂に、答えがある。</p>
+    </div>
+
+    <div class="manual-row">
+      <span class="manual-row-key">決断のコツ</span>
+      <p>「正しいかどうか」ではなく「<span class="highlight" style="color:var(--forest)">問いとして美しいかどうか</span>」を判断軸にする。黄色い戦士は知性の戦士であり、論理より問いの質で動くとき、最も正確な方向を選ぶ。迷ったときは「この選択は、より良い問いを生むか」を問え。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar">
+  <div class="section-inner">
+    <span class="section-eyebrow" style="color:rgba(42,34,24,0.5)">CALENDAR · 月別</span>
+    <h2 class="section-title" style="color:var(--paper-ink)">2026年4月から<br>12ヶ月のエネルギー</h2>
+    <div class="section-divider" style="background:linear-gradient(90deg,rgba(42,34,24,0.4),transparent)"></div>
+    <p style="color:rgba(42,34,24,0.65);margin-bottom:32px;font-size:14px">九星気学・一白水星の月盤による流れ。横にスクロールしてご覧ください。</p>
+  </div>
+
+  <div class="calendar-scroll">
+    <div class="calendar-track">
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · APR</div>
+          <div class="cal-card-star">四緑木星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">風の月。縁がつながりやすく、情報と人が動く。受け取ることを恐れない姿勢が吉。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">声をかけられたことに応じてみる価値がある。新しい流れの入り口となる出会いが潜んでいる。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · MAY</div>
+          <div class="cal-card-star">三碧木星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">始動と衝動の月。アイデアが湧くが、散漫になりやすい。「一点に絞る」意識が鍵。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">動き出す力は十分にある。最初の一歩を「小さく・確実に」切ることで流れが開く。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · JUN</div>
+          <div class="cal-card-star">二黒土星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">丁寧さと忍耐の月。目立った動きより、地を固めることが未来の礎になる。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">地道な作業・見直し・整理に向く。急がず、一つひとつを確実に仕上げることで信頼が積まれる。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · JUL</div>
+          <div class="cal-card-star">一白水星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">本命星と月盤が重なる「本位」の月。内なる声が最もクリアに聞こえる時期。深く沈んで、正直に聴く。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">人脈より本質を優先する判断が正解。外側を広げるより、核となる仕事に集中する月。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · AUG</div>
+          <div class="cal-card-star">九紫火星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">光の月。可視化・発表・表現に向く。一白水星には少し眩しい月だが、その光を借りていい。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">成果を表に出すタイミング。完璧を待たずに「見せる」ことが次の流れをつくる。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · SEP</div>
+          <div class="cal-card-star">八白土星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">変容と蓄積の月。山の気——じっくりと形を変え、強固な土台を作る時期。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">蓄える動きに向く。大きな出費より、投資・学び・スキルの蓄積に当てると実を結ぶ。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · OCT</div>
+          <div class="cal-card-star">七赤金星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">月命星と同宮の月。言葉・表現・喜びのエネルギーが自分の中で響く。話すこと、書くことに力が宿る。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">コミュニケーションに好機。提案・交渉・発信——声に出すことで動きが生まれる月。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · NOV</div>
+          <div class="cal-card-star">六白金星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">天の意志と一致する月。リーダーシップや主体的判断が求められる局面が来やすい。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">自分で決断する場面を怖れない。人に委ねてきたことを、一度自分に引き取ってみるタイミング。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2026 · DEC</div>
+          <div class="cal-card-star">五黄土星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">中心の月。五黄は最強のエネルギーだが、一白には重さがかかる。無理をせず、中心に戻る月。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">新しいことを始めるより、現在地を整える。環境・体・人間関係の見直しに時間を使う価値がある。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2027 · JAN</div>
+          <div class="cal-card-star">四緑木星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">縁と情報が動き出す新年。受け取ること・つながることに意識を開く。春の気が早めに訪れる。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">声かけに応じると、思わぬ流れが生まれる可能性がある。小さな縁を丁寧に扱う月。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2027 · FEB</div>
+          <div class="cal-card-star">三碧木星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">動き出しの月。冬から春への橋渡し。内側で熟成させていたものが、外側に出ようとする。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">新しい試みを小さく始める好機。「できそう」より「やりたい」の感覚を優先して動く。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <div class="cal-card-header">
+          <div class="cal-card-month">2027 · MAR</div>
+          <div class="cal-card-star">二黒土星 月</div>
+        </div>
+        <div class="cal-card-body">
+          <div class="cal-card-section">
+            <span class="cal-card-label">エネルギー</span>
+            <div class="cal-card-text">丁寧さが力になる月。一年の締めくくりとして、育んできたものを慈しむ時期。急がない。</div>
+          </div>
+          <div class="cal-card-section">
+            <span class="cal-card-label">仕事・お金</span>
+            <div class="cal-card-text">完成・まとめ・引き渡しに向く。縁の下で支えてくれた人への感謝を形にする動きが吉。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MOON -->
+<section id="moon">
+  <div class="section-inner">
+    <span class="section-eyebrow" style="color:var(--indigo)">MOON · 月のノート</span>
+    <h2 class="section-title">満月と新月の<br>リフレクション</h2>
+    <div class="section-divider" style="background:linear-gradient(90deg,var(--indigo),transparent)"></div>
+    <p style="color:rgba(232,228,220,0.55);margin-bottom:32px;font-size:14px">月2回の節目に開く、あなただけのカード。タップで表裏が切り替わります。</p>
+  </div>
+
+  <div class="moon-scroll">
+    <div class="moon-track">
+
+<!-- 2026年4月〜2027年3月 新月・満月 24枚 -->
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年4月20日</div>
+      <div class="mc-sign">牡羊座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">今月、自分に許可したいことは何か。<br>恐れを一時間だけ置いて、答えてみる。</div>
+      <div class="mc-back-q">動き出すための「最初の一文」を、書いてみるとしたら。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>明かりを消して、5分間だけ自分の呼吸を聞く。</div>
+      <div class="mc-back-personal">黄色い戦士は、この新月に問いを立てることで最も深く充電される。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年5月5日</div>
+      <div class="mc-sign">蠍座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">この半月で満ちてきたものを、言葉にするとしたら。</div>
+      <div class="mc-back-q">手放してもいいと感じているものは、何か。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>水を一杯飲みながら、今月の自分を労う言葉を一つ声に出す。</div>
+      <div class="mc-back-personal">蠍座の月を持つ咲さんに、この満月は「見えていた答え」を浮上させる。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年5月20日</div>
+      <div class="mc-sign">牡牛座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">「持続する」ために、今月何を選ぶか。</div>
+      <div class="mc-back-q">自分の体と暮らしに、小さな豊かさをひとつ加えるとしたら。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>明日の朝、少しだけ自分を喜ばせるものを準備して眠る。</div>
+      <div class="mc-back-personal">音8の持つ「形にまとめる力」が、この牡牛座の新月と共鳴する。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年6月4日</div>
+      <div class="mc-sign">射手座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">遠くに向かいたい衝動は、今どこを指しているか。</div>
+      <div class="mc-back-q">「自由」と呼べるものを、今月ひとつ収穫するとしたら。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>地図かアプリを開いて、いつか行きたい場所をひとつ保存する。</div>
+      <div class="mc-back-personal">一白水星の浸透力が、射手座の満月で「方向を決める勇気」として現れる。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年6月18日</div>
+      <div class="mc-sign">双子座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">今月、誰かに伝えたいことを一つ選ぶとしたら。</div>
+      <div class="mc-back-q">言葉にしていないまま心の中にある、一番大事なことは何か。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>ノートに、今の自分の気持ちを検閲なしに3行書く。</div>
+      <div class="mc-back-personal">月命星・七赤金星の言語化の力が、この双子座の新月で開花しやすい。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年7月4日</div>
+      <div class="mc-sign">山羊座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">この半月で、何を「完成させた」と言えるか。</div>
+      <div class="mc-back-q">責任を取ってきたことの中で、もう手放してもいいものは何か。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>「完了リスト」をひとつ書いて、自分を認める。</div>
+      <div class="mc-back-personal">己卯の日柱は、山羊座の収穫の月に「地に足のついた答え」をもたらす。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年7月18日</div>
+      <div class="mc-sign">蟹座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">「家」と感じる場所・状態は何か。今月その感覚を増やすとしたら。</div>
+      <div class="mc-back-q">守りたいと思うものを、今一度確かめる。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>自分の部屋に、好きなものをひとつ持ってくる。</div>
+      <div class="mc-back-personal">一白水星の本位月（7月）を前に、蟹座の新月は内側の充電を促す。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年8月2日</div>
+      <div class="mc-sign">水瓶座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">個人を超えた「何か」のために動いていることは、何か。</div>
+      <div class="mc-back-q">「自分らしくない」と感じていたものを、今月手放すとしたら。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>空を見上げて、宇宙の大きさを5秒間感じる。</div>
+      <div class="mc-back-personal">水瓶座に金星・火星を持つ咲さんに、この満月は「自由の収穫」を届ける。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年8月17日</div>
+      <div class="mc-sign">獅子座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">今月、「自分のために」始められることは何か。</div>
+      <div class="mc-back-q">輝くことを、今月自分に許可するとしたら。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>鏡を見て、今日の自分に「よくやっている」と言葉をかける。</div>
+      <div class="mc-back-personal">九紫火星の月（8月）と獅子座の新月が重なり、表現のエネルギーが最高潮に。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年9月1日</div>
+      <div class="mc-sign">魚座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">溶け込んでいたものから、今何かを受け取っているとしたら。</div>
+      <div class="mc-back-q">手放すことで、より大きなものが来ると感じていることは何か。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>湯船に浸かりながら、今月のことを静かに振り返る。</div>
+      <div class="mc-back-personal">太陽星座・魚座の満月。咲さんにとって年に一度の「魂の収穫祭」。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年9月16日</div>
+      <div class="mc-sign">乙女座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">今月、「整える」ことで始められるものは何か。</div>
+      <div class="mc-back-q">完璧を目指すのをやめて、「十分よい」を選ぶとしたら。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>引き出しかデスクをひとつ片づけ、新月に空間を作る。</div>
+      <div class="mc-back-personal">KIN216の問いの力が、乙女座の整理の月と合わさり「構造化の才」として現れる。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年10月1日</div>
+      <div class="mc-sign">牡羊座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">この半月の勇気を、言葉にするとしたら。</div>
+      <div class="mc-back-q">「もう必要ない」と感じる恐れを、今夜手放すとしたら。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>「〜をやめる」と紙に書いて、静かに破る。</div>
+      <div class="mc-back-personal">七赤金星の月（10月）と牡羊座の満月が、言葉による解放を後押しする。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年10月16日</div>
+      <div class="mc-sign">天秤座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">今月、バランスを取り戻したい関係や状況はどこか。</div>
+      <div class="mc-back-q">誰かと「対等に」向き合うために必要なことは何か。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>大切な人に、感謝の言葉をひとつ送る。</div>
+      <div class="mc-back-personal">LP1の独立心と天秤座の関係性の月——バランスの問いが、咲さんの魂を深める。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年10月31日</div>
+      <div class="mc-sign">牡牛座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">今月、豊かになったものを、静かに数えてみる。</div>
+      <div class="mc-back-q">「十分ある」と感じられる瞬間は、どんな時か。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>今月の「良かったこと」を3つノートに書く。</div>
+      <div class="mc-back-personal">五行で木・土が優勢な咲さんに、牡牛座の満月は「実りの感覚」を届ける。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年11月14日</div>
+      <div class="mc-sign">蠍座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">今月、本当に望んでいることを、検閲なしに書くとしたら。</div>
+      <div class="mc-back-q">変容のために、今「降りてもいい」ものは何か。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>暗闇の中で、自分の中心を感じる時間を5分とる。</div>
+      <div class="mc-back-personal">月星座・蠍座との新月の合。咲さんにとって年に一度の「魂の種まき」。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年11月29日</div>
+      <div class="mc-sign">双子座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">言葉にできたことで、解放されたものは何か。</div>
+      <div class="mc-back-q">「伝えた」ことで完結できる、未完のやり取りはあるか。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>長文でなくていい——一言でいいので、誰かに「ありがとう」を送る。</div>
+      <div class="mc-back-personal">七赤金星の言語化の力が、双子座の満月で「声に出す解放」を生む。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2026年12月14日</div>
+      <div class="mc-sign">射手座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">来年、向かいたい方向を一言で表すとしたら。</div>
+      <div class="mc-back-q">「冒険」という言葉を自分に当てはめると、何が浮かぶか。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>来年の自分に手紙を一文書く。</div>
+      <div class="mc-back-personal">個人年9年の入り口に、黄色い戦士が新しい問いを携えて出発する月。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2026年12月29日</div>
+      <div class="mc-sign">蟹座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">今年、守り育ててきたものを、静かに振り返る。</div>
+      <div class="mc-back-q">年の終わりに、自分に渡したい言葉は何か。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>温かい飲み物を持ちながら、今年の自分をただ認める時間をとる。</div>
+      <div class="mc-back-personal">赤い月のウェイブスペルを持つ咲さんの、年末の浄化と収穫の夜。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2027年1月13日</div>
+      <div class="mc-sign">山羊座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">今年、形にしたい「一つのこと」は何か。</div>
+      <div class="mc-back-q">長期的な視点で、今月始めておくべきことは何か。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>一枚の紙に「今年のテーマ」を一行書いて、よく見える場所に置く。</div>
+      <div class="mc-back-personal">音8の「統合する力」が山羊座の新月と合わさり、新年の設計図が引かれる。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2027年1月28日</div>
+      <div class="mc-sign">獅子座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">今月、「自分らしく輝いた」と感じた瞬間はあったか。</div>
+      <div class="mc-back-q">他者のための行動から、一度離れて、自分への贈り物を考えてみる。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>自分が「好き」なものを三つ声に出す。</div>
+      <div class="mc-back-personal">ソウルナンバー7の探求者が、獅子座の満月で「自分の輝き」を発見する夜。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2027年2月11日</div>
+      <div class="mc-sign">水瓶座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">今月、「常識」を一つ疑うとしたら、何を選ぶか。</div>
+      <div class="mc-back-q">未来の自分が喜ぶ「奇抜な一歩」を踏み出すとしたら。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>今まで試したことがないことを一つ、来週のスケジュールに入れる。</div>
+      <div class="mc-back-personal">水瓶座に金星・火星を持つ咲さんに、この新月は「自由の意図」を解放する。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card mangetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">満月 MANGETSU</span>
+      <div class="mc-icon">🌕</div>
+      <div class="mc-date">2027年2月27日</div>
+      <div class="mc-sign">乙女座の満月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label" style="color:var(--amber)">問い</span>
+      <div class="mc-back-q">今月「丁寧に」できたことは何か。その積み重ねを収穫する。</div>
+      <div class="mc-back-q">「細かすぎた」と感じる気遣いを、今夜一つ手放すとしたら。</div>
+      <div class="mc-back-action">🌕 今夜のアクション<br>机や部屋をひとつ整えて、「完了」の清々しさを味わう。</div>
+      <div class="mc-back-personal">五行・土の構造を持つ咲さんに、乙女座の満月は「地に足のついた達成感」を届ける。</div>
+    </div>
+  </div>
+</div>
+
+<div class="moon-card shingetsu" onclick="this.classList.toggle('flipped')">
+  <div class="moon-card-inner">
+    <div class="moon-card-front">
+      <span class="mc-type">新月 SHINGETSU</span>
+      <div class="mc-icon">🌑</div>
+      <div class="mc-date">2027年3月13日</div>
+      <div class="mc-sign">魚座の新月</div>
+      <div class="mc-invite">今夜、ここを開く</div>
+    </div>
+    <div class="moon-card-back">
+      <span class="mc-back-q-label">問い</span>
+      <div class="mc-back-q">来るべき春に、何を咲かせたいか。</div>
+      <div class="mc-back-q">一年を振り返り、自分が変わったと感じることを一つ挙げるとしたら。</div>
+      <div class="mc-back-action">🌑 今夜のアクション<br>水を飲みながら、一年後の自分への願いを静かに心に語りかける。</div>
+      <div class="mc-back-personal">太陽星座・魚座の新月。KIN216の黄色い戦士が、次の問いを静かに蒔く夜。</div>
+    </div>
+  </div>
+</div>
+
+    </div><!-- moon-track -->
+  </div><!-- moon-scroll -->
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-note">SIMPLE READING · 5占術・5セクション</p>
+
+    <div class="footer-upgrade">
+      <div class="footer-upgrade-title">魂の設計図（完全版）では——</div>
+      <ul>
+        <li>深層・表層・統合の3レイヤー読み</li>
+        <li>2〜6年のタイムライン（航海図）</li>
+        <li>関係性・不安の整え方・お金と仕事</li>
+        <li>生涯設計図（80歳までの魂の季節地図）</li>
+        <li>9占術を統合した完全個人鑑定</li>
+      </ul>
+      <a href="https://coconala.com/services/4152472" class="footer-link" target="_blank">完全版を見る（22,000円）</a>
+    </div>
+
+    <p class="footer-brand">藍</p>
+  </div>
+</footer>
+
+</body>
+</html>
